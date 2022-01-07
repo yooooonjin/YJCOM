@@ -3,7 +3,9 @@ package project.service.log;
 import org.springframework.stereotype.Service;
 
 import project.domain.dto.JoinDto;
+import project.domain.entity.MemberEntity;
 import project.domain.entity.MemberEntityRepository;
+import project.domain.entity.MemberRole;
 
 @Service
 public class LogServiceImpl implements LogService {
@@ -15,7 +17,10 @@ public class LogServiceImpl implements LogService {
 		
 		System.out.println(joinDto.getName());
 		
-		memberRepository.save(joinDto.toEntity());
+		MemberEntity entity= joinDto.toEntity();
+		entity.addRole(MemberRole.USER);
+		
+		memberRepository.save(entity);
 		
 		return "redirect:/";
 	}
