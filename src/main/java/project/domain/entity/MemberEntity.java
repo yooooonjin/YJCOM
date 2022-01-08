@@ -1,5 +1,6 @@
 package project.domain.entity;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,9 +29,17 @@ public class MemberEntity extends baseEntity {
 	@Id
 	private String email;
 	@Column(nullable = false)
+	private String name;
+	@Column(nullable = false)
 	private String password;
 	@Column(nullable = false)
-	private String name;
+	private String gender;
+	@Column(nullable = false)
+	private String phoneNumber;
+	@Column(nullable = false)
+	private LocalDate birthday;
+	@Column(nullable = false)
+	private String address;
 	
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(fetch = FetchType.EAGER)

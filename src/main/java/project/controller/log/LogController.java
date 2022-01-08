@@ -14,17 +14,17 @@ public class LogController {
 	
  	private final LogService service;
 	
- 	@GetMapping("/page/login")
+ 	@GetMapping("/login")
  	public String loginPage() {
- 		return "page/login";
+ 		return "log/login";
  	}
  	
- 	@GetMapping("/page/join")
+ 	@GetMapping("/join")
  	public String joinPage() {
- 		return "page/join";
+ 		return "log/join";
  	}
  	
- 	@PostMapping("/page/join")
+ 	@PostMapping("/join")
  	public String join(JoinDto joinDto) {
  		return service.join(joinDto);
  	}

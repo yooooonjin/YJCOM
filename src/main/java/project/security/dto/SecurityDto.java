@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import project.domain.entity.MemberEntity;
 
 public class SecurityDto extends User  {
-
+	
 	private String name;
 	
 	//public SecurityDto(String username, String password,String name, Collection<? extends GrantedAuthority> authorities) {

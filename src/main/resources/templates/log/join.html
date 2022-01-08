@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<th:block th:insert="/common/common.html::head" />
 	</head>
 	<body>
 		<main>
 			<div>
 				<h1>회원가입</h1>
-				<form action="/page/join" method="post">
+				<form action="/join" method="post">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					<ul>
 						<li>
@@ -20,6 +19,18 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						</li>
 						<li>
 							<input name="password" type="password" placeholder="비밀번호를 입력하세요">
+						</li>
+						<li>
+							<input name="gender" type="text" placeholder="성별(W/M)">
+						</li>
+						<li>
+							<input name="phoneNumber" type="tel" placeholder="전화번호를 입력하세요">
+						</li>
+						<li>
+							<input name="birthday" type="date">
+						</li>
+						<li>
+							<input name="address" type="text" placeholder="주소를 입력하세요">
 						</li>
 						<li>
 							<button type="submit">회원가입</button>

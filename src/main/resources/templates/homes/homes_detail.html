@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/homes/homes.css">
+	</head>
+	<body>
+		<header>
+			<section id="header">
+				<div class="flex between view">
+					<div class="logo">
+						<a href="/"><img src="/image/airbnb_logo-w.png" width=120px></a>
+					</div>
+					<div class="search">
+						<input type="text">
+					</div>
+					<th:block th:insert="/common/header-nav.html::header-nav"/>	
+				</div>
+			</section>
+			
+			<section id="filter-menu">
+				<div class="flex view">
+					<div class="flex">
+						<ul class="flex">
+							<li><button class="price-range">요금</button></li>
+							<li><button class="room-type">숙소유형</button></li>
+						</ul>
+						<ul class="filter flex">
+							<li><button>주방</button></li>
+							<li><button>무선인터넷</button></li>
+							<li><button>세탁기</button></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</header>
+		
+		<main class="flex between view">
+			<section id="home-list">
+				<h1>집정보</h1>
+				<div class="flex between">
+					<div><img src="/image/room-img-01.jpg" width="300px" height="200px"></div>
+					<div class="home-info">
+						<div>
+							<ul>
+								<li>숙소유형</li>
+								<li class="home-name"><a href="/homes/detail">house#1. Hangang view house</a></li>
+								<li>최대인원4명 원룸 침대1 욕실1</li>
+							</ul>
+							<ul class="home-price">
+								<li>100,000원<span>/박</span></li>
+								<li>총액 300,000원</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<ul class="flex">
+							<li>별점</li>
+							<li>(후기)</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			
+			<section id="map">
+			<h1>지도</h1>
+			</section>
+		</main>
+	</body>
+</html>

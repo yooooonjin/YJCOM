@@ -1,14 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/main/main.css">
 	</head>
 	<body>
-		인덱스페이지
-		<div>
-			<a href="/page/login">로그인</a>
-			<a href="/page/join">회원가입</a>
-		</div>
+		<header>
+			<section>
+				<div class="flex between view-size">
+					<div class="logo">
+						<a href="/"><img src="/image/airbnb_logo-w.png" width=120px></a>
+					</div>
+					<div class="big-search">
+						<ul class="flex">
+							<li><a href="/homes">숙소</a></li>
+							<li><a href="#">체험</a></li>
+							<li><a href="#">온라인체험</a></li>
+						</ul>
+					</div>
+					<th:block th:insert="/common/header-nav.html::header-nav"/>	
+				</div>
+			</section>
+			
+		</header>
+		
+		<main>
+			<div class="main">
+				<div class="main-img flex center">
+					<img src="/image/main-img-01.jpg" width="1400px">
+				</div>
+				<div class="search">
+					<div>
+						<input type="text">
+					</div>
+				</div>
+			</div>
+		</main>
 	</body>
 </html>

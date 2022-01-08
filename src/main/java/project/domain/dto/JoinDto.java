@@ -1,5 +1,12 @@
 package project.domain.dto;
 
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +19,26 @@ import project.domain.entity.MemberRole;
 @NoArgsConstructor
 @Data
 public class JoinDto {
+	
+	@Builder.Default
+	PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+	
 	private String email;
 	private String name;
 	private String password;
+	private String gender;
+	private String phoneNumber;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate birthday;	
+	private String address;
 	
 	public MemberEntity toEntity() {
-		MemberEntity entity= MemberEntity.builder().email(email).name(name).password(password).build();
+		MemberEntity entity= MemberEntity.builder()
+				.email(email).name(name).password(passwordEncoder.encode(password)).gender(gender)
+				.phoneNumber(phoneNumber).birthday(birthday).address(address)
+				.build();
+		
 		entity.addRole(MemberRole.USER);
 		
 		return entity;

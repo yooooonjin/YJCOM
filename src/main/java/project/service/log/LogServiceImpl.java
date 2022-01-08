@@ -15,13 +15,9 @@ public class LogServiceImpl implements LogService {
 	@Override
 	public String join(JoinDto joinDto) {
 		
-		System.out.println(joinDto.getName());
+		memberRepository.save(joinDto.toEntity());
 		
-		MemberEntity entity= joinDto.toEntity();
-		
-		memberRepository.save(entity);
-		
-		return "redirect:/";
+		return "/log/login";
 	}
 
 }
