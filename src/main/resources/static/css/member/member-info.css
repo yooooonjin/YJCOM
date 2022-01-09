@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+
+/* //////////////////////////////////////// */
+#member-info-header{
+	background-size: cover;
+	background-color: #f0f0f0;
+}
+header .logo{
+	margin: auto 0;
+}
+header .big-search ul li a{
+	line-height:80px;
+	font-size: 18px;
+	padding: 10px 16px 10px 16px;
+}
+header .host a{
+	line-height:80px;
+	font-size: 14px;
+	padding: 10px 16px 10px 16px;
+}
+header .user_pic{
+	border-radius: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+/* //////////////////////////////////////// */
+
+#member-profile{
+	width: 850px;
+	border: 1px solid #e9e9e9;
+	padding: 15px;
+	margin-top: 30px;
+	font-size: 14px;
+}
+#member-profile img{
+	margin: 0 30px;
+	border: 1px solid #a9a9a9;
+	border-radius: 50%;
+}
+#member-profile li{
+	width: 450px;
+	padding: 5px 0;
+	margin: 5px 0 0 10px;
+}
+#member-profile li:not(:last-child){
+	border-bottom: 1px solid #e9e9e9;
+}
+#member-profile li>div> div:nth-child(1) {
+	display: inline-block;
+	color: #ff2e5f;
+	font-weight: 500;
+	width: 60px;
+	text-align: center;
+	margin-right: 10px;
+}
+#member-profile .btn-edit, .btn-profile-edit>button{
+	background-color:white;
+	border: 1px solid #a9a9a9;
+	padding: 4px 13px;
+	border-radius:13px;
+	color: #a9a9a9;
+	font-size: 10px;
+	cursor: pointer;
+	justify-content: flex-end;
+	margin-left: 6px;
+}
+#member-profile .btn-profile-edit{
+	justify-content: flex-end;
+	
+}
+#member-profile .edit-profile input{
+	border: none;
+}
+#member-profile .edit-profile input:focus{
+	outline: 0; 
+}
+#member-profile .edit{
+	width: 120px;
+	text-align: right;
+}

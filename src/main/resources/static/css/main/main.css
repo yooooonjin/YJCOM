@@ -19,39 +19,16 @@ header .big-search ul li a{
 	padding: 10px 16px 10px 16px;
 }
 /* //////////////////////////////////////// */
-header .header-nav .host a{
+header .host a{
 	line-height:80px;
 	font-size: 14px;
 	padding: 10px 16px 10px 16px;
 }
-header .header-nav ul li img{
+header .user_pic{
 	border-radius: 20px;
 	margin-top: 20px;
 	cursor: pointer;
 }
-header .member{
-	position: relative;
-}
-header .member >.profile-menu{
-	position: absolute;
-	z-index: 2;
-	right:0%;
-	margin-top:25px;
-	padding: 10px 20px 10px 20px;
-	border-radius:6px;
-	width:180px;
-	background-color: rgba(0,0,0,0.5);
-}
-header .member >.profile-menu ul:not(:last-child){
-	border-bottom: 1px solid #292929;
-	padding-bottom: 10px;
-}
-header .member >.profile-menu li{
-	padding: 12px 0;
-	font-size: 14px;
-	font-weight: lighter;
-}
-
 /* //////////////////////////////////////// */
 .search> div{
 	text-align: center;

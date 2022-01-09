@@ -1,25 +1,34 @@
-package project.controller.log;
+package project.controller.member;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
+import project.domain.dto.MemberUpdateDto;
 import project.security.dto.SecurityDto;
 import project.service.member.MemberService;
 
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/member")
 @Controller
 public class memberController {
 	
 	private final MemberService service;
 	
-	@GetMapping("/show")
-	public String userInfo(Model model, @AuthenticationPrincipal SecurityDto securityDto) {
-		return service.userInfo(model,securityDto);
+	@GetMapping("/info")
+	public String memberInfo(Model model, @AuthenticationPrincipal SecurityDto securityDto) {
+		return service.memberInfo(model,securityDto);
+	}
+	
+	//TODO: 데이터 안넘어옴...
+	@PutMapping
+	public void memberUpdate(MemberUpdateDto updateDto) {
+		System.out.println("name : "+updateDto.getName());
+		service.memberUpdate(updateDto);
 	}
 
 }

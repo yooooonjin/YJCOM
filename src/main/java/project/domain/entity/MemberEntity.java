@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project.domain.dto.MemberUpdateDto;
 
 @Builder
 @AllArgsConstructor
@@ -47,6 +48,13 @@ public class MemberEntity extends baseEntity {
 	private Set<MemberRole> roleSet=new HashSet<>();
 	public void addRole(MemberRole role) {
 		roleSet.add(role);
+	}
+	
+	public MemberEntity updateNameAndPhonenumberAndAddress(MemberUpdateDto dto) {
+		this.name=dto.getName();
+		this.phoneNumber=dto.getPhoneNumber();
+		this.address=dto.getAddress();
+		return this;
 	}
 	
 }

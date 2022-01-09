@@ -4,11 +4,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<th:block th:insert="/common/common.html::head" />
 		<link rel="stylesheet" href="/css/homes/homes.css">
+		<link rel="stylesheet" href="/css/homes/homes-detail.css">
+		<link rel="stylesheet" href="/css/common/room-reserve.css">
+		<link rel="stylesheet" href="/css/common/header-nav.css">
 	</head>
 	<body>
 		<header>
 			<section id="header">
-				<div class="flex between view">
+				<div class="flex between view-size">
 					<div class="logo">
 						<a href="/"><img src="/image/airbnb_logo-w.png" width=120px></a>
 					</div>
@@ -18,54 +21,51 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<th:block th:insert="/common/header-nav.html::header-nav"/>	
 				</div>
 			</section>
+		</header>
 			
-			<section id="filter-menu">
-				<div class="flex view">
-					<div class="flex">
-						<ul class="flex">
-							<li><button class="price-range">요금</button></li>
-							<li><button class="room-type">숙소유형</button></li>
-						</ul>
-						<ul class="filter flex">
-							<li><button>주방</button></li>
-							<li><button>무선인터넷</button></li>
-							<li><button>세탁기</button></li>
-						</ul>
-					</div>
+		<main>
+			<section class="room-title view-size">
+				<ul>
+					<li class="room-name">house#1. Hangang view house</li>
+				</ul>
+				<div class="flex between">
+					<ul class="flex">
+						<li>별점</li>
+						<li>(후기)</li>
+					</ul>
+					<ul class="flex">
+						<li>공유하기</li>
+						<li>좋아요</li>
+					</ul>
 				</div>
 			</section>
-		</header>
-		
-		<main class="flex between view">
-			<section id="home-list">
-				<h1>집정보</h1>
-				<div class="flex between">
-					<div><img src="/image/room-img-01.jpg" width="300px" height="200px"></div>
-					<div class="home-info">
-						<div>
-							<ul>
-								<li>숙소유형</li>
-								<li class="home-name"><a href="/homes/detail">house#1. Hangang view house</a></li>
-								<li>최대인원4명 원룸 침대1 욕실1</li>
-							</ul>
-							<ul class="home-price">
-								<li>100,000원<span>/박</span></li>
-								<li>총액 300,000원</li>
+			<section id="room-info" >
+				<div class="room-info flex between view-size">
+					<div>
+						<div class="room-img">
+							<ul class="flex">
+								<li><img src="/image/room-img-01.jpg" width="900px" height="400px"></li>
 							</ul>
 						</div>
+						<div class="room-introduce">
+							<div>
+								<h2>숙소 소개</h2>
+								<p>조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br> 안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.</p>
+							</div>
+							<div>
+								<h2>숙소 편의시설</h2>
+								<ul class="filter flex">
+									<li><button>주방</button></li>
+									<li><button>무선인터넷</button></li>
+									<li><button>세탁기</button></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-					<div>
-						<ul class="flex">
-							<li>별점</li>
-							<li>(후기)</li>
-						</ul>
-					</div>
+					<th:block th:insert="/common/room-reserve.html::room-reserve"/>
 				</div>
 			</section>
-			
-			<section id="map">
-			<h1>지도</h1>
-			</section>
 		</main>
+		
 	</body>
 </html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/common/room-reserve.css">
+	</head>
+	<body>
+		<th:block th:fragment="room-reserve">
+		<div class="room-reserve sideBanner">
+			<ul class="room-reserve-info">
+				<li>100,000원&nbsp;<span>/박</span></li>
+					<ul class="flex between">
+						<li><input type="date"></li>
+						<li><input type="date"></li>
+					</ul>
+				<li><input class="guest-number" type="text" placeholder="게스트 3명"></li>
+			</ul>
+			<div class="room-price">
+				<ul class="flex between">
+					<li>객실요금</li>
+					<li>300,000원</li>
+				</ul>
+				<ul class="flex between">
+					<li>세금 및 봉사료</li>
+					<li>30,000원</li>
+				</ul>
+				<ul class="flex between">
+					<li>총 요금</li>
+					<li>330,000원</li>
+				</ul>
+				<button class="btn-host-message">호스트에게 연락하기</button>
+				<button class="btn-reserve">예약하기</button>
+			</div>
+		</div>
+	<script type="text/javascript">
+		$(function(){
+			// 기본 위치(top)값
+			var floatPosition = parseInt($(".sideBanner").css('top'))
+
+			// scroll 인식
+			$(window).scroll(function() {
+			  
+			    // 현재 스크롤 위치
+			    var currentTop = $(window).scrollTop();
+			    var bannerTop = currentTop + floatPosition + "px";
+
+			    //이동 애니메이션
+			    $(".sideBanner").stop().animate({
+			      "top" : bannerTop
+			    }, 500);
+
+			}).scroll();
+		});
+
+	</script>
+	</th:block>
+
+	</body>
+</html>

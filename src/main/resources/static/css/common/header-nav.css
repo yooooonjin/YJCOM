@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+#header-nav .member .profile-menu a{
+	color: black;
+}
+#header-nav .member{
+	position: relative;
+}
+#header-nav .member .profile-menu{
+	position: absolute;
+	z-index: 2;
+	right:0%;
+	margin-top:25px;
+	padding: 10px 20px 10px 20px;
+	border-radius:6px;
+	width:180px;
+	background-color:white;
+	border: 1px solid #e9e9e9;
+}
+#header-nav .member .profile-menu ul:not(:last-child){
+	border-bottom: 1px solid #e9e9e9;
+	padding-bottom: 10px;
+}
+#header-nav .member .profile-menu li{
+	padding: 12px 0;
+	font-size: 14px;
+}
