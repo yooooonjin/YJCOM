@@ -27,14 +27,23 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		</header>
 		
 		<main>
-			<div class="main">
+			<div id="search-tab">
 				<div class="main-img flex center">
-					<img src="/image/main-img-01.jpg" width="1400px">
+					<img src="/image/main-img-01.jpg" width="1920px" >
 				</div>
 				<div class="search">
-					<div>
-						<input type="text">
+					<div class="flex search-detail">
+						<div><input type="text" placeholder="위치"></div>
+						<div><input type="date" placeholder="체크인"></div>
+						<div><input type="date" placeholder="체크아웃"></div>
+						<div>
+							<input type="text" placeholder="인원">
+							<a><img src="/image/search-01.png" width="45px"></a>
+						</div>
 					</div>
+				</div>
+				<div class="introduce">
+					<p>내 취향에 맞는 숙소를 찾아 지금 바로 검색하세요</p>
 				</div>
 			</div>
 		</main>

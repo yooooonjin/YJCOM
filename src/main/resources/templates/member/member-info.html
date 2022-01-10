@@ -133,12 +133,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						$(".edit-profile").hide();
 						$(".btn-edit").show();
 					});
-					
+					 
+
 					 $(document).ajaxSend(function(e, xhr, options) {
 					        xhr.setRequestHeader(header, token);
 					    });
 					 
 					$(".btn-profile-edit-update").click(function(){
+						
 						var email=$(".email").val();
 						var name=$(".name").val();
 						var phoneNumber=$(".phoneNumber").val();
@@ -151,12 +153,44 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								email:email,
 								name:name,
 								phoneNumber:phoneNumber,
-								address:address
+								address:address},
+							success:function(){
+								 location.reload()
+								 /* loadingReplies() */
 							}
 						});
 					});
+					
 				});
+				
+				function loadingReplies(){
+       				$.ajax({
+       					url:"/member/info",
+       					type:"get"
+       				});	
+       			}
 			</script>
+			
+			<section>
+				<div id="part" class="view-size">
+					<ul class="flex center">
+						<li>GUEST</li>
+						<li>HOST</li>
+					</ul>
+				</div>
+			</section>
+			<section>
+				<div id="guest-part" class="view-size">
+					<div class="reserve-room">
+						<P>예약한 숙소</P>
+						<div></div>
+					</div>
+					<div class="review">
+						<P>내가 작성한 후기</P>
+						<div></div>
+					</div>
+				</div>
+			</section>
 		</main>
 	</body>
 </html>

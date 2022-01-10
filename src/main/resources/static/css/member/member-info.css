@@ -28,14 +28,14 @@ header .user_pic{
 
 #member-profile{
 	width: 850px;
-	border: 1px solid #e9e9e9;
-	padding: 15px;
+	padding: 15px 0 20px 0;
 	margin-top: 30px;
 	font-size: 14px;
+	
 }
 #member-profile img{
 	margin: 0 30px;
-	border: 1px solid #a9a9a9;
+	border: 1px solid #e9e9e9;
 	border-radius: 50%;
 }
 #member-profile li{
@@ -71,6 +71,7 @@ header .user_pic{
 }
 #member-profile .edit-profile input{
 	border: none;
+	color: #a9a9a9;
 }
 #member-profile .edit-profile input:focus{
 	outline: 0; 
@@ -79,3 +80,31 @@ header .user_pic{
 	width: 120px;
 	text-align: right;
 }
+/* //////////////////////////////////////// */
+#part{
+	width: 850px;
+	border-bottom: 1px solid #e9e9e9;
+}
+#part li{
+	padding: 30px 20px 10px;
+	font-weight: lighter;
+}
+/* //////////////////////////////////////// */
+#guest-part{
+	margin-top:30px;
+	
+}
+#guest-part>div >p{
+	text-align: left;
+	font-size: 15px;
+	font-weight: 600;
+	margin: 20px 0 0 20px;
+	color: black;	
+}
+#guest-part .review , .reserve-room{
+	width: 800px;
+	height: 200px;
+	border-bottom: 1px solid #a9a9a9;
+	margin: 15px auto;
+}
+

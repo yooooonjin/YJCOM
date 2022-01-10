@@ -9,7 +9,7 @@ public interface MemberService {
 
 	String memberInfo(Model model, SecurityDto securityDto);
 
-	void memberUpdate(MemberUpdateDto updateDto);
+	void memberUpdate(MemberUpdateDto updateDto, Model model);
 
 
 }

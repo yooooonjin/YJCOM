@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
 a{color: white;}
-
+body{
+	background-color: black;
+}
 header, main{
 	background-size: cover;
 	background-color: black;
@@ -34,22 +36,49 @@ header .user_pic{
 	text-align: center;
 	padding-bottom: 50px;
 }
-.search input{
-	width: 850px;
-	height: 66px;
-	border-color: white;
-	border-radius: 33px;
-}
-main .main-img img{
+#search-tab .main-img img{
 	padding-bottom: 20px;
 }
-main .main{
+#search-tab .main{
 	position: relative;
 }
-main .search{
+#search-tab .search{
 	position: absolute;
 	left:50%;
-	top: 15%;
+	top: 18%;
 	transform: translate(-50%, -50%);
 }
+#search-tab .introduce{
+	position: absolute;
+	left:50%;
+	top: 26%;
+	transform: translate(-50%, -50%);
+	font-size: 23px;
+	letter-spacing: -0.7px;
+}
+#search-tab .search-detail input{
+	height: 66px;
+	padding:0 20px;
+	margin:55px 0 0 0;
+	border-color: white;
+	border: none;
+}
 
+.search .search-detail div:nth-child(4){
+	position: relative;
+}	
+.search .search-detail div:nth-child(4) a{
+	position: absolute;
+	right:6%;
+	bottom: 6%;
+	cursor: pointer;
+}	
+.search .search-detail input:focus {
+	outline: none;
+}
+.search .search-detail div:nth-child(1) input{
+	border-radius: 33px 0 0 33px;
+}	
+.search .search-detail div:nth-child(4) input{
+	border-radius: 0 33px 33px 0;
+}	

@@ -28,11 +28,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Transactional
 	@Override
-	public void memberUpdate(MemberUpdateDto updateDto) {
-		System.out.println(updateDto.getName());
+	public void memberUpdate(MemberUpdateDto updateDto ,Model model) {
 		
-		memberRepository.findById(updateDto.getEmail()).map(entity->entity.updateNameAndPhonenumberAndAddress(updateDto));
-		
+		MemberEntity result = memberRepository.findById(updateDto.getEmail()).map(entity->entity.updateNameAndPhonenumberAndAddress(updateDto)).get();
+				
 	}
 
 }

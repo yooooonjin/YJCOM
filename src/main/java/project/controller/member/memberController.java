@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import project.domain.dto.MemberUpdateDto;
@@ -24,11 +25,12 @@ public class memberController {
 		return service.memberInfo(model,securityDto);
 	}
 	
+	@ResponseBody
 	//TODO: 데이터 안넘어옴...
 	@PutMapping
-	public void memberUpdate(MemberUpdateDto updateDto) {
+	public void memberUpdate(MemberUpdateDto updateDto,Model model) {
 		System.out.println("name : "+updateDto.getName());
-		service.memberUpdate(updateDto);
+		service.memberUpdate(updateDto,model);
 	}
 
 }
