@@ -26,7 +26,6 @@ public class memberController {
 	}
 	
 	@ResponseBody
-	//TODO: 데이터 안넘어옴...
 	@PutMapping
 	public void memberUpdate(MemberUpdateDto updateDto,Model model) {
 		System.out.println("name : "+updateDto.getName());

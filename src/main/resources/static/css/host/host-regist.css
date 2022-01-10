@@ -17,7 +17,7 @@ header .big-search ul li a{
 	font-size: 18px;
 	padding: 10px 16px 10px 16px;
 }
-header .host a{
+header span{
 	line-height:80px;
 	font-size: 14px;
 	padding: 10px 16px 10px 16px;

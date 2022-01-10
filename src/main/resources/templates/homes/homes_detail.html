@@ -23,25 +23,26 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<main>
 			<section class="room-title view-size">
 				<ul>
+					<li class="room-type">숙소유형</li>
 					<li class="room-name">house#1. Hangang view house</li>
 				</ul>
-				<div class="flex between">
+				<div class="room-etc flex between">
 					<ul class="flex">
 						<li>별점</li>
 						<li>(후기)</li>
 					</ul>
 					<ul class="flex">
 						<li>공유하기</li>
-						<li>좋아요</li>
 					</ul>
 				</div>
 			</section>
+			
 			<section id="room-info" >
 				<div class="room-info flex between view-size">
 					<div>
 						<div class="room-img">
 							<ul class="flex">
-								<li><img src="/image/room-img-01.jpg" width="900px" height="400px"></li>
+								<li><img src="/image/room-img-01.jpg" width="880px" height="400px"></li>
 							</ul>
 						</div>
 						<div class="room-introduce">
@@ -56,6 +57,53 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<li><button>무선인터넷</button></li>
 									<li><button>세탁기</button></li>
 								</ul>
+							</div>
+							<div>
+								<h2>후기</h2>
+								<div id="review-list">
+									<div class="review flex">
+										<div>
+											<img src="/image/user_pic.png" width="60px">
+											<p>한윤진</p>
+										</div>
+										<div>
+											<div>2022-01-10</div>
+											<div>
+												조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
+												안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
+												지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
+											</div>
+										</div>
+									</div>
+									
+									<div class="review flex">
+										<div>
+											<img src="/image/user_pic.png" width="60px">
+											<p>한윤진</p>
+										</div>
+										<div>
+											<div>2022-01-10</div>
+											<div>
+												조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
+											</div>
+										</div>
+									</div>
+									
+									<div class="review flex">
+										<div>
+											<img src="/image/user_pic.png" width="50px">
+											<p>한윤진</p>
+										</div>
+										<div>
+											<div>2022-01-10</div>
+											<div>
+												조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
+												안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
+												지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

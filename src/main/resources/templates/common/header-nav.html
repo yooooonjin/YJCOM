@@ -9,7 +9,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<th:block th:fragment="header-nav">
 		<div id="header-nav">
 			<ul class="flex">
-				<li sec:authorize="isAuthenticated()" class="host"><a href="/host/regist">호스트 모드</a></li>
+				<li sec:authorize="isAuthenticated()"><span sec:authentication="name">이메일 표기</span></li>
 				<li>
 					<div class="member">
 						<img class="user_pic" src="/image/user_pic.png" width="40px;">
@@ -25,10 +25,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<ul>
 									<li><a href="/member/info">프로필</a></li>
 									<li><a href="#">메세지</a></li>
-									<li><a href="#">여행</a></li>
 									<li><a href="#">위시리스트</a></li>
 								</ul>
 								<ul>
+									<li><a href="/host/regist">숙소등록</a></li>
 									<li><a href="#">숙소관리</a></li>
 								</ul>
 								<ul>

@@ -50,7 +50,7 @@ header .logo{
 	border-radius: 0 33px 33px 0;
 }
 /* //////////////////////////////////////// */
-header .host a{
+header span{
 	line-height:80px;
 	font-size: 14px;
 	padding: 10px 16px 10px 16px;
@@ -106,11 +106,6 @@ header .user_pic{
 #home-list .home-price li span{
 	font-size: 15px;
 	font-weight: 400;
-}
-#home-list .home-price li:nth-child(2){
-	color: #a9a9a9;
-	font-weight: lighter;
-	
 }
 #home-list .home-filter{
 	margin-top:15px;
