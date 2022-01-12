@@ -4,17 +4,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/homes")
+@RequestMapping("/home")
 @Controller
 public class HomesController {
 	
-	@GetMapping
+	@GetMapping("/list")
 	public String homesPage() {
-		return "homes/homes";
+		return "home/homes";
 	}
 	@GetMapping("/detail")
 	public String homesDetail() {
-		return "homes/homes_detail";
+		return "home/home-detail";
+	}
+	
+	@GetMapping("/reg")
+	public String homeReg() {
+		return "home/home-reg";
 	}
 
 }
