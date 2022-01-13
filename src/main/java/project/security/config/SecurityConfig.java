@@ -16,7 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 			
 		http.authorizeHttpRequests()// 요청에 의한 보안검사 시작
-			.antMatchers("/","/login","/join","/homes/**").permitAll() //인증필요없이 누구나 접근가능
+			.antMatchers("/","/login","/join","/home/**").permitAll() //인증필요없이 누구나 접근가능
+			.antMatchers("/host/**").hasRole("HOST") //USER 권한
 			.antMatchers("/member/**","/user/**").hasRole("USER") //USER 권한
 			.antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한
 			.anyRequest().authenticated();//어떤 요청에도 보안검사

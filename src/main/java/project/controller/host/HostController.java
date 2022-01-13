@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HostController {
 	
-	@GetMapping("/regist")
-	public String hostPage() {
-		return "host/host-regist";
+	@GetMapping("/home")
+	public String homeUpdatePage() {
+		return "host/home-update";
 	}
 
 }

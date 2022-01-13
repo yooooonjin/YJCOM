@@ -1,4 +1,4 @@
-package project.service.member;
+package project.service.impl;
 
 import javax.transaction.Transactional;
 
@@ -10,6 +10,7 @@ import project.domain.dto.MemberUpdateDto;
 import project.domain.entity.MemberEntity;
 import project.domain.entity.MemberEntityRepository;
 import project.security.dto.SecurityDto;
+import project.service.member.MemberService;
 
 @RequiredArgsConstructor
 @Service

@@ -88,6 +88,9 @@ header .user_pic{
 	width:400px;
 	padding-left: 20px;
 }
+#home-list .home-type{
+	color:#ff2e5f;
+}
 #home-list .home-name{
 	font-size: 20px;
 	font-weight: 700;

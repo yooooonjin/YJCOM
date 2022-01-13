@@ -48,20 +48,20 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<main class="flex between">
 			<section id="home-list">
 				<h1>집정보</h1>
-				<div class="home-list">
+				<div class="home-list" th:each="homes:${homes}">
 					<div class="flex between">
 						<div><img src="/image/room-img-01.jpg" width="300px" height="200px"></div>
 						<div class="home-info">
 							<div>
 								<ul>
-									<li>숙소유형</li>
-									<li class="home-name"><a href="/home/detail">house#1. Hangang view house</a></li>
+									<li class="home-type">[[${homes.homeType.homeType}]]</li>
+									<li class="home-name"><a href="/home/detail">[[${homes.homeName}]]</a></li>
 									<li class="home-filter">
-										<span>최대인원4명</span><span>원룸</span><span>침대1</span><span>욕실1</span>
+										<span th:each="ho : ${homes.homeOptionSet}">[[${ho.homeOption}]]</span>
 									</li>
 								</ul>
 								<ul class="home-price">
-									<li>100,000원&nbsp;<span>/박</span></li>
+									<li>[[${homes.homePrice}]]원&nbsp;<span>/박</span></li>
 								</ul>
 							</div>
 						</div>

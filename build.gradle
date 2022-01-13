@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 	id 'war'
 }
-
+ext['log4j2.version'] = '2.17.1'
 group = 'com.green'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
