@@ -60,11 +60,12 @@ public class HomeServiceImp implements HomeService {
 		return "home/homes";
 	}
 
-	//TODO 여기부터 구현
 	@Override
-	public String homeDetail(Model medel) {
+	public String homeDetail(Model model, long hno) {
 		
-		return null;
+		HomeListDto homeDetail= homeRepository.findById(hno).map(HomeListDto::new).orElseThrow();
+		model.addAttribute("homeDetail", homeDetail);
+		return "home/home-detail";
 	}
 
 }

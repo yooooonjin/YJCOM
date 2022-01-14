@@ -4,6 +4,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,9 +30,9 @@ public class HomesController {
 		return homeService.homeList(model);
 	}
 	//집 상세페이지
-	@GetMapping("/detail")
-	public String homesDetail(Model medel) {
-		return homeService.homeDetail(medel);
+	@GetMapping("/detail/{hno}")
+	public String homesDetail(Model medel, @PathVariable long hno) {
+		return homeService.homeDetail(medel,hno);
 		//return "home/home-detail";
 	}
 	//숙소 등록 페이지

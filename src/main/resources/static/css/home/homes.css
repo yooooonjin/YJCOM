@@ -74,7 +74,6 @@ header .user_pic{
 }
 /* //////////////////////////////////////// */
 #home-list{
-	width: 900px;
 	margin: 0 20px;
 }
 .home-list{
@@ -85,18 +84,36 @@ header .user_pic{
 	border-radius: 10px;
 }
 #home-list .home-info{
-	width:400px;
+	width:430px;
 	padding-left: 20px;
 }
 #home-list .home-type{
 	color:#ff2e5f;
 }
 #home-list .home-name{
-	font-size: 20px;
-	font-weight: 700;
+	font-size: 18px;
+	font-weight: 400;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
-.home-info{
+#home-list .home-info{
 	position: relative;
+}
+#home-list .home-number{
+	margin-top:10px;
+	font-size: 13px;
+}
+#home-list .home-number div{
+	padding-right: 5px;
+}
+#home-list .home-number span{
+	font-weight: 500;
+}
+#home-list .home-number div:not(:last-child)::after{
+	content: "|";
+	color: #e9e9e9;
+	padding: 0 5px;
 }
 #home-list .home-price{
 	position: absolute;
@@ -114,17 +131,18 @@ header .user_pic{
 	margin-top:15px;
 }
 #home-list .home-filter span{
+	display: inline-block;
 	border: 1px solid #a9a9a9;
 	background-color: white;
-	padding: 0.7em 1.9em;
-	border-radius: 16px;
-	margin-right: 8px;
-	font-size: 10px;
-	
+	padding: 0.4em 1.2em;
+	border-radius: 13px;
+	margin:0 5px 12px 0;
+	font-size: 11px;
 }
 
 
 #home-list .home-comment{
+	font-size:12px;
 	width:80px;
 }
 

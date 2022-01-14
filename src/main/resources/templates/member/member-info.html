@@ -28,10 +28,20 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</header>
 		
 	<body>
-		<main>
+		<main class="flex center">
+		<div>
 			<section>
-				<div id="member-profile" class="view-size flex between">
+				<div id="member-profile" class="view-size">
 					<h1>프로필</h1>
+					<div class="edit">
+						<div>
+							<button class="btn-edit">프로필 수정</button>
+						</div>
+						<div class="flex btn-profile-edit" style="display: none;">
+							<button class="btn-profile-edit-update">수정</button>
+							<button class="btn-profile-edit-cancel">취소</button>
+						</div>
+					</div>
 					<div>
 						<img src="/image/user_pic.png" width="150px">
 					</div>
@@ -49,13 +59,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<div>[[${member.email}]]</div>
 								</div>
 							</li>
-							<li class="flex between">
+							<li class="flex">
 								<div class="flex">
 								<div>번호</div>
 								<div>[[${member.phoneNumber}]]</div>
 								</div>
 							</li>
-							<li class="flex between">
+							<li class="flex">
 								<div class="flex">
 								<div>주소</div>
 								<div>[[${member.address}]]</div>
@@ -85,13 +95,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<input name="email" class="email" type="hidden" th:value="${member.email}">
 								</div>
 							</li>
-							<li class="flex between">
+							<li class="flex">
 								<div class="flex">
 								<div>번호</div>
 								<div><input name="phoneNumber" class="phoneNumber" type="text" th:value="${member.phoneNumber}"></div>
 								</div>
 							</li>
-							<li class="flex between">
+							<li class="flex">
 								<div class="flex">
 								<div>주소</div>
 								<div><input name="address" class="address" type="text" th:value="${member.address}"></div>
@@ -105,15 +115,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</li>
 						</ul>
 					</div>
-					<div class="edit">
-						<div>
-							<button class="btn-edit">프로필 수정</button>
-						</div>
-						<div class="flex btn-profile-edit" style="display: none;">
-							<button class="btn-profile-edit-update">수정</button>
-							<button class="btn-profile-edit-cancel">취소</button>
-						</div>
-					</div>
+					
 				</div>
 			</section>
 			<script type="text/javascript">
@@ -170,7 +172,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
        				});	
        			}
 			</script>
-			
+			</div>
+			<div>
 			<section>
 				<div id="part" class="view-size">
 					<ul class="flex center">
@@ -185,8 +188,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="guest-part">
 					<div class="reserve-room">
 						<P>예약한 숙소</P>
-						<div class="reserve-room-list flex between">
-							<div><img src="/image/room-img-01.jpg" width="300px" height="180px"></div>
+						<div class="reserve-room-list flex">
+							<div><img src="/image/room-img-01.jpg" width="280px" height="180px"></div>
 							<div class="home-info">
 								<div>
 									<ul>
@@ -253,27 +256,37 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="host-part" style="display: none;">
 					<div class="reserve-room">
 						<P>내가 등록한 숙소</P>
-						<div class="reserve-room-list flex between">
-							<div><img src="/image/room-img-01.jpg" width="300px" height="180px"></div>
-							<div class="home-info">
-								<div>
-									<ul>
-										<li>숙소유형</li>
-										<li class="home-name"><a href="/homes/detail">house#1. Hangang view house</a></li>
-										<li class="home-filter">
-											<span>최대인원4명</span><span>원룸</span><span>침대1</span><span>욕실1</span>
-										</li>
-									</ul>
-									<ul class="home-price">
-										<li>100,000원&nbsp;<span>/박</span></li>
+						<div th:each="hostHome:${hostHome}">
+							<div class="reserve-room-list flex" >
+								<div><img src="/image/room-img-01.jpg" width="280px" height="180px"></div>
+								<div class="home-info">
+									<div>
+										<ul>
+											<li>[[${hostHome.homeType}]]</li>
+											<li class="home-name"><a th:href="|/home/detail/${hostHome.hno}|">[[${hostHome.homeName}]]</a></li>
+											<li class="home-number">
+												<div class="flex">
+													<div>최대인원 <span>[[${hostHome.maximumNumber}]]</span>명</div>
+													<div>침대 <span>[[${hostHome.bedNumber}]]</span>개</div>
+													<div>침실 <span>[[${hostHome.bedroomNumber}]]</span>개</div>
+													<div>욕실 <span>[[${hostHome.bathroomNumber}]]</span>개</div>
+												</div>
+											</li>
+											<li class="home-filter">
+												<span th:each="hoH : ${hostHome.homeOptionSet}">[[${hoH.homeOption}]]</span>
+											</li>
+										</ul>
+										<ul class="home-price">
+											<li>[[${hostHome.homePrice}]]원&nbsp;<span>/박</span></li>
+										</ul>
+									</div>
+								</div>
+								<div class="home-comment">
+									<ul class="flex">
+										<li>별점</li>
+										<li>(후기)</li>
 									</ul>
 								</div>
-							</div>
-							<div class="home-comment">
-								<ul class="flex">
-									<li>별점</li>
-									<li>(후기)</li>
-								</ul>
 							</div>
 						</div>
 					</div>
@@ -306,6 +319,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</div>
 				</div>
 			</section>
+			</div>
 			<script type="text/javascript">
 			 $(function(){
 				 

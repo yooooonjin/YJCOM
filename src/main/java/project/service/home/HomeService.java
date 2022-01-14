@@ -11,6 +11,6 @@ public interface HomeService {
 
 	String homeList(Model model);
 
-	String homeDetail(Model medel);
+	String homeDetail(Model model, long hno);
 	
 }

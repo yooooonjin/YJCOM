@@ -19,6 +19,7 @@ import project.domain.entity.MemberEntity;
 @Data
 public class HomeListDto {
 	
+	private long hno;
 	private String homeName;
 	private String homeAddress;
 	private long homePrice;
@@ -39,6 +40,7 @@ public class HomeListDto {
 	private MemberEntity member;
 
 	public HomeListDto(HomeEntity entity) {
+		this.hno=entity.getHno();
 		this.homeName = entity.getHomeName();
 		this.homeAddress = entity.getHomeAddress();
 		this.homePrice = entity.getHomePrice();
