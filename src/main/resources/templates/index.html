@@ -4,47 +4,58 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<th:block th:insert="/common/common.html::head" />
 		<link rel="stylesheet" href="/css/main/main.css">
-		<link rel="stylesheet" href="/css/common/header-nav.css">
 	</head>
 	<body>
-		<header>
-			<section>
-				<div class="flex between view-size">
-					<div class="logo">
-						<a href="/"><img src="/image/airbnb_logo-w.png" width=120px></a>
-					</div>
-					<div class="big-search">
-						<ul class="flex">
-							<li><a href="/home/list">숙소</a></li>
-							<li><a href="#">체험</a></li>
-							<li><a href="#">온라인체험</a></li>
-						</ul>
-					</div>
-					<th:block th:insert="/common/header-nav.html::header-nav"/>	
-				</div>
-			</section>
-			
-		</header>
+	
+	<header id="blacktype">
+		<div class="index-view-size">
+		<th:block th:replace="~{/common/header::blacktype(~{this::indexMain})}">
+			<div class="big-search" th:fragment="indexMain">
+				<ul class="flex">
+					<li><a href="/home/list">숙소</a></li> 
+					<li><a href="#">체험</a></li>
+					<li><a href="#">온라인체험</a></li>
+				</ul>
+			</div>
+		</th:block>
+		</div>
+	</header>
 		
 		<main>
 			<div id="search-tab">
-				<div class="main-img flex center">
-					<img src="/image/main-img-01.jpg" width="1920px" >
-				</div>
 				<div class="search">
-					<div class="flex search-detail">
-						<div><input type="text" placeholder="위치"></div>
-						<div><input type="date" placeholder="체크인"></div>
-						<div><input type="date" placeholder="체크아웃"></div>
+					<div class="search-detail flex center ">
 						<div>
-							<input type="text" placeholder="인원">
-							<a><img src="/image/search-01.png" width="45px"></a>
+							<div class="location">
+								<div>위치</div>
+								<input placeholder="어디로 여행가세요?">
+							</div>
+						</div>
+						<div>
+							<div class="check-in">
+								<div>체크인</div>
+								<input type="date" placeholder="날짜입력">
+							</div>
+						</div>
+						<div>
+							<div class="check-out">
+								<div>체크아웃</div>
+								<input type="date" placeholder="날짜입력">
+							</div>
+						</div>
+						<div>
+							<div  class="number">
+								<div>인원</div>
+								<input placeholder="게스트추가">
+								<a><img src="/image/search-01.png" width="45px"></a>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="introduce">
-					<p>내 취향에 맞는 숙소를 찾아 지금 바로 검색하세요</p>
-				</div>
+			</div>
+			<div id="main-img">
+				<img src="/image/back-img.jpg" width="1920px" >
+				<p>에어비앤비가<br>여행지를 찾아드릴게요!</p>
 			</div>
 		</main>
 	</body>

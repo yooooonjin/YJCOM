@@ -5,24 +5,24 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<th:block th:insert="/common/common.html::head" />
 		<link rel="stylesheet" href="/css/home/home-reg.css">
 		<link rel="stylesheet" href="/css/common/header-nav.css">
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	</head>
 	<body>
-	<header>
-			<section id="home-reg-header">
-				<div class="flex between view-size">
-					<div class="logo">
-						<a href="/"><img src="/image/airbnb_logo-p.png" width=120px></a>
-					</div>
-					<div class="big-search">
-						<ul class="flex">
-							<li><a href="/home/reg">숙소등록</a></li>
-							<li><a href="#">메세지</a></li>
-						</ul>
-					</div>
-					<th:block th:insert="/common/header-nav.html::header-nav"/>	
-				</div>
-			</section>
-		</header>
+	<header id="whitetype">
+	<div class="view-size">
+	<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+		<div class="search" th:fragment="homeMain">
+			<div class="big-search" th:fragment="indexMain">
+				<ul class="flex">
+					<li><a href="/home/list">숙소</a></li> 
+					<li><a href="#">체험</a></li>
+					<li><a href="#">온라인체험</a></li>
+				</ul>
+			</div>
+		</div>
+	</th:block>
+	</div>
+	</header>
 		
 		<main>
 			<section id="home-reg">
@@ -33,7 +33,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div>
 								<p>숙소정보</p>
 								<input name="homeName" type="text" placeholder="숙소 이름을 입력하세요">
-								<input name="homeAddress" type="text" placeholder="주소를 입력하세요">
+								<input id="address" name="homeAddress" type="text" placeholder="주소를 입력하세요" autocomplete="off" required="required">
+								<input type="text" id="detailAddress" placeholder="상세주소를 입력하세요" autocomplete="off">
+								<input type="hidden" id="postcode" placeholder="우편번호">
+								<input type="hidden" id="extraAddress" placeholder="참고항목">
 							</div>
 							<div>
 								<p>숙소가격</p>
@@ -85,6 +88,45 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</section>
 			<script type="text/javascript">
 				$("input:radio[id='homeType1']").prop('checked', true);
+				
+				window.onload = function(){
+				    document.getElementById("address").addEventListener("click", function(){
+				        new daum.Postcode({
+				            oncomplete: function(data) {
+				                var addr = '';
+				                var extraAddr = '';
+
+				              
+				                if (data.userSelectedType === 'R') {
+				                    addr = data.roadAddress;
+				                } else {
+				                    addr = data.jibunAddress;
+				                }
+
+				                if(data.userSelectedType === 'R'){
+				                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+				                        extraAddr += data.bname;
+				                    }
+				                    if(data.buildingName !== '' && data.apartment === 'Y'){
+				                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+				                    }
+				                    if(extraAddr !== ''){
+				                        extraAddr = ' (' + extraAddr + ')';
+				                    }
+				                    document.getElementById("extraAddress").value = extraAddr;
+				                
+				                } else {
+				                    document.getElementById("extraAddress").value = '';
+				                }
+
+				                document.getElementById('postcode').value = data.zonecode;
+				                document.getElementById("address").value = addr;
+				                document.getElementById("detailAddress").focus();
+				            }
+				        }).open();
+				    
+				    });
+				}
 			</script>
 		</main>
 	

@@ -52,7 +52,7 @@ public class HomeListDto {
 		this.homeOptionSet=entity.getHomeOptionSet();
 		this.homeIntro = entity.getHomeIntro();
 		this.homePhoto = entity.getHomePhoto();
-		//this.member = member;
+		this.member = entity.getMember();
 	}
 	
 	

@@ -29,7 +29,7 @@ import project.domain.dto.MemberUpdateDto;
 @Getter
 @Table(name = "member")
 @Entity
-public class MemberEntity extends baseEntity {
+public class MemberEntity extends BaseEntity {
 	
 	@Id
 	private String email;

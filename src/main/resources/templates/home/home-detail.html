@@ -3,54 +3,61 @@
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<th:block th:insert="/common/common.html::head" />
-		<link rel="stylesheet" href="/css/home/homes.css">
 		<link rel="stylesheet" href="/css/home/home-detail.css">
 		<link rel="stylesheet" href="/css/common/home-reserve.css">
-		<link rel="stylesheet" href="/css/common/header-nav.css">
 		<script type="text/javascript" src="/js/visual.js"></script>
 	</head>
 	<body>
-		<header>
-			<section id="header">
-				<div class="flex between view-size">
-					<div class="logo">
-						<a href="/"><img src="/image/airbnb_logo-w.png" width=120px></a>
-					</div>
-					<th:block th:insert="/common/header-nav.html::header-nav"/>	
+		<header id="whitetype">
+			<div class="view-size">
+			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+				<div class="search" th:fragment="homeMain">
 				</div>
-			</section>
+			</th:block>
+			</div>
 		</header>
 			
-		<main th:each="homeDetail:${homeDetail}">
-			<section class="room-title view-size">
-				<ul>
-					<li class="room-type">[[${homeDetail.homeType.homeType}]]</li>
-					<li class="room-name">[[${homeDetail.homeName}]]</li>
-				</ul>
-				<div class="room-etc flex between">
-					<ul class="flex">
-						<li>[[${homeDetail.homeAddress}]]</li>
+		<main>
+			<section th:each="homeDetail:${homeDetail}" id="room-title">
+				<div class="room-title view-size">
+					<ul>
+						<li class="room-type">[[${homeDetail.homeType.homeType}]]</li>
+						<li class="room-name">[[${homeDetail.homeName}]]</li>
 					</ul>
-					<ul class="flex">
-						<li>공유하기</li>
-					</ul>
+					<div class="room-etc flex between">
+						<ul id="homeAddress" class="flex">
+							<li>[[${homeDetail.homeAddress}]]</li>
+						</ul>
+						<ul class="flex">
+							<li>공유하기</li>
+						</ul>
+					</div>
+					<div class="room-img visual-area">
+						<ol class="flex images">
+							<li style="background-image: url('/image/home-img/room-img (2).jpg');"></li>
+							<li style="background-image: url('/image/home-img/room-img (3).jpg');"></li>
+							<li style="background-image: url('/image/home-img/room-img (4).jpg');"></li>
+						</ol>
+					</div>
 				</div>
 			</section>
 			
-			<section id="room-info" >
+			<section id="home-detail-info" >
 				<div class="room-info flex between view-size">
 					<div>
-						<div class="room-img visual-area">
-							<ol class="flex images">
-								<li style="background-image: url('/image/home-img/room-img (2).jpg');"></li>
-								<li style="background-image: url('/image/home-img/room-img (3).jpg');"></li>
-								<li style="background-image: url('/image/home-img/room-img (4).jpg');"></li>
-							</il>
-						</div>
 						<div class="room-introduce">
 							<div>
+								<p class="home-sub-title">[[${homeDetail.member.name}]]님이 호스팅하는 [[${homeDetail.homeType.homeType}]]</p>
+								<div class="home-number flex">
+									<div>최대인원 <span>[[${homeDetail.maximumNumber}]]</span>명</div>
+									<div>침대 <span>[[${homeDetail.bedNumber}]]</span>개</div>
+									<div>침실 <span>[[${homeDetail.bedroomNumber}]]</span>개</div>
+									<div>욕실 <span>[[${homeDetail.bathroomNumber}]]</span>개</div>
+								</div>
+							</div>
+							<div>
 								<h2>숙소 소개</h2>
-								<p>[[${homeDetail.homeIntro}]]</p>
+								<p class="subtitle">[[${homeDetail.homeIntro}]]</p>
 							</div>
 							<div>
 								<h2>숙소 편의시설</h2>
@@ -103,12 +110,64 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									</div>
 								</div>
 							</div>
+							<div class="map">
+								<h2>호스팅 지역</h2>
+								<div id="map" style="width:900px;height:400px;"></div>
+							</div>
+							
+							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f&libraries=services"></script>
+							<script th:inline="javascript">
+							
+							
+							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						    mapOption = {
+						        center: new kakao.maps.LatLng(37.6568255, 127.021725), // 지도의 중심좌표
+						        level: 3 // 지도의 확대 레벨
+						    };  
+
+							// 지도를 생성합니다    
+							var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+							// 주소-좌표 변환 객체를 생성합니다
+							var geocoder = new kakao.maps.services.Geocoder();
+							
+							var homeAddress=[[${homeDetail.homeAddress}]];
+							
+							var imageSrc = "/image/airbnb_marker.png"; 
+							
+							// 주소로 좌표를 검색합니다
+							geocoder.addressSearch(homeAddress, function(result, status) {
+	
+							    // 정상적으로 검색이 완료됐으면 
+							     if (status === kakao.maps.services.Status.OK) {
+	
+							        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+							        var imageSize = new kakao.maps.Size(50, 60); 
+							        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+							        
+							        // 결과값으로 받은 위치를 마커로 표시합니다
+							        var marker = new kakao.maps.Marker({
+							            map: map,
+							            position: coords,
+							            image : markerImage
+							        });
+	
+							        map.setCenter(coords);
+							    } 
+							});    
+							</script>
+							
 						</div>
 					</div>
 					<th:block th:insert="/common/home-reserve.html::home-reserve"/>
 				</div>
 			</section>
 		</main>
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
 		
 	</body>
 </html>

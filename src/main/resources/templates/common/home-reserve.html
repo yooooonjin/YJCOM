@@ -7,51 +7,111 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</head>
 	<body>
 		<th:block th:fragment="home-reserve">
-		<div class="room-reserve sideBanner">
-			<ul class="room-reserve-info">
-				<li>100,000원&nbsp;<span>/박</span></li>
-					<ul class="flex between">
-						<li><input type="date"></li>
-						<li><input type="date"></li>
+		<form th:action="|/member/home/reserve/${hno}|" method="post">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<div id="home-reserve-form">
+					<ul class="home-reserve-info">
+						<li>[[${#numbers.formatInteger(homeDetail.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
+						<li class="flex between">
+							<input name="checkIn" class="checkin" type="date" onchange="date()">
+							<input name="checkOut" class="checkout" type="date" onchange="date()">
+							<input type="hidden" class="days">
+						</li>
+						<li><input name="guests" class="guest-number" type="number" placeholder="게스트 인원" required="required"></li>
 					</ul>
-				<li><input class="guest-number" type="text" placeholder="게스트 3명"></li>
-			</ul>
-			<div class="room-price">
-				<ul class="flex between">
-					<li>객실요금</li>
-					<li>300,000원</li>
-				</ul>
-				<ul class="flex between">
-					<li>세금 및 봉사료</li>
-					<li>30,000원</li>
-				</ul>
-				<ul class="flex between">
-					<li>총 요금</li>
-					<li>330,000원</li>
-				</ul>
-				<button class="btn-host-message">호스트에게 연락하기</button>
-				<button class="btn-reserve">예약하기</button>
-			</div>
-		</div>
-	<script type="text/javascript">
+					<div class="home-price">
+						<ul class="flex between">
+							<li>객실요금</li>
+							<li class="periodhomeprice">[[${#numbers.formatInteger(homeDetail.homePrice,3,'COMMA')}]]원</li>
+						</ul>
+						
+						<ul class="flex between">
+							<li>세금 및 봉사료</li>
+							<li class="commission">[[${#numbers.formatInteger(homeDetail.homePrice*0.1,3,'COMMA')}]]원</li>
+						</ul>
+						<ul class="flex between">
+							<li>총 요금</li>
+							<li class="total">[[${#numbers.formatInteger(homeDetail.homePrice+(homeDetail.homePrice*0.1),3,'COMMA')}]]원</li>
+						</ul>
+						<input type="hidden" name="totalPrice"  id="total">
+						<button class="btn-host-message" type="button">호스트에게 연락하기</button>
+						<button class="btn-reserve" type="submit">예약하기</button>
+					</div>
+				</div>
+		</form>
+		
+	<script type="text/javascript"  th:inline="javascript">
 		$(function(){
+			
+			
+			/////////////////////////사이드베너이동///////////////////////////
 			// 기본 위치(top)값
-			var floatPosition = parseInt($(".sideBanner").css('top'))
+			var floatPosition = parseInt($("#home-reserve-form").css('top'))
 
 			// scroll 인식
 			$(window).scroll(function() {
 			  
 			    // 현재 스크롤 위치
-			    var currentTop = $(window).scrollTop();
+			    var currentTop = $(window).scrollTop()-750;
 			    var bannerTop = currentTop + floatPosition + "px";
 
+			    if(currentTop<0){
+			    	bannerTop=floatPosition;
+			    } 
+			    
 			    //이동 애니메이션
-			    $(".sideBanner").stop().animate({
+			    $("#home-reserve-form").stop().animate({
 			      "top" : bannerTop
 			    }, 500);
+			    
 
-			}).scroll();
-		});
+			}).scroll(); 
+			
+			
+			
+        });
+		/////////////////////////날짜값///////////////////////////
+		
+		function date(){
+			
+            var checkin = $(".checkin").val();
+            var checkout = $(".checkout").val();
+			
+			var inarr=checkin.split("-");
+			var outarr=checkout.split("-");
+			
+			var indate=new Date(inarr[0],inarr[1],inarr[2])
+			var outdate=new Date(outarr[0],outarr[1],outarr[2])
+			
+			var dif = outdate - indate;
+			var btDay=dif / (1000*60*60*24);
+			
+			if(checkin && checkout){
+				$(".days").val(btDay);
+			 }
+			console.log("일수차이는:"+ btDay);
+			
+			var homeprice =[[${homeDetail.homePrice}]]
+			
+			console.log("1박 가격:"+ homeprice);
+			
+			
+			var periodhomeprice =homeprice*btDay
+			var commission =periodhomeprice*0.1
+			var total = periodhomeprice + commission
+			
+			
+			if(btDay!="" && checkout!=""){
+				$(".periodhomeprice").html(periodhomeprice.toLocaleString()+"원");
+				$(".commission").html(commission.toLocaleString()+"원");
+				$(".total").html(total.toLocaleString()+"원");
+				$("#total").val(total);
+				
+			}
+			
+		}
+			
+			
 
 	</script>
 	</th:block>

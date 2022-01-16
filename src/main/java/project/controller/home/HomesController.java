@@ -13,7 +13,6 @@ import lombok.extern.log4j.Log4j2;
 import project.domain.dto.home.homeRegDto;
 import project.security.dto.SecurityDto;
 import project.service.home.HomeService;
-import project.service.impl.HomeServiceImp;
 
 @Log4j2
 @RequestMapping("/home")

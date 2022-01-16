@@ -4,44 +4,21 @@
 	width: 600px;
 	margin: 0 auto;
 }
-/* ////////////////////////// */
-#home-reg-header{
-	background-size: cover;
-	background-color: #f0f0f0;
-}
-header .logo{
-	margin: auto 0;
-}
-header .big-search ul li a{
-	line-height:80px;
-	font-size: 18px;
-	padding: 10px 16px 10px 16px;
-}
-header span{
-	line-height:80px;
-	font-size: 14px;
-	padding: 10px 16px 10px 16px;
-}
-header .user_pic{
-	border-radius: 20px;
-	margin-top: 20px;
-	cursor: pointer;
-}
 /* //////////////////////////////////////// */
-.home-reg{
+#home-reg .home-reg{
 	text-align: center;
 	margin-top: 35px;
 	text-align: center;
 }
 
-p{
+#home-reg p{
 	text-align: left;
 	font-size: 15px;
 	font-weight: 600;
 	margin-top: 20px;
 	color: #ff2e5f;
 }
-input{
+#home-reg input{
 	width: 600px;
 	height: 45px;
 	padding: 0 10px;
@@ -49,7 +26,7 @@ input{
 	border: 1px solid #e9e9e9;
 	border-radius: 8px;
 }
-textarea{
+#home-reg textarea{
 	width: 600px;
 	height: 200px;
 	padding: 10px 10px;
@@ -57,20 +34,20 @@ textarea{
 	border: 1px solid #e9e9e9;
 	border-radius: 6px;
 }
-.homePrice input{
+#home-reg .homePrice input{
 	width: 550px;
 }
-.homePrice p{
+#home-reg .homePrice p{
 	font-size: 17px;
 	color: black;
 	padding: 5px 5px 0 0;
 	font-weight: 500;
 }
-.home-detail-number input{
+#home-reg .home-detail-number input{
 	width: 145px;
 }
 /* ////////////////////////// */
-button{
+#home-reg button{
 	margin:40px 0 40px 0
 	;
 	border: none;
@@ -84,10 +61,10 @@ button{
 	cursor: pointer;
 }
 /* ////////////////////////// */
-.box-radio-input input[type="radio"], input[type="checkbox"]{
+#home-reg .box-radio-input input[type="radio"], input[type="checkbox"]{
   display:none;
 }
-.box-radio-input input[type="radio"] + span, input[type="checkbox"] + span{
+#home-reg .box-radio-input input[type="radio"] + span, input[type="checkbox"] + span{
 	margin:10px 0 0 0;
   display:inline-block;
   background:none;
@@ -101,7 +78,7 @@ button{
   font-size: 14px;
   border-radius: 6px;
 }
-.box-radio-input input[type="radio"]:checked + span, input[type="checkbox"]:checked + span{
+#home-reg .box-radio-input input[type="radio"]:checked + span, input[type="checkbox"]:checked + span{
   background: #ff2e5f;
   color:#fff;
 }

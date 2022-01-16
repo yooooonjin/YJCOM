@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name="home")
 @Entity
-public class HomeEntity extends baseEntity {
+public class HomeEntity extends BaseEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

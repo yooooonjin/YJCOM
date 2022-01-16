@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:fragment="blacktype(main)">	
+		<section class="flex between">
+				<div class="logo">
+					<a href="/"><img src="/image/airbnb_logo-w.png" width=120px></a>
+				</div>
+				
+				<th:block th:replace="${main}">
+					<!-- 메인섹션이 삽입되는 영역입니다 -->
+				</th:block>
+				
+				<div class="member">
+					<ul class="flex end">
+						<li sec:authorize="isAuthenticated()"><span sec:authentication="name">이메일 표기</span></li>
+						<li class="img">
+							<p>
+								<img class="line" src="/image/line.png" width="15px;">
+								<img class="user_pic" src="/image/user_pic2.png" width="30px;">
+							</p>
+						</li>
+					</ul>
+				<th:block th:insert="/common/header-nav.html::header-nav"/>	
+				</div>
+		</section>
+</th:block>	
+
+
+<th:block th:fragment="whitetype(main)">	
+		<section class="flex between">
+			<div class="logo">
+				<a href="/"><img src="/image/airbnb_logo-p.png" width=120px></a>
+			</div>
+			
+			<th:block th:replace="${main}">
+				<!-- 메인섹션이 삽입되는 영역입니다 -->
+			</th:block>
+			
+			<div class="member">
+				<ul class="flex end">
+					<li sec:authorize="isAuthenticated()"><span sec:authentication="name">이메일 표기</span></li>
+					<li class="img">
+						<p>
+							<img class="line" src="/image/line.png" width="15px;">
+							<img class="user_pic" src="/image/user_pic2.png" width="30px;">
+						</p>
+					</li>
+				</ul>
+			<th:block th:insert="/common/header-nav.html::header-nav"/>	
+			</div>
+		</section>
+</th:block>	
+	
+	
+</html>

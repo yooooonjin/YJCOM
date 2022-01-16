@@ -17,3 +17,5 @@ input::placeholder{color: #a9a9a9;}
 .row{flex-direction: row;}
 .column{flex-direction: column;}
 .view-size{width: 1280px; margin: 0 auto};
+.index-view-size{width: 1426px; margin: 0 auto;}
+

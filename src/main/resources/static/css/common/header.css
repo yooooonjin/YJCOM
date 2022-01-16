@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+.index-view-size{
+	width: 1426px;
+	margin: 0 auto;
+}
+/* //////////////////////////////////////// */
+#blacktype{
+	background-size: cover;
+	background-color: black;
+	color: white;
+}
+#blacktype a{color: white;}
+/* //////////////////////////////////////// */
+#whitetype{
+	background-size: cover;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	color: white;
+}
+#whitetype a{color: black;}
+#whitetype span{
+	color: black
+}
+#whitetype p{
+	border: 1px solid #dddddd;
+}
+/* //////////////////////////////////////// */
+
+header> section> div{
+	height: 80px;
+}
+header .logo{
+	width: 400px;
+	margin: auto 0;
+}
+header .member{
+	width: 400px;
+}
+header .big-search ul li a{
+	line-height:80px;
+	font-size: 18px;
+	padding: 10px 16px 10px 16px;
+}
+/* //////////////////////////////////////// */
+header span{
+	line-height:80px;
+	font-size: 14px;
+	padding: 10px 16px 10px 16px;
+}
+/* //////////////////////////////////////// */
+header .img{
+	margin:19px 0;
+	position: relative;
+}
+header p{
+	width: 77px;
+	height: 42px;
+	background-color: white;
+	border-radius: 21px;
+	cursor: pointer;
+}
+header .user_pic{
+	position: absolute;
+	right:6px;
+	top: 6px;
+	border-radius: 20px;
+	z-index: 1;
+	z-index: 1;
+}
+header .line{
+	position: absolute;
+	left:13px;
+	top: 13px;
+	z-index: 1;
+	z-index: 1;
+}

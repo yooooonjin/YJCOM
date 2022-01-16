@@ -10,40 +10,33 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
 	</head>
-	<header>
-		<section id="member-info-header">
-			<div class="flex between view-size">
-				<div class="logo">
-					<a href="/"><img src="/image/airbnb_logo-p.png" width=120px></a>
-				</div>
-				<div class="big-search">
-					<ul class="flex">
-						<li><a href="/home/reg">숙소등록</a></li>
-						<li><a href="#">메세지</a></li>
-					</ul>
-				</div>
-				<th:block th:insert="/common/header-nav.html::header-nav"/>	
-			</div>
-		</section>
-	</header>
-		
 	<body>
-		<main class="flex center">
+	
+	<header id="whitetype">
+	<div class="view-size">
+	<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+		<div class="search" th:fragment="homeMain">
+			<div class="big-search" th:fragment="indexMain">
+				<ul class="flex">
+					<li><a href="/home/list">숙소</a></li> 
+					<li><a href="#">체험</a></li>
+					<li><a href="#">온라인체험</a></li>
+				</ul>
+			</div>
+		</div>
+	</th:block>
+	</div>
+	</header>
+	
+		<main class="flex around view-size">
 		<div>
 			<section>
-				<div id="member-profile" class="view-size">
+				<div id="member-profile">
 					<h1>프로필</h1>
-					<div class="edit">
-						<div>
-							<button class="btn-edit">프로필 수정</button>
-						</div>
-						<div class="flex btn-profile-edit" style="display: none;">
-							<button class="btn-profile-edit-update">수정</button>
-							<button class="btn-profile-edit-cancel">취소</button>
-						</div>
-					</div>
-					<div>
-						<img src="/image/user_pic.png" width="150px">
+					
+					<div class="profile-img">
+						<img src="/image/user_pic2.png" width="128px">
+						<p><a href="#">사진 업데이트하기</a></p>
 					</div>
 					<div class="default-profile">
 						<ul>
@@ -79,6 +72,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</li>
 						</ul>
 					</div>
+					
 					<!-- //////////////////////////////////////////////// -->
 					<div class="edit-profile" style="display: none;">
 						<ul>
@@ -114,6 +108,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								</div>
 							</li>
 						</ul>
+					</div>
+					<div class="edit">
+						<div>
+							<button class="btn-edit">프로필 수정</button>
+						</div>
+						<div class="flex center btn-profile-edit" style="display: none;">
+							<button class="btn-profile-edit-update">수정</button>
+							<button class="btn-profile-edit-cancel">취소</button>
+						</div>
 					</div>
 					
 				</div>
@@ -178,7 +181,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="part" class="view-size">
 					<ul class="flex center">
 						<li class="guest">GUEST<p class="guest-bar"></p></li>
-						<li class="host">HOST<p class="host-bar" style="display: none;"></p></li>
+						<li sec:authorize="hasRole('ROLE_HOST')" class="host">HOST<p class="host-bar" style="display: none;"></p></li>
 					</ul>
 				</div>
 			</section>
@@ -188,30 +191,41 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="guest-part">
 					<div class="reserve-room">
 						<P>예약한 숙소</P>
-						<div class="reserve-room-list flex">
-							<div><img src="/image/room-img-01.jpg" width="280px" height="180px"></div>
-							<div class="home-info">
-								<div>
-									<ul>
-										<li>숙소유형</li>
-										<li class="home-name"><a href="/home/detail">house#1. Hangang view house</a></li>
-										<li class="home-filter">
-											<span>최대인원4명</span><span>원룸</span><span>침대1</span><span>욕실1</span>
-										</li>
-									</ul>
-									<ul class="home-price">
-										<li>100,000원&nbsp;<span>/박</span></li>
+						<div th:each="reservedHome:${reservedHome}">
+							<div class="reserve-room-list flex" >
+								<div><img src="/image/room-img-01.jpg" width="280px" height="180px"></div>
+								<div class="home-info">
+									<div>
+										<ul>
+											<li>[[${reservedHome.homeType}]]</li>
+											<li class="home-name"><a th:href="|/home/detail/${reservedHome.hno}|">[[${reservedHome.homeName}]]</a></li>
+											<li class="home-number">
+												<div class="flex">
+													<div>최대인원 <span>[[${reservedHome.maximumNumber}]]</span>명</div>
+													<div>침대 <span>[[${reservedHome.bedNumber}]]</span>개</div>
+													<div>침실 <span>[[${reservedHome.bedroomNumber}]]</span>개</div>
+													<div>욕실 <span>[[${reservedHome.bathroomNumber}]]</span>개</div>
+												</div>
+											</li>
+											<li class="home-filter">
+												<span th:each="hoH : ${reservedHome.homeOptionSet}">[[${hoH.homeOption}]]</span>
+											</li>
+										</ul>
+										<ul class="home-price">
+											<li>[[${#numbers.formatInteger(reservedHome.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
+										</ul>
+									</div>
+								</div>
+								<div class="home-comment">
+									<ul class="flex">
+										<li>별점</li>
+										<li>(후기)</li>
 									</ul>
 								</div>
 							</div>
-							<div class="home-comment">
-								<ul class="flex">
-									<li>별점</li>
-									<li>(후기)</li>
-								</ul>
-							</div>
 						</div>
 					</div>
+					<div th:unless="${reservedHome}" class="br">현재 투숙 예정 예약이 없습니다.</div>
 				
 					<div class="review">
 						<P>내가 작성한 후기</P>
@@ -277,7 +291,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											</li>
 										</ul>
 										<ul class="home-price">
-											<li>[[${hostHome.homePrice}]]원&nbsp;<span>/박</span></li>
+											<li>[[${#numbers.formatInteger(hostHome.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
 										</ul>
 									</div>
 								</div>
@@ -341,5 +355,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			
 			</script>
 		</main>
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
 	</body>
 </html>

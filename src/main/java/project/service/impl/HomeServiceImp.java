@@ -49,7 +49,7 @@ public class HomeServiceImp implements HomeService {
 		
 		memberRepository.findById(securityDto.getUsername()).get().addRole(MemberRole.HOST);
 		
-		return "home/home-reg";
+		return "redirect:/member/info";
 	}
 
 	@Override
