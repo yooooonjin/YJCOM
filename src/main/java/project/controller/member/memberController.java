@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.RequiredArgsConstructor;
 import project.domain.dto.MemberUpdateDto;
 import project.domain.dto.home.HomeReserveDto;
+import project.domain.dto.home.HomeReviewDto;
 import project.security.dto.SecurityDto;
 import project.service.member.MemberService;
 
@@ -34,11 +35,14 @@ public class memberController {
 	public void memberUpdate(MemberUpdateDto updateDto,Model model) {
 		service.memberUpdate(updateDto,model);
 	}
-	//TODO 예약테이블이 없어 리뷰 서비스 진행 불가
-	@GetMapping("/home/review")
-	public String reviewWritePage() {
-		return "/member/home-review";
+	
+	//리뷰 작성
+	@ResponseBody
+	@PostMapping("/home/review/{hno}")
+	public void reviewWritePage(@PathVariable long hno, @AuthenticationPrincipal SecurityDto securityDto, String review) {
+		service.reviewWrite(hno, securityDto,review);
 	}
+	
 	//숙소예약
 	@PostMapping("/home/reserve/{hno}")
 	public String homeReserve(@PathVariable long hno, @AuthenticationPrincipal SecurityDto securityDto, HomeReserveDto reserveDto) {

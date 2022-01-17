@@ -9,7 +9,7 @@ public interface HomeService {
 
 	String homeReg(homeRegDto regDto, SecurityDto securityDto);
 
-	String homeList(Model model);
+	String homeList(Model model, int page);
 
 	String homeDetail(Model model, long hno);
 	

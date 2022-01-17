@@ -3,8 +3,8 @@
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<th:block th:insert="/common/common.html::head" />
-		<link rel="stylesheet" href="/css/home/home-reg.css">
 		<link rel="stylesheet" href="/css/common/header-nav.css">
+		<link rel="stylesheet" href="/css/home/home-review.css">
 	</head>
 	<body>
 	
@@ -26,16 +26,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		
 		<main>
 			<section id="home-review">
-				<div class="home-review home-reg-view-size">
+				<div class="home-review home-review-view-size">
 					<form action="/member/home/review" method="post">
 						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 						<input type="hidden" name="">
 						<div>
 							<p>숙소후기</p>
+							<div th:each="reservedHome:${reservedHome}">
+							<select name="reservedHome" class="reservedHome">
+								<option>[[${reservedHome.homeName}]]</option>
+							</select>
 							<div>
 								<textarea name="homeReview"></textarea>									
 							</div>
 							<button type="submit">등록하기</button>
+							</div>
 						</div>
 					</form>	
 				</div>

@@ -41,41 +41,59 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		</section>
 		
 		<main class="flex between index-view-size">
-			<section id="home-list">
-				<h1>집정보</h1>
-				<div class="home-list" th:each="homes:${homes}">
-				<input type="hidden" id="homeAddress" th:value="${homes.homeAddress}">
-					<div class="flex between">
-						<div><img src="/image/room-img-01.jpg" width="300px" height="200px"></div>
-						<div class="home-info">
-							<div>
-								<ul>
-									<li class="home-type">[[${homes.homeType.homeType}]]</li>
-									<li id="homeName" class="home-name"><a th:href="|/home/detail/${homes.hno}|">[[${homes.homeName}]]</a></li>
-									<li class="home-number">
-										<div class="flex">
-											<div>최대인원 <span>[[${homes.maximumNumber}]]</span>명</div>
-											<div>침대 <span>[[${homes.bedNumber}]]</span>개</div>
-											<div>침실 <span>[[${homes.bedroomNumber}]]</span>개</div>
-											<div>욕실 <span>[[${homes.bathroomNumber}]]</span>개</div>
-										</div>
-									</li>
-									<li class="home-filter">
-										<span th:each="ho : ${homes.homeOptionSet}">[[${ho.homeOption}]]</span>
-									</li>
-								</ul>
-								<ul class="home-price">
-									<li>[[${#numbers.formatInteger(homes.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
+			<section class="left-main">
+				<div id="home-list">
+					<div class="home-list" th:each="homes:${homes}">
+						<h1>집정보</h1>
+						<input type="hidden" id="homeAddress" th:value="${homes.homeAddress}">
+						<div class="flex between">
+							<div><img src="/image/room-img-01.jpg" width="300px" height="200px"></div>
+							<div class="home-info">
+								<div>
+									<ul>
+										<li class="home-type">[[${homes.homeType.homeType}]]</li>
+										<li id="homeName" class="home-name"><a th:href="|/home/detail/${homes.hno}|">[[${homes.homeName}]]</a></li>
+										<li class="home-number">
+											<div class="flex">
+												<div>최대인원 <span>[[${homes.maximumNumber}]]</span>명</div>
+												<div>침대 <span>[[${homes.bedNumber}]]</span>개</div>
+												<div>침실 <span>[[${homes.bedroomNumber}]]</span>개</div>
+												<div>욕실 <span>[[${homes.bathroomNumber}]]</span>개</div>
+											</div>
+										</li>
+										<li class="home-filter">
+											<span th:each="ho : ${homes.homeOptionSet}">[[${ho.homeOption}]]</span>
+										</li>
+									</ul>
+									<ul class="home-price">
+										<li>[[${#numbers.formatInteger(homes.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
+									</ul>
+								</div>
+							</div>
+							<div class="home-comment">
+								<ul class="flex end">
+									<li>별점</li>
+									<li>(후기)</li>
 								</ul>
 							</div>
 						</div>
-						<div class="home-comment">
-							<ul class="flex end">
-								<li>별점</li>
-								<li>(후기)</li>
-							</ul>
-						</div>
 					</div>
+				</div>
+				
+				<div id="paging" >
+					<div th:if="${paging}" >
+	        			<span th:if="${paging.from gt 1}">
+	        				<a href="/home/list?page=1">&lt;&lt;</a>
+	        				<a th:href="|/home/list?page=${paging.from-1}|">&lt;</a>
+	        			</span>
+	        			<span th:each="paging:${#numbers.sequence( paging.from , paging.to)}">
+	        				<a th:href="|/home/list?page=${paging}|">[[${paging}]]</a>
+	        			</span>
+	        			<span th:if="${paging.to lt paging.pageTotal}">
+	        				<a th:href="|/home/list?page=${paging.to+1}|">&gt;</a>
+	        				<a th:href="|/home/list?page=${paging.pageTotal}|">&gt;&gt;</a>
+	        			</span>
+	        		</div>
 				</div>
 			</section>
 			

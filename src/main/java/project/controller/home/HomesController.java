@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,8 +26,8 @@ public class HomesController {
 	
 	//집 리스트
 	@GetMapping("/list")
-	public String homesPage(Model model) {
-		return homeService.homeList(model);
+	public String homesPage(Model model,@RequestParam(defaultValue = "1") int page) {
+		return homeService.homeList(model,page);
 	}
 	//집 상세페이지
 	@GetMapping("/detail/{hno}")

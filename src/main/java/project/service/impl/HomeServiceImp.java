@@ -5,6 +5,10 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -18,6 +22,7 @@ import project.domain.entity.MemberEntityRepository;
 import project.domain.entity.MemberRole;
 import project.security.dto.SecurityDto;
 import project.service.home.HomeService;
+import project.util.PageInfo;
 
 @RequiredArgsConstructor
 @Service
@@ -51,13 +56,21 @@ public class HomeServiceImp implements HomeService {
 		
 		return "redirect:/member/info";
 	}
-
+	//집 전체 불러오기 //페이징처리
 	@Override
-	public String homeList(Model model) {
-		List<HomeListDto> homes= homeRepository.findAll().stream().map(HomeListDto::new).collect(Collectors.toList());
+	public String homeList(Model model,int page) {
 		
+		//한 페이지당 집 3개씩
+		Pageable pageable =PageRequest.of(page-1, 3, Direction.DESC, "hno");
+		Page<HomeEntity> homesEntity =homeRepository.findAll(pageable);
+		List<HomeListDto> homes =homesEntity.stream().map(HomeListDto::new).collect(Collectors.toList());
 		model.addAttribute("homes",homes);
+		
+		//페이지 3개씩
+		PageInfo paging=new PageInfo(homesEntity.getTotalPages(),page,3);
+		model.addAttribute("paging",paging);
 		return "home/homes";
+		
 	}
 
 	@Override

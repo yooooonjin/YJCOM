@@ -186,33 +186,66 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			</section>
 			
-			<section id="part-detail">
 			<!-- //////////////////////////////////guest/////////////////////////////////////////// -->
+			<script type="text/javascript">
+			
+			$(function(){
+				$(".review-write-btn").click(function(){
+					$(this).siblings(".review-write-page").slideDown();
+				});
+				$(".cancel-btn").click(function(){
+					$(this).parents(".review-write-page").slideUp();
+				});
+				
+				$(".submit-btn").click(function(){
+					
+					var review = $(".write-area").val(); //수정....
+					var hno= $(this).siblings(".home-id").val();
+					$.ajax({
+						url:"/member/home/review/"+hno,
+						type:"post",
+						data:{
+							review:review,
+							hno:hno
+						},
+						success:function(){
+							 location.reload()
+						}
+					});
+					$(this).parents(".review-write-page").slideUp();
+				});
+				
+				
+				
+			});
+			</script>
+			<section id="part-detail">
 				<div id="guest-part">
 					<div class="reserve-room">
 						<P>예약한 숙소</P>
 						<div th:each="reservedHome:${reservedHome}">
+							<span class="review-write-btn">후기 작성하기 ></span>
 							<div class="reserve-room-list flex" >
 								<div><img src="/image/room-img-01.jpg" width="280px" height="180px"></div>
 								<div class="home-info">
 									<div>
 										<ul>
-											<li>[[${reservedHome.homeType}]]</li>
-											<li class="home-name"><a th:href="|/home/detail/${reservedHome.hno}|">[[${reservedHome.homeName}]]</a></li>
+											<li>[[${reservedHome.home.homeType}]]</li>
+											<li class="home-name"><a th:href="|/home/detail/${reservedHome.home.hno}|">[[${reservedHome.home.homeName}]]</a></li>
 											<li class="home-number">
 												<div class="flex">
-													<div>최대인원 <span>[[${reservedHome.maximumNumber}]]</span>명</div>
-													<div>침대 <span>[[${reservedHome.bedNumber}]]</span>개</div>
-													<div>침실 <span>[[${reservedHome.bedroomNumber}]]</span>개</div>
-													<div>욕실 <span>[[${reservedHome.bathroomNumber}]]</span>개</div>
+													<div>최대인원 <span>[[${reservedHome.home.maximumNumber}]]</span>명</div>
+													<div>침대 <span>[[${reservedHome.home.bedNumber}]]</span>개</div>
+													<div>침실 <span>[[${reservedHome.home.bedroomNumber}]]</span>개</div>
+													<div>욕실 <span>[[${reservedHome.home.bathroomNumber}]]</span>개</div>
 												</div>
 											</li>
 											<li class="home-filter">
-												<span th:each="hoH : ${reservedHome.homeOptionSet}">[[${hoH.homeOption}]]</span>
+												<span th:each="hoH : ${reservedHome.home.homeOptionSet}">[[${hoH.homeOption}]]</span>
 											</li>
 										</ul>
 										<ul class="home-price">
-											<li>[[${#numbers.formatInteger(reservedHome.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
+											<li>[[${#numbers.formatInteger(reservedHome.home.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
 										</ul>
 									</div>
 								</div>
@@ -223,45 +256,31 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									</ul>
 								</div>
 							</div>
+							<div class="review-write-page" style="display: none;">
+								<div class="write-page">
+									<span>[[${reservedHome.home.homeName}]]</span>
+									<textarea class="write-area" name="review"></textarea>
+									<div class="btn flex end">
+										<input class="home-id" type="hidden" th:value="${reservedHome.home.hno}">
+										<button class="submit-btn" type="submit">등록하기</button>
+										<button class="cancel-btn" type="button">취소하기</button>
+									</div>									
+								</div>
+								</div>
+							</div>
 						</div>
-					</div>
 					<div th:unless="${reservedHome}" class="br">현재 투숙 예정 예약이 없습니다.</div>
-				
-					<div class="review">
+					
+			<!-- //////////////////////////////////////////내가작성한 후기///////////////////////////////// -->
+					<div>
 						<P>내가 작성한 후기</P>
-						<div class="review-list">
-							<div>2022-01-10</div>
-							<div class="room-name">
-								<a href="/home/detail">house#1. Hangang view house</a>
-							</div>
-							<div>
-								조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-								안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
-								지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
-							</div>
-						</div>
-						
-						<div class="review-list">
-							<div>2022-01-10</div>
-							<div class="room-name">
-								<a href="/home/detail">house#1. Hangang view house</a>
-							</div>
-							<div>
-								조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-								안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
-								지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
-							</div>
-						</div>
-						
-						<div class="review-list">
-							<div>2022-01-10</div>
-							<div class="room-name">
-								<a href="/home/detail">house#1. Hangang view house</a>
-							</div>
-							<div>
-								조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-								안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
-								지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
+						<div class="review" th:if="${homeReview}">
+							<div class="review-list" th:each="homeReview:${homeReview}">
+								<div>[[${homeReview.createdDate.toLocalDate}]]</div>
+								<div class="room-name">
+									<a th:href="|/home/detail/${homeReview.home.hno}|">[[${homeReview.home.homeName}]]</a>
+								</div>
+								<div>[[${homeReview.review}]]</div>
 							</div>
 						</div>
 					</div>
@@ -304,34 +323,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 						</div>
 					</div>
-				
-					<div class="review">
-						<P>나의 숙소 후기</P>
-						<div class="review-list">
-							<div>2022-01-10</div>
-							<div class="room-name">
-								<a href="/homes/detail">house#1. Hangang view house</a>
-							</div>
-							<div>
-								조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-								안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
-								지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
-							</div>
-						</div>
-						
-						<div class="review-list">
-							<div>2022-01-10</div>
-							<div class="room-name">
-								<a href="/homes/detail">house#1. Hangang view house</a>
-							</div>
-							<div>
-								조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-								안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
-								지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
-							</div>
-						</div>
-					</div>
-				</div>
+					<!-- /////////////////////////////////////////나의 숙소후기///////////////////////////////// -->
+								</div>
 			</section>
 			</div>
 			<script type="text/javascript">

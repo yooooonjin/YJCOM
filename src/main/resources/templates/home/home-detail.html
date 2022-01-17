@@ -116,7 +116,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 							
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f&libraries=services"></script>
-							<script th:inline="javascript">
+							<script type="text/javascript">
 							
 							
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -131,7 +131,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							// 주소-좌표 변환 객체를 생성합니다
 							var geocoder = new kakao.maps.services.Geocoder();
 							
-							var homeAddress=[[${homeDetail.homeAddress}]];
+							var homeAddress="[[${homeDetail.homeAddress}]]";
 							
 							var imageSrc = "/image/airbnb_marker.png"; 
 							
