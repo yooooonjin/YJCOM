@@ -12,7 +12,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="home-reserve-form">
 					<ul class="home-reserve-info">
 						<li>[[${#numbers.formatInteger(homeDetail.homePrice,3,'COMMA')}]]원&nbsp;<span>/박</span></li>
-						<li class="flex between">
+						<li class="select-info flex between">
 							<input name="checkIn" class="checkin" type="date" onchange="date()">
 							<input name="checkOut" class="checkout" type="date" onchange="date()">
 							<input type="hidden" class="days">

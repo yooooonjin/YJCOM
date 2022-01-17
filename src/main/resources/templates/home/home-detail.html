@@ -9,7 +9,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</head>
 	<body>
 		<header id="whitetype">
-			<div class="view-size">
+			<div class="detail-view-size">
 			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
 				<div class="search" th:fragment="homeMain">
 				</div>
@@ -19,7 +19,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			
 		<main>
 			<section th:each="homeDetail:${homeDetail}" id="room-title">
-				<div class="room-title view-size">
+				<div class="room-title detail-view-size">
 					<ul>
 						<li class="room-type">[[${homeDetail.homeType.homeType}]]</li>
 						<li class="room-name">[[${homeDetail.homeName}]]</li>
@@ -43,16 +43,23 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</section>
 			
 			<section id="home-detail-info" >
-				<div class="room-info flex between view-size">
+				<div class="room-info flex between detail-view-size">
 					<div>
 						<div class="room-introduce">
-							<div>
-								<p class="home-sub-title">[[${homeDetail.member.name}]]님이 호스팅하는 [[${homeDetail.homeType.homeType}]]</p>
-								<div class="home-number flex">
-									<div>최대인원 <span>[[${homeDetail.maximumNumber}]]</span>명</div>
-									<div>침대 <span>[[${homeDetail.bedNumber}]]</span>개</div>
-									<div>침실 <span>[[${homeDetail.bedroomNumber}]]</span>개</div>
-									<div>욕실 <span>[[${homeDetail.bathroomNumber}]]</span>개</div>
+							<div class="flex between">
+								<div>
+									<div>
+										<p class="home-sub-title">[[${homeDetail.member.name}]]님이 호스팅하는 [[${homeDetail.homeType.homeType}]]</p>
+									</div>
+									<div class="home-number flex">
+										<div>최대인원 <span>[[${homeDetail.maximumNumber}]]</span>명</div>
+										<div>침대 <span>[[${homeDetail.bedNumber}]]</span>개</div>
+										<div>침실 <span>[[${homeDetail.bedroomNumber}]]</span>개</div>
+										<div>욕실 <span>[[${homeDetail.bathroomNumber}]]</span>개</div>
+									</div>
+								</div>
+								<div>
+									<img src="/image/user_pic2.png" width="56px" style="border-radius: 28px;">
 								</div>
 							</div>
 							<div>
@@ -66,53 +73,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div>
 								<h2>후기</h2>
 								<div id="review-list">
-									<div class="review flex">
+									<div class="review flex" th:each="homeReview:${homeReview}">
 										<div>
 											<img src="/image/user_pic.png" width="60px">
-											<p>한윤진</p>
+											<p>[[${homeReview.member.name}]]</p>
 										</div>
 										<div>
-											<div>2022-01-10</div>
-											<div>
-												조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-												안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
-												지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
-											</div>
-										</div>
-									</div>
-									
-									<div class="review flex">
-										<div>
-											<img src="/image/user_pic.png" width="60px">
-											<p>한윤진</p>
-										</div>
-										<div>
-											<div>2022-01-10</div>
-											<div>
-												조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-											</div>
-										</div>
-									</div>
-									
-									<div class="review flex">
-										<div>
-											<img src="/image/user_pic.png" width="50px">
-											<p>한윤진</p>
-										</div>
-										<div>
-											<div>2022-01-10</div>
-											<div>
-												조명과 가구 소품 하나하나, 게스트의 휴식을 위해 섬세하게 준비한 집이예요.<br>
-												안전샤시로 된 창호를 모든 공간에 시공하여 채광과 단열이 모두 좋습니다. 
-												지하철과 이마트가 가깝고 부엌과 거실이 널찍해 오래 생활하기에도 적합합니다.
-											</div>
+											<div>[[${homeReview.createdDate.toLocalDate}]]</div>
+											<div>[[${homeReview.review}]]</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="map">
 								<h2>호스팅 지역</h2>
-								<div id="map" style="width:900px;height:400px;"></div>
+								<div id="map" style="width:655px;height:400px;"></div>
 							</div>
 							
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f&libraries=services"></script>

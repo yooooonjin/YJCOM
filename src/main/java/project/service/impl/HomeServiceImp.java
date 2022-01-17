@@ -18,6 +18,8 @@ import project.domain.dto.home.homeRegDto;
 import project.domain.entity.HomeEntity;
 import project.domain.entity.HomeEntityRepository;
 import project.domain.entity.HomeOption;
+import project.domain.entity.HomeReviewEntity;
+import project.domain.entity.HomeReviewEntityRepository;
 import project.domain.entity.MemberEntityRepository;
 import project.domain.entity.MemberRole;
 import project.security.dto.SecurityDto;
@@ -30,7 +32,9 @@ public class HomeServiceImp implements HomeService {
 	
 	final HomeEntityRepository homeRepository;
 	final MemberEntityRepository memberRepository;
+	final HomeReviewEntityRepository reviewRepository;
 	
+	//집 등록
 	@Transactional
 	@Override
 	public String homeReg(homeRegDto regDto, SecurityDto securityDto) {
@@ -54,7 +58,7 @@ public class HomeServiceImp implements HomeService {
 		
 		memberRepository.findById(securityDto.getUsername()).get().addRole(MemberRole.HOST);
 		
-		return "redirect:/member/info";
+		return "/home/detail/"+entity.getHno();
 	}
 	//집 전체 불러오기 //페이징처리
 	@Override
@@ -72,12 +76,16 @@ public class HomeServiceImp implements HomeService {
 		return "home/homes";
 		
 	}
-
+	//집 디테일 페이지
 	@Override
 	public String homeDetail(Model model, long hno) {
 		
 		HomeListDto homeDetail= homeRepository.findById(hno).map(HomeListDto::new).orElseThrow();
 		model.addAttribute("homeDetail", homeDetail);
+		
+		//후기//TODO dto에 담기
+		List<HomeReviewEntity> homeReview = reviewRepository.findAllByHome_hno(hno);
+		model.addAttribute("homeReview", homeReview);
 		return "home/home-detail";
 	}
 

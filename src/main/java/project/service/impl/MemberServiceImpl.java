@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String memberInfo(Model model, SecurityDto securityDto) {
 		
-		//회원정보 데이터
+		//회원정보 데이터 //TODO DTO에 담아서 이동
 		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
 		model.addAttribute("member",entity);
 		
@@ -51,19 +51,13 @@ public class MemberServiceImpl implements MemberService {
 		List<HomeListDto> hostHome= homeEntity.stream().map(HomeListDto::new).collect(Collectors.toList());
 		model.addAttribute("hostHome",hostHome);
 		
-		
-		//내가 등록한 집에 달린 댓글
-		homeEntity.forEach(e->{
-			List<HomeReviewEntity> myHomeReviewEntity= homeReviewRepository.findAllByHome_hno(e.getHno());
-			model.addAttribute("myHomeReviewEntity",myHomeReviewEntity);
-		});
-		
-		
 		//예약한 집 데이터 //TODO DTO에 담아서 이동
 		List<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(entity.getEmail());
+		//reservationEntity.stream().map(null).collect(Collectors.toList());
+		
 		model.addAttribute("reservedHome",reservationEntity);
 		
-		//내가 쓴 댓글 데이터
+		//내가 쓴 후기 데이터
 		List<HomeReviewEntity> homeReviewEntity = homeReviewRepository.findAllByMember_email(entity.getEmail());
 		//dto로 변환
 		List<HomeReviewDto> homeReview= homeReviewEntity.stream().map(HomeReviewDto::new).collect(Collectors.toList());

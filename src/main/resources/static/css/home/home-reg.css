@@ -1,17 +1,21 @@
 @charset "UTF-8";
 
 .home-reg-view-size{
-	width: 600px;
+	width: 730px;
 	margin: 0 auto;
+}
+
+.select-view-size{
+	width: 600px;
 }
 /* //////////////////////////////////////// */
 #home-reg .home-reg{
 	text-align: center;
 	margin-top: 35px;
-	text-align: center;
 }
 
 #home-reg p{
+	width:130px;
 	text-align: left;
 	font-size: 15px;
 	font-weight: 600;
@@ -20,11 +24,12 @@
 }
 #home-reg input{
 	width: 600px;
-	height: 45px;
+	height: 55px;
 	padding: 0 10px;
 	margin-top: 10px;
 	border: 1px solid #e9e9e9;
 	border-radius: 8px;
+	outline: none;
 }
 #home-reg textarea{
 	width: 600px;
@@ -33,9 +38,7 @@
 	margin-top: 10px;
 	border: 1px solid #e9e9e9;
 	border-radius: 6px;
-}
-#home-reg .homePrice input{
-	width: 550px;
+	outline: none;
 }
 #home-reg .homePrice p{
 	font-size: 17px;
@@ -45,13 +48,14 @@
 }
 #home-reg .home-detail-number input{
 	width: 145px;
+	text-align: center;
 }
 /* ////////////////////////// */
 #home-reg button{
 	margin:40px 0 40px 0
 	;
 	border: none;
-	width: 600px;
+	width: 200px;
 	height: 50px;
 	background-color: #ff2e5f;
 	border-radius: 3px;

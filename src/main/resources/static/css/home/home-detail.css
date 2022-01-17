@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.detail-view-size{
+	width: 1120px;
+	margin: 0 auto;
+}
 
 #home-detail-info h2{
 	margin-bottom: 35px;
@@ -14,8 +18,8 @@
 }
 
 #room-title .room-title .room-name{
-	font-size: 30px;
-	font-weight: 500;
+	font-size: 25px;
+	font-weight: 600;
 }
 #room-title .room-title .room-etc{
 	font-size: 18px;
@@ -24,7 +28,7 @@
 
 /* ////////////////////////////////// */
 #room-title  .visual-area{
-	width: 1280px;
+	width: 1120px;
 	overflow: hidden;
 	border-radius: 13px;
 }
@@ -53,35 +57,30 @@
 	font-size: 17px;
 }
 #home-detail-info .home-number div{
+	line-height: 0.8em;
 	padding-right: 5px;
 }
-#home-detail-info .home-number span{
-	font-weight: 400;
-}
 #home-detail-info .home-number div:not(:last-child)::after{
-	content: "|";
-	color: #a9a9a9;
-	padding: 0 5px;
+	content: "·";
+	padding-left: 5px;
 }
 /* ////////////////////////////////// */
 #home-detail-info .room-introduce{
-	width: 900px;
+	width: 655px;
 	font-size: 18px;
-	font-weight: lighter;
 }
 #home-detail-info .room-introduce> div{
-	padding:40px 0;
-	width: 880px;
-	font-size: 18px;
-	font-weight: lighter;
-	border-bottom: 1px solid #a9a9a9;
+	padding:35px 0;
+	width: 655px;
+	font-size: 16px;
+	border-bottom: 1px solid #DDDDDD;
 }
 #home-detail-info .room-introduce> div:nth-child(5){
 	border-bottom: none;
 }
 #home-detail-info .subtitle{
 	white-space:pre-line;
-	width: 880px;
+	width: 655px;
 }
 #home-detail-info .filter-menu{
 	padding: 17px 0 17px 0;
@@ -93,8 +92,8 @@
 	background-color: white;
 	padding: 0.4em 1.7em;
 	border-radius: 25px;
-	margin: 0 13px 0 0;
-	font-size: 17px;
+	margin: 0 13px 15px 0;
+	font-size: 16px;
 	font-weight: 400;
 }
 /* ////////////////후기////////////////// */
@@ -109,11 +108,10 @@
 }
 #home-detail-info .review{
 	padding: 15px 30px;
-	margin: 0 auto 20px;
+	margin: 10px auto 10px;
 	border-bottom: 1px solid #e9e9e9;
 }
 #home-detail-info .review:last-child{
-	margin: 0 auto 50px;
 	border: none;
 }
 #home-detail-info .review> div:nth-child(2){

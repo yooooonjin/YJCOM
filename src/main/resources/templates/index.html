@@ -57,6 +57,38 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<img src="/image/back-img.jpg" width="1920px" >
 				<p>에어비앤비가<br>여행지를 찾아드릴게요!</p>
 			</div>
+			<div class="background" style="display: none;">
+		  <div class="window">
+			<div class="login-page">
+				<h1>로그인</h1>
+				<div id="login">
+					<a href="/"><img src="/image/airbnb_logo-p.png" width=120px></a>
+					<div class="log-form">
+						<form action="/login" method="post">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+						<div class="error" th:if="${param.error}">
+						[[${session["SPRING_SECURITY_LAST_EXCEPTION"].message}]]
+						</div>		
+							<ul>
+								<li>
+									<p>이메일</p>
+									<input name="email" type="text" placeholder="이메일을 입력하세요">
+								</li>
+								<li>
+									<p>비밀번호</p>
+									<input name="password" type="password" placeholder="비밀번호를 입력하세요">
+								</li>
+								<li>
+									<button type="submit">로그인</button>
+								</li>
+							</ul>
+							<p class="join"><a href="/join">회원가입</a></p>
+						</form>	
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
 		</main>
 	</body>
 </html>

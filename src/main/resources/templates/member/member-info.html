@@ -199,14 +199,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				
 				$(".submit-btn").click(function(){
 					
-					var review = $(".write-area").val(); //수정....
+					var review = $(this).parent().siblings("textarea.write-area").val();
 					var hno= $(this).siblings(".home-id").val();
 					$.ajax({
 						url:"/member/home/review/"+hno,
 						type:"post",
 						data:{
-							review:review,
-							hno:hno
+							review:review
 						},
 						success:function(){
 							 location.reload()
@@ -223,6 +222,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="guest-part">
 					<div class="reserve-room">
 						<P>예약한 숙소</P>
+						<div th:unless="${reservedHome}" class="br">현재 투숙 예정 숙소가 없습니다.</div>
 						<div th:each="reservedHome:${reservedHome}">
 							<span class="review-write-btn">후기 작성하기 ></span>
 							<div class="reserve-room-list flex" >
@@ -253,6 +253,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<ul class="flex">
 										<li>별점</li>
 										<li>(후기)</li>
+										
 									</ul>
 								</div>
 							</div>
@@ -269,12 +270,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								</div>
 							</div>
 						</div>
-					<div th:unless="${reservedHome}" class="br">현재 투숙 예정 예약이 없습니다.</div>
 					
 			<!-- //////////////////////////////////////////내가작성한 후기///////////////////////////////// -->
 					<div>
 						<P>내가 작성한 후기</P>
-						<div class="review" th:if="${homeReview}">
+						<div th:unless="${homeReview}" class="br">작성한 후기가 없습니다.</div>
+						<div class="review">
 							<div class="review-list" th:each="homeReview:${homeReview}">
 								<div>[[${homeReview.createdDate.toLocalDate}]]</div>
 								<div class="room-name">
@@ -318,13 +319,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<ul class="flex">
 										<li>별점</li>
 										<li>(후기)</li>
+										
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- /////////////////////////////////////////나의 숙소후기///////////////////////////////// -->
-								</div>
+					
+				</div>
 			</section>
 			</div>
 			<script type="text/javascript">
