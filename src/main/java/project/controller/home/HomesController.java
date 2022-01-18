@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import project.domain.dto.home.HomeSearchDto;
 import project.domain.dto.home.homeRegDto;
 import project.security.dto.SecurityDto;
 import project.service.home.HomeService;
@@ -28,6 +29,11 @@ public class HomesController {
 	@GetMapping("/list")
 	public String homesPage(Model model,@RequestParam(defaultValue = "1") int page) {
 		return homeService.homeList(model,page);
+	}
+	//조건에 맞는 집 리스트
+	@PostMapping("/search/list")
+	public String homesSearch(Model model,@RequestParam(defaultValue = "1") int page, HomeSearchDto searchDto) {
+		return homeService.homesearch(model,page,searchDto);
 	}
 	//집 상세페이지
 	@GetMapping("/detail/{hno}")

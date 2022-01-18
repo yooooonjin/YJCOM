@@ -2,6 +2,7 @@ package project.service.home;
 
 import org.springframework.ui.Model;
 
+import project.domain.dto.home.HomeSearchDto;
 import project.domain.dto.home.homeRegDto;
 import project.security.dto.SecurityDto;
 
@@ -12,5 +13,7 @@ public interface HomeService {
 	String homeList(Model model, int page);
 
 	String homeDetail(Model model, long hno);
+
+	String homesearch(Model model, int page, HomeSearchDto searchDto);
 	
 }

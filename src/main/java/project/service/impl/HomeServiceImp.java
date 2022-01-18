@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import project.domain.dto.home.HomeListDto;
+import project.domain.dto.home.HomeSearchDto;
 import project.domain.dto.home.homeRegDto;
 import project.domain.entity.HomeEntity;
 import project.domain.entity.HomeEntityRepository;
@@ -26,6 +28,7 @@ import project.security.dto.SecurityDto;
 import project.service.home.HomeService;
 import project.util.PageInfo;
 
+@Log4j2
 @RequiredArgsConstructor
 @Service
 public class HomeServiceImp implements HomeService {
@@ -87,6 +90,32 @@ public class HomeServiceImp implements HomeService {
 		List<HomeReviewEntity> homeReview = reviewRepository.findAllByHome_hno(hno);
 		model.addAttribute("homeReview", homeReview);
 		return "home/home-detail";
+	}
+	//조건에 맞는 집 불러오기
+	/**
+	 *
+	 */
+	@Override
+	public String homesearch(Model model, int page, HomeSearchDto searchDto) {
+		log.info("조건={}",searchDto.getCheckout());
+		
+		String result= searchDto.getLocation();
+		
+		String[] locationArr= searchDto.getLocation().split("[ ]");
+		
+		log.info("자치구={}",locationArr[1]);
+		
+		String location=locationArr[1];
+		int guests = searchDto.getGuests();
+
+		
+		List<Long> hno = homeRepository.selectHome(location,guests);
+		
+		List<HomeEntity> homeEntity= homeRepository.findAllById(hno);
+		model.addAttribute("homes", homeEntity);
+		
+		return "home/homes";
+		
 	}
 
 }

@@ -77,6 +77,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								</ul>
 							</div>
 						</div>
+						
+						<section>
+							<div id="infowindow">
+							 	<a th:href="|/home/detail/${homes.hno}|"><img src="/image/room-img-01.jpg" width="80px" height="80px"></a>
+							</div>
+						</section>
+						
 					</div>
 				</div>
 				
@@ -97,11 +104,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 			</section>
 			
+			
+			
 			<section>
 				<div id="map"></div>
 			</section>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f&libraries=services"></script>
 			
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f&libraries=services"></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f"></script>
 			<script th:inline="javascript">
 			
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -113,10 +123,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			// 지도를 생성합니다    
 			var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
-			[# th:each="homes : ${homes}"];
+			/*[# th:each="homes : ${homes}"]*/
 			
 			
-			var homeAddress=[[${homes.homeAddress}]];
+			var homeAddress=/*[[${homes.homeAddress}]]*/;
 			var geocoder = new kakao.maps.services.Geocoder();
 			var imageSrc = "/image/airbnb_marker.png"; 
 			
@@ -135,18 +145,26 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			        var marker = new kakao.maps.Marker({
 			            map: map,
 			            position: coords,
-			            image : markerImage
+			            image : markerImage,
+			            clickable: true
 			        });
-			        //지도에 a 태그 표시
-			        {}
-
-			        map.setCenter(coords);
 			        
+			        map.setCenter(coords); //맵 위치 지정 
+			        
+			        var content = document.getElementById("infowindow");
+			        
+
+				     // 커스텀 오버레이를 생성합니다
+				     var overlay = new kakao.maps.CustomOverlay({
+				         content: content,
+				         map: map,
+				         position: coords,
+				         yAnchor: 1.8
+				     });
 			    } 
 			}); 
 			
-			
-			[/]
+			/*[/]*/
 			
 			
 			
@@ -154,7 +172,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			
 		</main>
 		
-		<footer>
+		<footer id="homes-page-footer">
 			<th:block th:insert="/common/footer::footer"/>	
 		</footer>
 	</body>
