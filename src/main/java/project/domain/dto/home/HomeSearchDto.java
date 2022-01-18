@@ -20,6 +20,6 @@ public class HomeSearchDto {
 	private LocalDate checkin;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate checkout;
-	private int guests;
+	private String guestsStr;
 	
 }

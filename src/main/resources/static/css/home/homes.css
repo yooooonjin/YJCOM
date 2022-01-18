@@ -12,31 +12,40 @@
 	margin-top: 17px;
 	box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.1);
 }
+.search .search-detail div{
+	color: black;
+	margin:auto 0;
+}
 .search .search-detail input{
-	margin-top:12px;
-	width:130px;
-	padding:0 5px 0 16px;
+	padding:0 5px 0 5px;
 	border: none;
 	background-color: rgba(0,0,0,0);
 	outline: none;
+	text-align: center;
 }
-.search .search-detail div:not(:last-child) input{
-	border-right: 1px solid #a9a9a9;
-}
-.search .search-detail div:nth-child(4){
+.search .search-detail div:nth-child(3){
 	position: relative;
 }	
-.search .search-detail div:nth-child(4) a{
+.search .search-detail div:nth-child(3) a{
 	position: absolute;
-	right:6%;
-	bottom: 6%;
+	right:9px;
+	bottom: -8px;
 	cursor: pointer;
 }	
 .search .search-detail div:nth-child(1) input{
+	width:100px;
+	border-right: 1px solid #a9a9a9;
 	border-radius: 33px 0 0 33px;
+	padding-left: 15px;
 }	
-.search .search-detail div:nth-child(4) input{
+.search .search-detail div:nth-child(2) input{
+	width: 70px;
+}
+.search .search-detail div:nth-child(3) input{
+	width:80px;
+	border-left: 1px solid #a9a9a9;
 	border-radius: 0 33px 33px 0;
+	margin-right: 40px;
 }
 /* //////////////////////////////////////// */
 #filter-menu{
@@ -54,6 +63,7 @@
 .left-main{
 	margin-top: 20px;
 	min-height: 600px;
+	min-width: 850px;
 }
 #home-list{
 	margin: 0 20px;
@@ -98,7 +108,7 @@
 	padding-right: 5px;
 }
 #home-list .home-number span{
-	font-weight: 600;
+	font-weight: 400;
 }
 #home-list .home-number div:not(:last-child)::after{
 	content: "|";

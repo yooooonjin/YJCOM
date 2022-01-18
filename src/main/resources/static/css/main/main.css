@@ -8,16 +8,17 @@ body{
 #search-tab .search{
 	padding: 0 0 30px 0;
 }
-#search-tab .search-detail> div{
+#search-tab .search-detail{
+	margin:0 auto;
 	height: 66px;
+	width: 887px;
+	border-radius: 33px;
 	background-color: white;
+}
+#search-tab .search-detail> div:hover{
+	background-color: #EBEBEB;
+	border-radius: 33px;
 	
-}
-#search-tab .search-detail> div:nth-child(1){
-	border-radius: 33px 0 0 33px;
-}
-#search-tab .search-detail> div:nth-child(4){
-	border-radius: 0 33px 33px 0;
 }
 #search-tab .search-detail> div> div{
 	padding: 0 30px;
@@ -155,7 +156,7 @@ input[type="number"]::-webkit-inner-spin-button {
 	line-height: 26px;
 }
 
-/* //////////////////////////////////////// */
+/* /////////////////메인이미지/////////////////////// */
 #main-img{
 	margin: 0 auto;
 	text-align: center;

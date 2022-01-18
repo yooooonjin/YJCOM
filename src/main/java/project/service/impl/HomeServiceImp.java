@@ -91,29 +91,30 @@ public class HomeServiceImp implements HomeService {
 		model.addAttribute("homeReview", homeReview);
 		return "home/home-detail";
 	}
+	
 	//조건에 맞는 집 불러오기
-	/**
-	 *
-	 */
 	@Override
 	public String homesearch(Model model, int page, HomeSearchDto searchDto) {
-		log.info("조건={}",searchDto.getCheckout());
 		
 		String result= searchDto.getLocation();
 		
 		String[] locationArr= searchDto.getLocation().split("[ ]");
-		
 		log.info("자치구={}",locationArr[1]);
-		
 		String location=locationArr[1];
-		int guests = searchDto.getGuests();
-
 		
+		//문자열로 넘어온 게스트 수를 정수로 변환
+		String guestsStr=searchDto.getGuestsStr();
+		String guestStr_=guestsStr.replaceAll("[^0-9]", "");
+		if(guestStr_==null || guestStr_.equals(""))guestStr_="0";
+		int guests = Integer.parseInt(guestStr_);
+
+		//해당 지역 / 최소인원 조건에 맞는 집
 		List<Long> hno = homeRepository.selectHome(location,guests);
 		
+		//TODO DTO에 담아서 전달
 		List<HomeEntity> homeEntity= homeRepository.findAllById(hno);
 		model.addAttribute("homes", homeEntity);
-		
+		model.addAttribute("searchDto", searchDto);
 		return "home/homes";
 		
 	}

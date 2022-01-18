@@ -27,10 +27,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<div id="search-tab">
 				<div class="search">
 					<div class="search-detail flex center ">
-						<div>
-							<div class="location">
+						<div class="location">
+							<div>
 								<div>위치</div>
-								<input class="region-select" name="location" placeholder="어디로 여행가세요?" autocomplete="off">
+								<input class="region-select" name="location" placeholder="어디로 여행가세요?" autocomplete="off" required="required">
 								
 								<div class="location-select flex between" style="display: none;">
 									<ul>
@@ -78,12 +78,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 						</div>
 						<div>
-							<div  class="number">
+							<div class="number">
 								<div>인원</div>
-								<input id="guests" type="number" name="guests" placeholder="게스트추가">
-								<button type="submit"><img src="/image/search-01.png" width="45px"></button>
+								<input class="guestsStr"  type="text" name="guestsStr" placeholder="게스트추가"  autocomplete="off">
+								<button onclick="btnClick()" class="submit-btn" type="submit"><img src="/image/search-01.png" width="45px"></button>
 								
-								<div class="add-guests">
+								<div class="add-guests" style="display: none;">
 									<div>
 										<ul class="flex between">
 											<li>
@@ -92,7 +92,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											</li>
 											<li class="flex">
 												<div class="down">-</div>
-												<input class="guest0 guest1" value="0" type="number">
+												<input class="guest1" value="0" type="number">
 												<div class="up">+</div>
 											</li>
 										</ul>
@@ -103,7 +103,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											</li>
 											<li class="flex">
 												<div class="down">-</div>
-												<input class="guest guest2" value="0" type="number">
+												<input class="guest2" value="0" type="number">
 												<div class="up">+</div>
 											</li>
 										</ul>
@@ -114,7 +114,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											</li>
 											<li class="flex">
 												<div class="down">-</div>
-												<input class="guest guest3" value="0" type="number">
+												<input class="guest3" value="0" type="number">
 												<div class="up">+</div>
 											</li>
 										</ul>
@@ -140,46 +140,62 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			
 			<script type="text/javascript">
 				$(function(){
+					
+					//위치 선택하기 클릭하면 위치 선택 팝업창 보이기
+					$(".region-select").click(function(){
+						$(".location-select").show();
+					});
+					//위치 선택하면 창 닫히면서 위치 입력받기
 					$(".region").click(function(){
 						var region= $(this).val();
 						$(".region-select").val(region);
 						$(".location-select").hide();
 					});
-					
-					$(".region-select").click(function(){
-						$(".location-select").show();
+					//위치 선택 팝업창이 아닌 다른 곳을 클릭하면 팝업창 숨김
+					$("body").click(function(e) {
+						if(!$(e.target).hasClass("region-select") && !$(e.target).hasClass("location-select")  ) {
+							$(".location-select").hide();
+						} 
 					});
-					
-					
+					//down 클릭 할 때 인원수 -1 
 					$(".down").click(function(){
 						
 						var down= $(this).siblings("input[type=number]").val();
 						//인원수가 0보다 크면
 						if(parseInt(down)>0){
-						$(this).siblings("input[type=number]").val(parseInt(down)-1);
+							$(this).siblings("input[type=number]").val(parseInt(down)-1);
 						}
 					});
 					
+					//up 클릭 할 때 인원수 +1 
 					$(".up").click(function(){
 						var up = $(this).siblings("input[type=number]").val();
 						$(this).siblings("input[type=number]").val(parseInt(up)+1);
 					});
 					
-					//guest 값이 변하면
-					$(".guest0").change(function(){
-
-						alert($(this).val());
+					//up 또는 down을 클릭할 떼 인원 수 더한 값 계산
+					$(".up, .down").click(function(){
 						
 						var guest1 = parseInt($(".guest1").val());
 						var guest2 = parseInt($(".guest2").val()); 
 						var guest3 = parseInt($(".guest3").val()); 
 						
-						$("#guests").val(guest1 + guest2 + guest3);
+						$(".guestsStr").val("게스트 "+parseInt(guest1 + guest2 + guest3)+"명");
 						
+					});
+					//게스트 입력창을 클릭하면 게스트 추가 팝업창 보이기
+					$(".guestsStr").click(function(){
+						$(".add-guests").show();
+					});
+					
+					//게스트 추가 팝업창이 아닌 다른 곳을 클릭하면 팝업창 숨김
+					$("body").click(function(e) {
+						if($(e.target).parents('.number').length < 1) {
+							$(".add-guests").hide();
+						} 
 					});
 					
 				});
-			
 			
 			</script>
 		</main>

@@ -10,12 +10,17 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<div class="index-view-size">
 			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
 				<div class="search" th:fragment="homeMain">
-					<div class="flex search-detail">
-						<div><input type="text" placeholder="위치"></div>
-						<div><input type="date" placeholder=체크인></div>
-						<div><input type="date" placeholder="체크아웃"></div>
+					<div class="flex search-detail" th:if="${searchDto}">
 						<div>
-							<input type="text" placeholder="인원">
+							<input th:value="${searchDto.location}" placeholder="위치" readonly="readonly">
+						</div>
+						<div>
+							<input th:value="${#temporals.format(searchDto.checkin,'MM월dd일')}" placeholder="날짜입력" readonly="readonly">
+							<th:block th:if="${searchDto.checkin}">~</th:block>
+							<input th:if="${searchDto.checkout}" th:value="${#temporals.format(searchDto.checkout,'MM월dd일')}" readonly="readonly">
+						</div>
+						<div>
+							<input th:value="${searchDto.guestsStr}" placeholder="게스트추가" readonly="readonly">
 							<a><img src="/image/search-01.png" width="30px"></a>
 						</div>
 					</div>
