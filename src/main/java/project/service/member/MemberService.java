@@ -9,14 +9,14 @@ import project.security.dto.SecurityDto;
 
 public interface MemberService {
 
-	String memberInfo(Model model, SecurityDto securityDto);
+	String memberInfo(Model model, SecurityDto securityDto, int page);
 
 	void memberUpdate(MemberUpdateDto updateDto, Model model);
 
 	String homeReserve(long hno, SecurityDto securityDto, HomeReserveDto reserveDto);
 
 
-	void reviewWrite(long hno, SecurityDto securityDto, String review);
+	void reviewWrite(long resNo, long hno, SecurityDto securityDto, String review);
 
 
 }

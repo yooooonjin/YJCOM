@@ -58,7 +58,7 @@
 }
 /* //////////////////////////////////////// */
 #part{
-	width: 900px;
+	width: 850px;
 	border-bottom: 1px solid #e9e9e9;
 }
 #part li{
@@ -88,74 +88,61 @@
 	font-weight: 600;
 	margin: 30px 0 10px;
 }
-/* /////////////////리뷰 새로만든것/////////////////////// */
-#review-list div p{
+/* /////////////////리뷰/////////////////// */
+#review div p{
 	margin:0;
-	padding: 15px 8px 0 0;
+	padding: 15px 9px 0 0;
 	font-size: 17px;
 	font-weight: 500;
 }
-#review-list div p:nth-child(2){
+#review div p:nth-child(2){
 	margin:0;
 	padding: 15px 8px 0 0;
-	font-size: 13px;
+	font-size: 11px;
+	line-height: 30px;
+	font-weight: lighter;
 }
-#review-list div div:nth-child(2){
+#review .review-data{
 	margin:0;
-	padding: 15px 8px 0 0;
-	font-size: 14px;
-	font-weight: 400;
+	padding: 5px 0 0 0;
+	font-size: 11px !important;
+	font-weight: 400 !important;
 }
-
-
-
-
-
-/* /////////////////리뷰/////////////////////// */
-#guest-part .review-write-btn{
-	margin:0;
-	padding: 15px 0 2px;
-	font-size: 15px;
-	font-weight: 500;
-	color: black;
+#review .review-write-btn{
+	cursor: pointer;
 }
-#guest-part .review-write-page .write-page{
-	width: 300px;
-	border: 1px solid #e9e9e9;
-	padding: 10px 15px 15px 15px;
-}
-#guest-part .review-write-page .write-page span{
-	font-size: 13px;
-	font-weight: 500;
-	border-bottom: 1px solid black;
-}
-#guest-part .review-write-page .write-area{
-	margin-top:15px;
-	width: 300px;
+#review .review-write-area{
+	padding:5px 10px;
+	width: 100%;
 	height: 70px;
 	outline: none;
-	border: none;
+	font-size: 11px;
+	border: 1px solid #DDDDDD;
 }
-#guest-part .review-write-page button{
+#review .edit-button {
+	padding-top: 10px;
+}
+#review .submit-btn, .cancel-btn {
 	background-color:white;
 	border: 1px solid #a9a9a9;
-	padding: 7px 30px;
+	padding: 2px 8px;
 	color: black;
-	font-size: 12px;
+	font-size: 9px;
 	cursor: pointer;
-	margin-left:12px;
+	margin-left:3px;
 }
+
 /* ////////////////게스트/////////////////////// */
 #guest-part .reserve-room{
-	width: 900px;
+	width: 850px;
 }
 #guest-part .reserve-room-list{
-	height: 550px;
-	padding: 20px;
-	margin: 0 0 8px;
-	width: 440px;
+	height: 470px;
+	padding: 17px;
+	width: 390px;
 	border-radius: 10px;
 	border: 1px solid #e9e9e9;
+	margin-right: 30px;
 	/* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); */
 	
 }
@@ -166,54 +153,69 @@
 	padding-left: 18px;
 }
 #guest-part .reserve-room .home-type{
-	font-size: 12px;
+	font-size: 10px;
 }
 #guest-part .reserve-room .home-name{
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 500;
 }
 #guest-part .reserve-room .home-info{
 	position: relative;
 }
 #guest-part .reserve-room .home-number{
-	margin-top:10px;
-	font-size: 12px;
+	margin-top:5px;
+	font-size: 10px;
 }
-#guest-part .reserve-room .home-number div{
-	padding-right: 5px;
-}
-
 
 #guest-part .reserve-info1{
-	padding-bottom: 20px;
+	padding-bottom: 15px;
 }
 #guest-part .reserve-info0{
 	border-top: 1px solid #DDDDDD;
 	border-bottom: 1px solid #DDDDDD;
-	padding: 25px 10px 25px;
+	padding: 15px 15px 15px;
 }
 #guest-part .reserve-info4>div{
-	color: #a3a3a3;
-	font-weight: 300;
+	color: black;
+	font-weight: lighter;
+	font-size: 14px;
 }
 #guest-part .reserve-info4 .detail-price1{
 	margin-top: 6px;
 }
-#guest-part .reserve-info4>div:last-child{
-	margin-top: 10px;
-	font-size: 18px;
+#guest-part .reserve-info4>div:last-child span:last-child{
+	margin-top: 8px;
+	font-size: 16px;
 	font-weight: 600;
 	color: black;
 }
-#guest-part h3{
-	font-size: 17px;
-	padding-right: 15px;
-	padding-bottom: 3px;
+#guest-part .reserve-info4>div:last-child span:first-child{
+	padding-top:15px;
+	font-weight: 500;
 }
-reserve-room-list span{
+#guest-part h3{
+	font-size: 16px;
+	padding-bottom: 2px;
+}
+#guest-part .reserve-room-list span{
 	display:inline-block;
-	font-size: 13px;
+	font-size: 12px;
 	font-weight: 400;
+}
+#paging{
+	text-align: center;
+	width: 810px;
+}
+#paging span a{
+	display:inline-block;
+	width: 9px;
+	height: 9px;
+	border:1px solid black;
+	border-radius: 50%;
+	margin: 40px 6px 0;
+}
+#paging span a:hover{
+	background-color: black;
 }
 
 /* /////////////////호스트/////////////////////// */

@@ -191,18 +191,22 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			
 			$(function(){
 				$(".review-write-btn").click(function(){
-					$(this).siblings(".review-write-page").slideDown();
+					$(this).parent().parent("div").siblings("div").children(".review-write-area").show();
+					$(this).parent().siblings(".edit-button").show();
 				});
 				$(".cancel-btn").click(function(){
-					$(this).parents(".review-write-page").slideUp();
+					$(this).parent().parent("div").siblings("div").children(".review-write-area").hide();
+					$(this).parent(".edit-button").hide();
 				});
 				
 				$(".submit-btn").click(function(){
 					
-					var review = $(this).parent().siblings("textarea.write-area").val();
+					var review = $(this).parent().parent("div").siblings("div").children(".review-write-area").val();
 					var hno= $(this).siblings(".home-id").val();
+					var resNo= $(this).siblings(".reservation-id").val();
+					
 					$.ajax({
-						url:"/member/home/review/"+hno,
+						url:"/member/home/review/"+hno+"/"+resNo,
 						type:"post",
 						data:{
 							review:review
@@ -211,7 +215,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							 location.reload()
 						}
 					});
-					$(this).parents(".review-write-page").slideUp();
+					$(this).parent().parent("div").siblings("div").children(".review-write-area").hide();
 				});
 				
 				
@@ -221,12 +225,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<section id="part-detail">
 				<div id="guest-part">
 					<P>예약한 숙소</P>
-					<div class="reserve-room flex between">
-						<div th:unless="${reservedHome}" class="br">현재 투숙 예정 숙소가 없습니다.</div>
-						<div  th:each="reservedHome:${reservedHome}">
+					<div class="reserve-room flex">
+						<div th:unless="${reservedHomes}">현재 투숙 예정 숙소가 없습니다.</div>
+						<div  th:each="reservedHome:${reservedHomes}">
 							<div class="reserve-room-list" >
 								<div class="reserve-info1 flex">
-									<div><img src="/image/room-img-01.jpg" width="150px" height="120px"></div>
+									<div><img src="/image/room-img-01.jpg" width="140px" height="110px"></div>
 									<div class="home-info">
 										<div>
 											<ul>
@@ -266,37 +270,50 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											<span>[[${#numbers.formatInteger(reservedHome.totalPrice*0.1,3,'COMMA')}]]원</span>
 										</div>
 										<div class="flex between">
-											<span>총 합계 :</span>
+											<span>총 합계</span>
 											<span>[[${#numbers.formatInteger(reservedHome.totalPrice,3,'COMMA')}]]원</span>
 										</div>
 									</div>
 								</div>
 								
-								<div th:unless="${homeReview}" class="br">작성한 후기가 없습니다.</div>
-								<div id="review-list">
-									<div th:each="homeReview:${homeReview}">
-										<div class="flex between">
-											<p>내가 작성한 후기</p>
-											<p>[[${homeReview.createdDate.toLocalDate}]]</p>
+								<div id="review" class="review">
+									<div  th:if="${reservedHome.review}">
+										<div>
+											<div class="flex">
+												<p>내가 작성한 후기</p>
+												<p>[[${reservedHome.review.createdDate.toLocalDate}]]</p>
+											</div>
+											<div class="review-data">[[${reservedHome.review.review}]]</div>
 										</div>
-										<div>[[${homeReview.review}]]</div>
+										
+									</div>
+									
+									<div class="write"  th:unless="${reservedHome.review}" >
+										<div class="flex between">
+											<div class="flex">
+												<p>내가 작성한 후기</p>
+												<p class="review-write-btn">후기 작성하기</p>
+											</div>
+											<div class="edit-button" style="display: none;">
+												<input class="reservation-id" type="hidden" th:value="${reservedHome.resNo}">
+												<input class="home-id" type="hidden" th:value="${reservedHome.home.hno}">
+												<button class="submit-btn" type="submit">등록하기</button>
+												<button class="cancel-btn" type="button">취소하기</button>
+											</div>
+										</div>
+										<div>
+											<textarea name="review" style="display: none;" class="review-write-area"></textarea>
+										</div>
 									</div>
 								</div>
-								
-							</div>
-							<!-- <div class="review-write-page" style="display: none;">
-								<div class="write-page">
-									<span>[[${reservedHome.home.homeName}]]</span>
-									<textarea class="write-area" name="review"></textarea>
-									<div class="btn flex end">
-										<input class="home-id" type="hidden" th:value="${reservedHome.home.hno}">
-										<button class="submit-btn" type="submit">등록하기</button>
-										<button class="cancel-btn" type="button">취소하기</button>
-									</div>									
-								</div>
-								</div> -->
 							</div>
 						</div>
+					</div>
+					<div id="paging" th:if="${paging}">
+						<span th:each="paging:${#numbers.sequence( 1, pageTot)}">
+	       					<a th:href="|/member/info?page=${paging}|"></a>
+	       				</span>
+					</div>
 				</div>
 			<!-- //////////////////////////////////host/////////////////////////////////////////// -->
 				<div id="host-part" style="display: none;">
@@ -337,7 +354,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 						</div>
 					</div>
-					
 				</div>
 			</section>
 			</div>

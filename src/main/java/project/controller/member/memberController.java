@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,8 @@ public class memberController {
 	
 	//프로필 페이지 이동
 	@GetMapping("/info")
-	public String memberInfo(Model model, @AuthenticationPrincipal SecurityDto securityDto) {
-		return service.memberInfo(model,securityDto);
+	public String memberInfo(Model model, @AuthenticationPrincipal SecurityDto securityDto,@RequestParam(defaultValue = "1") int page) {
+		return service.memberInfo(model,securityDto,page);
 	}
 	//회원정보수정
 	@ResponseBody
@@ -38,9 +39,9 @@ public class memberController {
 	
 	//리뷰 작성
 	@ResponseBody
-	@PostMapping("/home/review/{hno}")
-	public void reviewWritePage(@PathVariable long hno, @AuthenticationPrincipal SecurityDto securityDto, String review) {
-		service.reviewWrite(hno, securityDto,review);
+	@PostMapping("/home/review/{hno}/{resNo}")
+	public void reviewWritePage(@PathVariable long resNo, @PathVariable long hno, @AuthenticationPrincipal SecurityDto securityDto, String review) {
+		service.reviewWrite(resNo,hno, securityDto,review);
 	}
 	
 	//숙소예약

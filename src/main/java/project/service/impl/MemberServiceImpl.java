@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -39,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	//프로필 정보
 	@Override
-	public String memberInfo(Model model, SecurityDto securityDto) {
+	public String memberInfo(Model model, SecurityDto securityDto, int page) {
 		
 		//회원정보 데이터 //TODO DTO에 담아서 이동
 		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
@@ -52,16 +56,16 @@ public class MemberServiceImpl implements MemberService {
 		model.addAttribute("hostHome",hostHome);
 		
 		//예약한 집 데이터 //TODO DTO에 담아서 이동
-		List<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(entity.getEmail());
-		//reservationEntity.stream().map(null).collect(Collectors.toList());
+//		List<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(entity.getEmail());
+		Pageable pageable =PageRequest.of(page-1, 2, Direction.DESC, "resNo");
 		
-		model.addAttribute("reservedHome",reservationEntity);
+		Page<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(entity.getEmail(),pageable);
 		
-		//내가 쓴 후기 데이터
-		List<HomeReviewEntity> homeReviewEntity = homeReviewRepository.findAllByMember_email(entity.getEmail());
-		//dto로 변환
-		List<HomeReviewDto> homeReview= homeReviewEntity.stream().map(HomeReviewDto::new).collect(Collectors.toList());
-		model.addAttribute("homeReview",homeReview);
+		
+		model.addAttribute("pageTot",reservationEntity.getTotalPages());
+		
+		model.addAttribute("reservedHomes",reservationEntity);
+		
 		
 		return "member/member-info";
 	}
@@ -91,10 +95,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	//후기 작성
 	@Override
-	public void reviewWrite(long hno,SecurityDto securityDto, String review) {
+	public void reviewWrite(long resNo, long hno,SecurityDto securityDto, String review) {
 		HomeReviewEntity homeReviewEntity = HomeReviewEntity.builder().review(review)
 						.member(memberRepository.findById(securityDto.getUsername()).get())
-						.home(homeRepository.findById(hno).get())		
+						.home(homeRepository.findById(hno).get()).reservation(reservationRepository.findById(resNo).get())		
 						.build();
 		
 		homeReviewRepository.save(homeReviewEntity);

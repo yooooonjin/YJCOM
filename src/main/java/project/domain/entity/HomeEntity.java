@@ -3,6 +3,7 @@ package project.domain.entity;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -27,7 +28,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@ToString
+@ToString(exclude = {"reviews"})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -79,6 +80,7 @@ public class HomeEntity extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "email")
 	private MemberEntity member;
+	
 	
 
 }

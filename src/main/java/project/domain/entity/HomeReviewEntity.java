@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +35,10 @@ public class HomeReviewEntity extends BaseEntity {
 	@JoinColumn(name = "hno")
 	@ManyToOne
 	private HomeEntity home;
+	
+	@JoinColumn(name="resNo")
+	@OneToOne
+	private ReservationEntity reservation;
 	
 
 }

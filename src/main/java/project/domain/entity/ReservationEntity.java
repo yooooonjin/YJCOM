@@ -4,11 +4,13 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +48,9 @@ public class ReservationEntity extends BaseEntity {
 	@JoinColumn(name = "hno")
 	@ManyToOne
 	private HomeEntity home;
+	
+	@OneToOne(mappedBy = "reservation", fetch = FetchType.EAGER)
+	private HomeReviewEntity review;
 	
 	
 }
