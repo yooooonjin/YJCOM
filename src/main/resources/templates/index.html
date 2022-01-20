@@ -4,6 +4,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<th:block th:insert="/common/common.html::head" />
 		<link rel="stylesheet" href="/css/main/main.css">
+		<link rel="stylesheet" href="/css/common/datepicker.css">
 	</head>
 	<body>
 	
@@ -68,13 +69,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<div>
 							<div class="check-in">
 								<div>체크인</div>
-								<input name="checkin" type="date" placeholder="날짜입력">
+								<th:block th:insert="/common/datepicker::date-picker-checkin"></th:block>
 							</div>
 						</div>
 						<div>
 							<div class="check-out">
 								<div>체크아웃</div>
-								<input name="checkout" type="date" placeholder="날짜입력">
+								<th:block th:insert="/common/datepicker::date-picker-checkout"></th:block>
 							</div>
 						</div>
 						<div>

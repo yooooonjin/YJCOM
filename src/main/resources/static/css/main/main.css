@@ -9,9 +9,10 @@ body{
 	padding: 0 0 30px 0;
 }
 #search-tab .search-detail{
+	position:relative;
 	margin:0 auto;
 	height: 66px;
-	width: 887px;
+	width: 847px;
 	border-radius: 33px;
 	background-color: white;
 }
@@ -40,12 +41,10 @@ body{
 	font-weight: 300;
 }
 /* ///////////////////location///////////////////////// */
-#search-tab .search-detail .location{
-	position: relative;
-}
 #search-tab .search-detail .location .location-select{
 	width:500px;
 	position: absolute;
+	left:0;
 	padding:16px 0;
 	margin-top:28px;
 	border-radius: 30px;
@@ -77,25 +76,22 @@ body{
 }
 #search-tab .search-detail .location .location-select input{
 	font-size: 15px;
-	width: 100px;
+	width: 120px;
 	cursor: pointer;
 	font-weight: normal;
 }
 
 /* ///////////////////search-button///////////////////////// */
 #search-tab .search-detail .number{
-	width:220px;
+	width:240px;
 }
 
-#search-tab .search .search-detail div:nth-child(4){
-	position: relative;
-}	
 #search-tab .search .search-detail div:nth-child(4) button{
 	background-color: rgba(0,0,0,0);
 	border:none;
 	position: absolute;
-	right:6%;
-	bottom: 6%;
+	right:10px;
+	bottom: 6px;
 	cursor: pointer;
 }	
 /* ///////////////////add-guests///////////////////////// */
@@ -104,7 +100,7 @@ body{
 	width:395px;
 	background-color: white;
 	z-index: 3;
-	right: 130%;
+	right: 0;
 	padding:16px 32px;
 	margin-top:28px;
 	border-radius: 30px;

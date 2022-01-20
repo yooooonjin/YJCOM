@@ -61,7 +61,7 @@ public class HomeServiceImp implements HomeService {
 		
 		memberRepository.findById(securityDto.getUsername()).get().addRole(MemberRole.HOST);
 		
-		return "/home/detail/"+entity.getHno();
+		return "redirect:/home/list";
 	}
 	//집 전체 불러오기 //페이징처리
 	@Override

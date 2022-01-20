@@ -7,7 +7,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</head>
 	<body>
 		<header id="whitetype">
-		<div class="index-view-size">
+		<div class="home-view-size">
 			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
 				<div class="search" th:fragment="homeMain">
 					<div class="flex search-detail" th:if="${searchDto}">
@@ -30,7 +30,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		</header>
 		
 		<section id="filter-menu">
-			<div class="flex index-view-size">
+			<div class="flex home-view-size">
 				<div class="flex">
 					<ul class="flex">
 						<li><button class="price-range">요금</button></li>
@@ -45,10 +45,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</div>
 		</section>
 		
-		<main class="flex between index-view-size">
+		<main class="flex home-view-size">
 			<section class="left-main">
 				<div id="home-list">
-					<div class="home-list" th:each="homes:${homes}">
+					<div class="home-list" th:each="homes,status:${homes}">
 						<h1>집정보</h1>
 						<input type="hidden" id="homeAddress" th:value="${homes.homeAddress}">
 						<div class="flex between">
@@ -77,8 +77,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 							<div class="home-comment">
 								<ul class="flex end">
-									<li>별점</li>
-									<li>(후기)</li>
+									<!-- <li>별점</li>
+									<li>(후기)</li> -->
+									<li><a><img src="/image/heart.png"></a></li>
 								</ul>
 							</div>
 						</div>

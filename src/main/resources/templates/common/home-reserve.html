@@ -40,7 +40,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 		</form>
 		
-	<script type="text/javascript"  th:inline="javascript">
+	<script type="text/javascript">
 		$(function(){
 			
 			
@@ -91,7 +91,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			 }
 			console.log("일수차이는:"+ btDay);
 			
-			var homeprice =[[${homeDetail.homePrice}]]
+			var homeprice ="[[${homeDetail.homePrice}]]"
 			
 			console.log("1박 가격:"+ homeprice);
 			
