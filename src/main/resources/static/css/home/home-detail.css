@@ -59,6 +59,7 @@
 #home-detail-info .home-number div{
 	line-height: 0.8em;
 	padding-right: 5px;
+	font-weight: 300;
 }
 #home-detail-info .home-number div:not(:last-child)::after{
 	content: "·";
@@ -126,3 +127,6 @@
 	font-size: 16px;
 }
 
+#map{
+	border-radius: 20px;
+}

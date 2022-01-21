@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		
+		<th:block th:fragment="date-picker-checkin">
+			<script type="text/javascript" th:inline="javascript">
+			 $(function() {
+			       //input을 datepicker로 선언
+			       $(".datepicker-checkin").datepicker({
+			           dateFormat: 'yy-mm-dd' //달력 날짜 형태
+			           ,showOtherMonths: false //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+			           ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+			           ,changeYear: false //option값 년 선택 가능
+			           ,changeMonth: false //option값  월 선택 가능                
+			           ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+			           ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+			           ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+			           ,buttonText: "선택" //버튼 호버 텍스트              
+			           ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+			           ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+			           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+			           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+			           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+			           ,minDate: "0d" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+			           ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
+		        	   ,stepMonths: 1 //한번 넘어갈 Month 개수
+			        	,numberOfMonths:1 //한번에 보일 Month 개수
+			        	,beforeShowDay: function(date){
+			        		
+			        		
+							var y = date.getFullYear();
+			        		var m = date.getMonth()+1;
+							var d = date.getDate();
+			        		
+				    	    /*[# th:each="reservationDate : ${reservationDates}"]*/
+							
+			        		disable=new Date ([[${reservationDate}]]);
+			        		
+							var y2 = disable.getFullYear();
+			        		var m2 = disable.getMonth()+1;
+							var d2 = disable.getDate();
+				    	    
+				    	    if((y+'-'+ m +'-'+d)==(y2+'-'+ m2 +'-'+d2)){
+				    	    	return [false];
+				    	    }
+					       /*[/]*/
+					       
+			        		return [true];
+			        		
+			        		}
+			       
+			        	,beforeShow: function(input) {
+			    		    var i_offset= $(input).offset(); //클릭된 input의 위치값 체크
+			    		    setTimeout(function(){
+			    		       $('#ui-datepicker-div').css({'top':i_offset.top+10, 'bottom':'', 'left':i_offset.left-25}); //위치 설정
+			    		    })
+			    		} 
+			       });                    
+			       
+			       //초기값을 오늘 날짜로 설정
+			       $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+			       
+			       
+			       
+			       $('.datepicker-checkin').datepicker("option", "maxDate", $(".datepicker-checkout").val());
+			       $('.datepicker-checkin').datepicker("option", "onClose", function ( selectedDate ) {
+			           $(".datepicker-checkout").datepicker( "option", "minDate", selectedDate );
+			       });
+
+			       $('.datepicker-checkout').datepicker("option", "minDate", $(".datepicker-checkin").val());
+			       $('.datepicker-checkout').datepicker("option", "onClose", function ( selectedDate ) {
+			           $(".datepicker-checkin").datepicker( "option", "maxDate", selectedDate );
+			       });
+			       
+			       
+			       
+			   });
+			</script>
+			
+			<th:block th:each="reservationDate:${reservationDates}">
+			</th:block>
+			
+			
+			<input  name="checkIn" placeholder="날짜입력" type="text" class="datepicker-checkin" autocomplete="off" onchange="date()"/>
+
+		</th:block>
+		
+		
+		
+		
+		
+		<th:block th:fragment="date-picker-checkout">
+			<script type="text/javascript" th:inline="javascript">
+			 $(function() {
+			       //input을 datepicker로 선언
+			       $(".datepicker-checkout").datepicker({
+			           dateFormat: 'yy-mm-dd' //달력 날짜 형태
+			           ,showOtherMonths: false //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+			           ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+			           ,changeYear: false //option값 년 선택 가능
+			           ,changeMonth: false //option값  월 선택 가능                
+			           ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+			           ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+			           ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+			           ,buttonText: "선택" //버튼 호버 텍스트              
+			           ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+			           ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+			           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+			           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+			           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+			           ,minDate: "0d" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+			           ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
+			        	,stepMonths: 1 //한번 넘어갈 Month 개수
+			        	,numberOfMonths:1 //한번에 보일 Month 개수
+						,beforeShowDay: function(date){
+			        		
+			        		
+							var y = date.getFullYear();
+			        		var m = date.getMonth()+1;
+							var d = date.getDate();
+			        		
+				    	    /*[# th:each="reservationDate : ${reservationDates}"]*/
+							
+			        		disable=new Date ([[${reservationDate}]]);
+			        		
+							var y2 = disable.getFullYear();
+			        		var m2 = disable.getMonth()+1;
+							var d2 = disable.getDate();
+				    	    
+				    	    if((y+'-'+ m +'-'+d)==(y2+'-'+ m2 +'-'+d2)){
+				    	    	return [false];
+				    	    }
+					       /*[/]*/
+					       
+			        		return [true];
+			        		
+			        		}
+			       
+			        	,beforeShow: function(input) {
+			    		    var i_offset= $(input).offset(); //클릭된 input의 위치값 체크
+			    		    setTimeout(function(){
+			    		       $('#ui-datepicker-div').css({'top':i_offset.top+10, 'bottom':'', 'left':i_offset.left-185}); //위치설정
+			    		    })
+			    		} 
+			       });                    
+			       
+			       //초기값을 오늘 날짜로 설정해줘야 합니다.
+			       $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+			   });
+			</script>
+			<input  name="checkOut" placeholder="날짜입력" type="text" class="datepicker-checkout" autocomplete="off" onchange="date()"/>
+
+		</th:block>
+		
+	</body>
+</html>

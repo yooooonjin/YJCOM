@@ -81,12 +81,22 @@ public class MemberServiceImpl implements MemberService {
 	//Dto에서 Entity로 변환할지 결정
 	@Override
 	public String homeReserve(long hno, SecurityDto securityDto, HomeReserveDto reserveDto) {
+		
+		//문자열로 넘어온 게스트 수를 정수로 변환
+		String guestsStr=reserveDto.getGuestsStr();
+		String guestStr_=guestsStr.replaceAll("[^0-9]", "");
+		if(guestStr_==null || guestStr_.equals(""))guestStr_="0";
+		int guests = Integer.parseInt(guestStr_);
+		
+		//예약
 		ReservationEntity entity = ReservationEntity.builder()
-						.checkIn(reserveDto.getCheckIn()).checkOut(reserveDto.getCheckOut()).guests(reserveDto.getGuests())
+						.checkIn(reserveDto.getCheckIn()).checkOut(reserveDto.getCheckOut()).guests(guests)
 						.totalPrice(reserveDto.getTotalPrice()).reserveStatus("ask")
 						.member(memberRepository.findById(securityDto.getUsername()).get())
 						.home(homeRepository.findById(hno).get())
 						.build();
+		
+		
 		
 		reservationRepository.save(entity);
 		

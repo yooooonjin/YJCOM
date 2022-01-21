@@ -1,6 +1,11 @@
 package project.service.impl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -24,6 +29,8 @@ import project.domain.entity.HomeReviewEntity;
 import project.domain.entity.HomeReviewEntityRepository;
 import project.domain.entity.MemberEntityRepository;
 import project.domain.entity.MemberRole;
+import project.domain.entity.ReservationEntity;
+import project.domain.entity.ReservationEntityRepository;
 import project.security.dto.SecurityDto;
 import project.service.home.HomeService;
 import project.util.PageInfo;
@@ -36,6 +43,7 @@ public class HomeServiceImp implements HomeService {
 	final HomeEntityRepository homeRepository;
 	final MemberEntityRepository memberRepository;
 	final HomeReviewEntityRepository reviewRepository;
+	final ReservationEntityRepository reservationRepository;
 	
 	//집 등록
 	@Transactional
@@ -79,18 +87,6 @@ public class HomeServiceImp implements HomeService {
 		return "home/homes";
 		
 	}
-	//집 디테일 페이지
-	@Override
-	public String homeDetail(Model model, long hno) {
-		
-		HomeListDto homeDetail= homeRepository.findById(hno).map(HomeListDto::new).orElseThrow();
-		model.addAttribute("homeDetail", homeDetail);
-		
-		//후기//TODO dto에 담기
-		List<HomeReviewEntity> homeReview = reviewRepository.findAllByHome_hno(hno);
-		model.addAttribute("homeReview", homeReview);
-		return "home/home-detail";
-	}
 	
 	//조건에 맞는 집 불러오기
 	@Override
@@ -118,5 +114,39 @@ public class HomeServiceImp implements HomeService {
 		return "home/homes";
 		
 	}
+	
+	//집 디테일 페이지
+		@Override
+		public String homeDetail(Model model, long hno) {
+			
+			HomeListDto homeDetail= homeRepository.findById(hno).map(HomeListDto::new).orElseThrow();
+			model.addAttribute("homeDetail", homeDetail);
+			
+		
+			//예약되어있는 날짜를 reservationDates Set컬렉션에 담기
+			List<ReservationEntity> reservationEntity= reservationRepository.findByHome_hno(hno);
+			
+			Set<LocalDate> reservationDates = new HashSet<LocalDate>();
+			
+			reservationEntity.forEach(e->{
+				LocalDate checkin= e.getCheckIn();
+				LocalDate checkout= e.getCheckOut();
+				
+				reservationDates.add(checkin);
+				reservationDates.add(checkout);
+				
+				checkin.datesUntil(checkout).forEach(date-> reservationDates.add(date));
+			});
+			
+			System.out.println(reservationDates);
+			model.addAttribute("reservationDates", reservationDates);
+
+			
+			
+			//후기//TODO dto에 담기
+			List<HomeReviewEntity> homeReview = reviewRepository.findAllByHome_hno(hno);
+			model.addAttribute("homeReview", homeReview);
+			return "home/home-detail";
+		}
 
 }

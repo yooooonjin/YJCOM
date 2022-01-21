@@ -166,6 +166,14 @@
 	margin-top:5px;
 	font-size: 10px;
 }
+#guest-part .reserve-room .home-number span{
+	margin-top:5px;
+	font-size: 10px;
+}
+#guest-part .reserve-room .home-number> div>div:not(:last-child)::after{
+	content: "·";
+	padding: 0 1px;
+}
 
 #guest-part .reserve-info1{
 	padding-bottom: 15px;

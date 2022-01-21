@@ -104,16 +104,13 @@
 	margin: 15px 0 10px;
 	font-size: 13px;
 }
-#home-list .home-number div{
-	padding-right: 5px;
-}
 #home-list .home-number span{
 	font-weight: 400;
 }
 #home-list .home-number div:not(:last-child)::after{
-	content: "|";
-	color: #e9e9e9;
-	padding: 0 5px;
+	content: "·";
+	color: black;
+	padding: 5px 5px;
 }
 #home-list .home-filter span{
 	display: inline-block;

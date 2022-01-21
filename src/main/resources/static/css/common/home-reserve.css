@@ -10,31 +10,102 @@
 	border-radius: 15px;
 	margin-top: 50px;
 }
-#home-reserve-form .home-reserve-info li{
-	margin-bottom: 9px;
+/* ////////////////////////////////////////// */
+#home-reserve-form .home-reserve-info{
+	border: 1px solid #DDDDDD;
+	border-radius: 8px;
 }
-#home-reserve-form .home-reserve-info li{
-	margin-bottom: 9px;
+#home-reserve-form .select-info div{
+	height: 56px;
+	padding: 10px 10px;
 }
-#home-reserve-form .home-reserve-info li:nth-child(1){
-	margin-bottom:15px;
-	font-size: 20px;
-	font-weight: 600;
+#home-reserve-form .select-info div:nth-child(1){
+	border-right:  1px solid #DDDDDD;
 }
-
-#home-reserve-form .home-reserve-info li span{
-	font-size: 15px;
-	font-weight: 400;
+#home-reserve-form .home-reserve-info p{
+	line-height:11px;
+	font-size: 12px;
 }
 #home-reserve-form .home-reserve-info input{
-	width: 48%;
-	height: 56px;
-	margin-bottom:10px;
-	padding: 5px;
+	width:100%;
+	border: none;
+	outline: none;
 }
-#home-reserve-form .home-reserve-info .guest-number{
-	width: 100%;
+/* ///////////////////add-guests///////////////////////// */
+#home-reserve-form .guests{
 	height: 56px;
+	border-top: 1px solid #DDDDDD;
+	padding: 10px 10px;
+	position: relative;
+}
+#home-reserve-form .add-guests{
+	position: absolute;
+	right:-15px;
+	top:35px;
+	width:350px;
+	background-color: white;
+	z-index: 5;
+	padding:16px 32px;
+	margin-top:28px;
+	border-radius: 30px;
+	border:  1px solid #DDDDDD;
+}
+#home-reserve-form .add-guests ul{
+	padding: 16px 0 20px;
+}
+#home-reserve-form .add-guests ul:not(:last-child){
+	border-bottom: 1px solid #DDDDDD;
+}
+#home-reserve-form .add-guests ul div:nth-child(1){
+	line-height: 1.4em;
+	font-size: 16px;
+	font-weight: 500;
+}
+#home-reserve-form .add-guests ul div:nth-child(2){
+	line-height: 1.2em;
+	font-size: 15px;
+	font-weight: 300;
+	color: #717171;
+}
+#home-reserve-form .add-guests ul li input{
+	width: 40px;
+	height:32px;
+	text-align: center;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#home-reserve-form .add-guests ul li .down, .up{
+	border: 1px solid #DDDDDD;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	font-size: 30px;
+	cursor: pointer;
+}
+#home-reserve-form .add-guests ul li .down{
+	font-size: 40px;
+	text-align:center;
+	line-height: 27px;
+	font-weight: 300;
+}
+#home-reserve-form .add-guests ul li .up{
+	text-align:center;
+	font-size: 25px;
+	line-height: 26px;
+}
+/* ////////////////////////////////////////// */
+#home-reserve-form >div:nth-child(1){
+	font-size: 25px;
+	font-weight: 500;
+	margin-bottom: 25px;
+}
+#home-reserve-form >div:nth-child(1)>span{
+	font-size: 15px;
+	font-weight: 400;
+	margin-bottom: 25px;
 }
 #home-reserve-form .home-price{
 	margin: 25px 0 0 0;
@@ -91,3 +162,5 @@
 	font-weight: 600;	
 	cursor: pointer;
 }
+
+

@@ -19,7 +19,7 @@ public class HomeReserveDto {
 	private LocalDate checkIn;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate checkOut;
-	private int guests;
+	private String guestsStr;
 	private long totalPrice;
 	
 }
