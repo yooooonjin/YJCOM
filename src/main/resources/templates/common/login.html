@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<body>
+		
+	<th:block th:fragment="login">
+		<div id="login-pop" style="display: none;">
+			<div class="background">
+			<div class="login">
+				<h1>로그인</h1>
+				<div>
+					<img class="close" src="/image/x.png" width="32px" height="32px">
+					<p class="login-title">로그인</p>
+					<div class="log-form">
+						<form action="/login" method="post">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+						<div class="error" th:if="${param.error}">
+						[[${session["SPRING_SECURITY_LAST_EXCEPTION"].message}]]
+						</div>		
+							<ul>
+								<li class="welcome">에어비앤비에 오신 것을 환영합니다.</li>
+								<li>
+									<p>이메일</p>
+									<input name="email" type="text" placeholder="이메일을 입력하세요">
+								</li>
+								<li>
+									<p>비밀번호</p>
+									<input name="password" type="password" placeholder="비밀번호를 입력하세요">
+								</li>
+								<li>
+									<button type="submit">로그인</button>
+								</li>
+							</ul>
+							<p class="join"><a href="/join">회원가입</a></p>
+						</form>	
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function(){
+					
+					$(".close").click(function(){
+						$("#login-pop").hide();
+					});
+					
+					$(".login-btn").click(function(){
+						$("#login-pop").show();
+						$("#header-nav").hide();
+					});
+					
+				});
+			
+			</script>
+		
+		</div>
+		</div>
+	</th:block>
+	
+	
+	</body>
+</html>

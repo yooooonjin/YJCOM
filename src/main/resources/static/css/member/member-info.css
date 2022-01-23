@@ -40,6 +40,9 @@
 	text-align: center;
 	margin-right: 10px;
 }
+#member-profile li>div> div:nth-child(2) {
+	text-align: left;
+}
 #member-profile .edit-profile input{
 	border: none;
 	color: #a9a9a9;
@@ -261,15 +264,12 @@
 	margin-top:10px;
 	font-size: 13px;
 }
-#host-part .reserve-room .home-number div{
-	padding-right: 5px;
-}
 #host-part .reserve-room .home-number span{
 	font-weight: 500;
 }
 #host-part .reserve-room .home-number div:not(:last-child)::after{
-	content: "|";
-	color: #e9e9e9;
+	content: "·";
+	color: black;
 	padding: 0 5px;
 }
 #host-part .reserve-room .home-price{

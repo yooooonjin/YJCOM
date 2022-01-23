@@ -13,6 +13,7 @@ public interface HomeEntityRepository extends JpaRepository<HomeEntity, Long> {
 
 	@Query("SELECT h.hno FROM HomeEntity h WHERE h.homeAddress like %:location% AND h.maximumNumber >= :guests")
 	List<Long> selectHome(@Param("location") String location, @Param("guests") int guests);
+
 	
 
 }

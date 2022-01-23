@@ -104,7 +104,10 @@ public class HomeServiceImp implements HomeService {
 		if(guestStr_==null || guestStr_.equals(""))guestStr_="0";
 		int guests = Integer.parseInt(guestStr_);
 
-		//해당 지역 / 최소인원 조건에 맞는 집
+		LocalDate checkin= searchDto.getCheckin();
+		LocalDate checkout=searchDto.getCheckout();
+		
+		//해당 지역 // 최소인원 조건에 맞는 집
 		List<Long> hno = homeRepository.selectHome(location,guests);
 		
 		//TODO DTO에 담아서 전달

@@ -77,6 +77,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					
 						$(function(){
 							
+							
 							//down 클릭 할 때 인원수 -1 
 							$(".down").click(function(){
 								
@@ -90,7 +91,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							//up 클릭 할 때 인원수 +1 
 							$(".up").click(function(){
 								var up = $(this).siblings("input[type=number]").val();
-								$(this).siblings("input[type=number]").val(parseInt(up)+1);
+								var maximumNumber =  parseInt("[[${homeDetail.maximumNumber}]]");
+								
+								if((parseInt($(".guest1").val())+parseInt($(".guest2").val())+parseInt($(".guest3").val())+1) <= maximumNumber ){
+									$(this).siblings("input[type=number]").val(parseInt(up)+1);
+								}
+								
 							});
 							
 							//up 또는 down을 클릭할 떼 인원 수 더한 값 계산
@@ -114,6 +120,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									$(".add-guests").hide();
 								} 
 							});
+							
+							
+							
 							
 						});
 					

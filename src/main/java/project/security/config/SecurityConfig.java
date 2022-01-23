@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated();//어떤 요청에도 보안검사
 			
 		http.formLogin()//보안 검증은 formLogin방식
-			.loginPage("/login")
+//			.loginPage("/login")
 			.loginProcessingUrl("/login")//로그인페이지의 action
 			.usernameParameter("email")//로그인페이지 username->email
 			;
