@@ -1,7 +1,6 @@
 package project.domain.dto.home;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,19 +39,21 @@ public class HomeListDto {
 	private MemberEntity member;
 
 	public HomeListDto(HomeEntity entity) {
-		this.hno=entity.getHno();
-		this.homeName = entity.getHomeName();
-		this.homeAddress = entity.getHomeAddress();
-		this.homePrice = entity.getHomePrice();
-		this.maximumNumber = entity.getMaximumNumber();
-		this.bedNumber = entity.getBedNumber();
-		this.bedroomNumber = entity.getBedroomNumber();
-		this.bathroomNumber = entity.getBathroomNumber();
-		this.homeType = entity.getHomeType();
-		this.homeOptionSet=entity.getHomeOptionSet();
-		this.homeIntro = entity.getHomeIntro();
-		this.homePhoto = entity.getHomePhoto();
-		this.member = entity.getMember();
+	
+			this.hno=entity.getHno();
+			this.homeName = entity.getHomeName();
+			this.homeAddress = entity.getHomeAddress();
+			this.homePrice = entity.getHomePrice();
+			this.maximumNumber = entity.getMaximumNumber();
+			this.bedNumber = entity.getBedNumber();
+			this.bedroomNumber = entity.getBedroomNumber();
+			this.bathroomNumber = entity.getBathroomNumber();
+			this.homeType = entity.getHomeType();
+			this.homeOptionSet=entity.getHomeOptionSet();
+			this.homeIntro = entity.getHomeIntro();
+			this.homePhoto = entity.getHomePhoto();
+			this.member = entity.getMember();
+	
 	}
 	
 	

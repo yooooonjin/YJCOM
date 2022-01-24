@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -92,26 +93,40 @@ public class HomeServiceImp implements HomeService {
 	@Override
 	public String homesearch(Model model, int page, HomeSearchDto searchDto) {
 		
+		/////////////////////////////////////////////
+		//지정 위치중 자치구만 가져오기
 		String result= searchDto.getLocation();
 		
 		String[] locationArr= searchDto.getLocation().split("[ ]");
 		log.info("자치구={}",locationArr[1]);
 		String location=locationArr[1];
-		
+		/////////////////////////////////////////////
 		//문자열로 넘어온 게스트 수를 정수로 변환
 		String guestsStr=searchDto.getGuestsStr();
 		String guestStr_=guestsStr.replaceAll("[^0-9]", "");
 		if(guestStr_==null || guestStr_.equals(""))guestStr_="0";
 		int guests = Integer.parseInt(guestStr_);
-
+		/////////////////////////////////////////////
+		//해당 지역 & 최소인원 조건에 맞는 집
+		List<Long> hno = homeRepository.selectHome(location,guests);
+		
+		/////////////////////////////////////////////
 		LocalDate checkin= searchDto.getCheckin();
 		LocalDate checkout=searchDto.getCheckout();
 		
-		//해당 지역 // 최소인원 조건에 맞는 집
-		List<Long> hno = homeRepository.selectHome(location,guests);
-		
 		//TODO DTO에 담아서 전달
-		List<HomeEntity> homeEntity= homeRepository.findAllById(hno);
+		List<HomeEntity> homeEntity=null;
+		if(checkin!=null && checkout!=null) { //체크인, 체크아웃 날짜가 지정되었을 경우
+			homeEntity= homeRepository.findAllById(hno).stream() 
+				.filter(e->e.isreservations( checkin, checkout)) //검색된 집 정보중에서 기간중 예약 가능한 집만 필터링
+				.collect(Collectors.toList());
+		}else { //체크인, 체크아웃 날짜가 지정되지 않았을 경우
+			LocalDate today=LocalDate.now();
+			homeEntity= homeRepository.findAllById(hno).stream()
+					.filter(e->e.isreservations( today.plusDays(1), today.minusDays(1)))
+					.collect(Collectors.toList()); //일정 관계없이 지역,인원으로만 필터링된 집
+		}
+		
 		model.addAttribute("homes", homeEntity);
 		model.addAttribute("searchDto", searchDto);
 		return "home/homes";
@@ -144,7 +159,6 @@ public class HomeServiceImp implements HomeService {
 			System.out.println(reservationDates);
 			model.addAttribute("reservationDates", reservationDates);
 
-			
 			
 			//후기//TODO dto에 담기
 			List<HomeReviewEntity> homeReview = reviewRepository.findAllByHome_hno(hno);

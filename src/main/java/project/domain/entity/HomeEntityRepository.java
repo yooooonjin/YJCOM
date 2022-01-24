@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 public interface HomeEntityRepository extends JpaRepository<HomeEntity, Long> {
 
-
+	
 	List<HomeEntity> findAllByMember_email(String email);
 
-	@Query("SELECT h.hno FROM HomeEntity h WHERE h.homeAddress like %:location% AND h.maximumNumber >= :guests")
+	@Query("SELECT h.hno FROM HomeEntity h WHERE h.homeAddress like %:location% AND h.maximumNumber >= :guests" )
 	List<Long> selectHome(@Param("location") String location, @Param("guests") int guests);
 
 	
-
+	
 }

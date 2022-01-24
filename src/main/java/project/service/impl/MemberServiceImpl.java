@@ -91,7 +91,7 @@ public class MemberServiceImpl implements MemberService {
 		//예약
 		ReservationEntity entity = ReservationEntity.builder()
 						.checkIn(reserveDto.getCheckIn()).checkOut(reserveDto.getCheckOut()).guests(guests)
-						.totalPrice(reserveDto.getTotalPrice()).reserveStatus("ask")
+						.totalPrice(reserveDto.getTotalPrice()).days(reserveDto.getDays()).reserveStatus("ask")
 						.member(memberRepository.findById(securityDto.getUsername()).get())
 						.home(homeRepository.findById(hno).get())
 						.build();

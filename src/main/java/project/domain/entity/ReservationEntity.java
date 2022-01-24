@@ -37,6 +37,8 @@ public class ReservationEntity extends BaseEntity {
 	@Column(nullable = false)
 	private int guests;
 	
+	private int days;
+	
 	private long totalPrice;
 	
 	private String reserveStatus;
@@ -52,5 +54,15 @@ public class ReservationEntity extends BaseEntity {
 	@OneToOne(mappedBy = "reservation", fetch = FetchType.EAGER)
 	private HomeReviewEntity review;
 	
+	
+	//내가 조회할 날짜와 중복이되면 list에서 제외 시키는 필터
+	public boolean isReservation(LocalDate _checkIn, LocalDate _checkOut) { //조회한 체크인날짜 //조회한 체크아웃날짜
+		
+		//조회한 기간과 예약된 날짜가 중복되는 것만 반환
+		if(checkIn.isBefore(_checkOut.minusDays(1)) && checkOut.isAfter(_checkIn.plusDays(1))) {
+			return true;
+		}
+		return false;
+	}
 	
 }

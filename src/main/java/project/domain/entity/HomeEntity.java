@@ -1,9 +1,11 @@
 package project.domain.entity;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -81,6 +83,21 @@ public class HomeEntity extends BaseEntity {
 	@JoinColumn(name = "email")
 	private MemberEntity member;
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy ="home" )
+	@Builder.Default
+	private List<ReservationEntity> reservations = new Vector<>();
+	
+	public boolean isreservations(LocalDate checkin, LocalDate checkout) {
+		
+		reservations=reservations.stream()
+		.filter(r->r.isReservation(checkin, checkout)) //조회한 체크인날짜 //조회한 체크아웃날짜
+		.collect(Collectors.toList()); //조회한 기간과 겹치는 예약들만 List에 담기
+		
+		if(reservations.size()>0) {
+			return false; //조회한 날짜에 예약이 존재하는 경우 반환X
+		}	
+		return true;
+	}
 	
 
 }

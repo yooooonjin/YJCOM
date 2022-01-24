@@ -83,12 +83,29 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								</ul>
 							</div>
 						</div>
-						
+						<!-- ///////////////////////////////////인포윈도우////////////////////////////////// -->
 						<section>
 							<div id="infowindow">
-							 	<a th:href="|/home/detail/${homes.hno}|"><img src="/image/room-img-01.jpg" width="80px" height="80px"></a>
+								<div>
+								 	<img class="info-img" src="/image/room-img-01.jpg">
+								 	<img onclick="closeOverlay()" class="info-close" src="/image/x.png">
+								 	<div class="info">
+									 	<div class="info-home-type">[[${homes.homeType.homeType}]]</div>
+									 	<a class="info-home-name" th:href="|/home/detail/${homes.hno}|">[[${homes.homeName}]]</a>
+										<div class="flex info-home-number">
+											<div>최대인원 <span>[[${homes.maximumNumber}]]</span>명</div>
+											<div>침대 <span>[[${homes.bedNumber}]]</span>개</div>
+											<div>침실 <span>[[${homes.bedroomNumber}]]</span>개</div>
+											<div>욕실 <span>[[${homes.bathroomNumber}]]</span>개</div>
+										</div>
+										<div class="info-home-price">
+											[[${#numbers.formatInteger(homes.homePrice,3,'COMMA')}]]원&nbsp;<span>/ 박</span>
+										</div>
+									</div>
+							 	</div>
 							</div>
 						</section>
+						<!-- ///////////////////////////////////인포윈도우////////////////////////////////// -->
 						
 					</div>
 				</div>
@@ -132,7 +149,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			/*[# th:each="homes : ${homes}"]*/
 			
 			
-			var homeAddress=/*[[${homes.homeAddress}]]*/;
+			var homeAddress= /*[[${homes.homeAddress}]]*/;
+			
 			var geocoder = new kakao.maps.services.Geocoder();
 			var imageSrc = "/image/airbnb_marker.png"; 
 			
@@ -149,26 +167,38 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			        
 			        // 결과값으로 받은 위치를 마커로 표시합니다
 			        var marker = new kakao.maps.Marker({
-			            map: map,
 			            position: coords,
 			            image : markerImage,
 			            clickable: true
 			        });
 			        
-			        map.setCenter(coords); //맵 위치 지정 
+			        marker.setMap(map);
 			        
-			        var content = document.getElementById("infowindow");
+			        var iwContent = '<div style="padding:5px;  font-size:30px;">Hello World!</div>'
+			     	var content = document.getElementById("infowindow");
+			        var iwRemoveable=false;
 			        
-
+				     
 				     // 커스텀 오버레이를 생성합니다
-				     var overlay = new kakao.maps.CustomOverlay({
+				   	 var customOverlay = new kakao.maps.CustomOverlay({
 				         content: content,
-				         map: map,
-				         position: coords,
-				         yAnchor: 1.8
+				         position: coords
 				     });
+				     
+				     
+				     kakao.maps.event.addListener(marker, 'click', function() {
+				         // 마커 위에 인포윈도우를 표시합니다
+				         customOverlay.setMap(map);  
+				   });
 			    } 
+		 	 // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+		 	 
+		 	 
 			}); 
+			
+		     function closeOverlay() {
+		    	 customOverlay.setMap(null);     
+		     }
 			
 			/*[/]*/
 			
