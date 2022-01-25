@@ -7,6 +7,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<link rel="stylesheet" href="/css/common/home-reserve.css">
 		<link rel="stylesheet" href="/css/common/datepicker-home-detail.css">
 		<script type="text/javascript" src="/js/visual.js"></script>
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<header id="whitetype">
@@ -18,8 +19,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</div>
 		</header>
 			
-		<main>
-			<section th:each="homeDetail:${homeDetail}" id="room-title">
+		<main th:each="homeDetail:${homeDetail}">
+			<section id="room-title">
 				<div class="room-title detail-view-size">
 					<ul>
 						<li class="room-type">[[${homeDetail.homeType.homeType}]]</li>
@@ -74,7 +75,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div>
 								<h2>후기</h2>
 								<div id="review-list">
-									<div class="review flex" th:each="homeReview:${homeReview}">
+									<div th:unless="${homeReviews}">후기가 존재하지 않습니다.</div>
+									<div class="review flex" th:each="homeReview:${homeReviews}">
 										<div>
 											<img src="/image/user_pic.png" width="60px">
 											<p>[[${homeReview.member.name}]]</p>
@@ -86,57 +88,104 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									</div>
 								</div>
 							</div>
-							<div class="map">
-								<h2>호스팅 지역</h2>
-								<div id="map" style="width:655px;height:400px;"></div>
-							</div>
-							
-							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f&libraries=services"></script>
-							<script type="text/javascript">
-							
-							
-							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-						    mapOption = {
-						        center: new kakao.maps.LatLng(37.6568255, 127.021725), // 지도의 중심좌표
-						        level: 3 // 지도의 확대 레벨
-						    };  
-
-							// 지도를 생성합니다    
-							var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-							// 주소-좌표 변환 객체를 생성합니다
-							var geocoder = new kakao.maps.services.Geocoder();
-							
-							var homeAddress="[[${homeDetail.homeAddress}]]";
-							
-							var imageSrc = "/image/airbnb_marker.png"; 
-							
-							// 주소로 좌표를 검색합니다
-							geocoder.addressSearch(homeAddress, function(result, status) {
-	
-							    // 정상적으로 검색이 완료됐으면 
-							     if (status === kakao.maps.services.Status.OK) {
-	
-							        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-							        var imageSize = new kakao.maps.Size(50, 60); 
-							        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-							        
-							        // 결과값으로 받은 위치를 마커로 표시합니다
-							        var marker = new kakao.maps.Marker({
-							            map: map,
-							            position: coords,
-							            image : markerImage
-							        });
-	
-							        map.setCenter(coords);
-							    } 
-							});    
-							</script>
 							
 						</div>
 					</div>
 					<th:block th:insert="/common/home-reserve.html::home-reserve"/>
+				</div>
+			</section>
+			
+			<section id="additional-info">
+				<div class="additional-info detail-view-size">
+					<div class="map">
+						<h2>호스팅 지역</h2>
+						<div id="map" style="height:400px;"></div>
+					</div>
+					
+					<div class="notice">
+						<h2>알아두어야 할 사항</h2>
+						<div class="flex between">
+							<div>
+								<h4>숙소 이용규칙</h4>
+								<ul>
+									<li><i class="fas fa-clock"></i>체크인: 오후 3:00 이후</li>
+									<li><i class="fas fa-clock"></i>체크아웃 시간: 오전 11:00</li>
+									<li><i class="fas fa-smoking-ban"></i>흡연 금지</li>
+									<li><i class="fas fa-paw"></i>반려동물 동반 불가</li>
+									<li><i class="fas fa-birthday-cake"></i>파티나 이벤트 금지</li>
+								</ul>
+							</div>
+							<div>
+								<h4>건강과 안전</h4>
+								<ul>
+									<li class="flex"><i class="fas fa-spray-can"></i>에어비앤비의 사회적 거리 두기 및 관련 가이드라인이 적용됩니다.</li>
+									<li class="flex"><i class="fas fa-newspaper"></i>일산화탄소 경보기</li>
+									<li class="flex"><i class="fas fa-fire-extinguisher"></i>화재경보기</li>
+									<li class="flex"><i class="fas fa-credit-card"></i>보증금 - 숙소를 파손할 경우 최대 ₩179423의 금액이 부과될 수 있습니다</li>
+								</ul>
+							</div>
+							<div>
+								<h4>환불 정책</h4>
+								<ul>
+									<li>2월 22일 전까지 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다.</li>
+								</ul>
+							</div>
+						
+						</div>
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44c331bb2848d75067011ce7a893d31f&libraries=services"></script>
+					<script type="text/javascript">
+					
+					
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				    mapOption = {
+				        center: new kakao.maps.LatLng(37.6568255, 127.021725), // 지도의 중심좌표
+				        level: 3 // 지도의 확대 레벨
+				    };  
+
+					// 지도를 생성합니다    
+					var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+					// 주소-좌표 변환 객체를 생성합니다
+					var geocoder = new kakao.maps.services.Geocoder();
+					
+					var homeAddress="[[${homeDetail.homeAddress}]]";
+					
+					var imageSrc = "/image/airbnb_marker.png"; 
+					
+					// 주소로 좌표를 검색합니다
+					geocoder.addressSearch(homeAddress, function(result, status) {
+
+					    // 정상적으로 검색이 완료됐으면 
+					     if (status === kakao.maps.services.Status.OK) {
+
+					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+					        var imageSize = new kakao.maps.Size(50, 60); 
+					        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+					        
+					        // 결과값으로 받은 위치를 마커로 표시합니다
+					        var marker = new kakao.maps.Marker({
+					            map: map,
+					            position: coords,
+					            image : markerImage
+					        });
+
+					        map.setCenter(coords);
+					    } 
+					});    
+					</script>
 				</div>
 			</section>
 		</main>

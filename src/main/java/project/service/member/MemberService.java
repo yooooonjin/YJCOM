@@ -18,5 +18,9 @@ public interface MemberService {
 
 	void reviewWrite(long resNo, long hno, SecurityDto securityDto, String review);
 
+	String homeReserveRequest(long hno, HomeReserveDto reserveDto, Model model);
+
+	String personalInfoPage(SecurityDto securityDto, Model model);
+
 
 }

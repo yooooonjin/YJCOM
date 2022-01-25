@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+#whitetype{
+	border-bottom:1px solid #DDDDDD;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+
+.reservation-request-view-size{
+	width: 1120px;
+	margin: 0 auto;
+}
+
+#reservation-request h3{
+	padding: 24px 0;
+	font-size: 23px;
+	font-weight: 500;
+}
+#reservation-request .reservation-request{
+	width: 560px;
+}
+#reservation-request> div:nth-child(1){
+	padding: 64px 0 40px 0;
+}
+#reservation-request img{
+	width: 48px;
+	height:48px;
+	border-radius: 50%;
+	margin-right: 20px;
+}
+#reservation-request img:hover{
+	background-color: #f7f7f7;
+}
+#reservation-request h2{
+	font-size: 32px;
+	font-weight: 600;
+}
+
+#reservation-request .comment{
+	width: 560px;
+	height: 98px;
+	border: 1px solid #DDDDDD;
+	border-radius: 10px;
+	padding: 20px 24px;;
+}
+#reservation-request .comment div:nth-child(1){
+	font-weight: 500;
+	padding-bottom: 2px;
+}
+#reservation-request .reservation-info{
+	padding-bottom:24px;
+	border-bottom: 1px solid #DDDDDD;
+}
+#reservation-request .reservation-info div div{
+	font-size: 17px;
+	font-weight: 300;
+	padding: 0 0 10px 0;
+}
+#reservation-request .reservation-info div div:nth-child(1){
+	font-weight: 500;
+}
+
+/* ////////////////////////////////////////////////// */
+
+#reservation-request .payment input{
+	width: 100%;
+	height: 56px;
+	padding: 16px 40px 16px 16px;
+	border: none;
+	background-color: rgba(0,0,0,0);
+}
+#reservation-request .payment input::placeholder{
+	color: black;
+	font-size: 15px;
+	font-weight: 300;
+}
+#reservation-request .payment> div> div{
+	border: 1px solid #a9a9a9;
+	border-radius: 8px;
+	margin-bottom: 13px;
+}
+#reservation-request .payment> div> div:nth-child(2)> input {
+	border-bottom: 1px solid #a9a9a9;
+	border-radius: 0;
+}
+#reservation-request .payment> div> div:nth-child(2)>div> input:nth-child(1) {
+	border-right: 1px solid #a9a9a9;
+}
+#reservation-request .payment{
+	padding-bottom:30px;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+/* ////////////////////////////////////////////////// */
+
+#reservation-request .required-input> div{
+	padding-bottom:24px;
+}
+#reservation-request .required-input div div{
+	font-size: 15px;
+	font-weight: 300;
+}
+#reservation-request .required-input div div:nth-child(1){
+	font-size: 17px;
+	font-weight: 500;
+}
+#reservation-request .required-input button{
+	width: 60px;
+	height: 34px;
+	font-size:15px;
+	border-radius: 5px;
+	border: 1px solid black;
+	background-color: white;
+}
+#reservation-request .required-input{
+	border-bottom: 1px solid #DDDDDD;
+}
+
+/* ////////////////////////////////////////////////// */
+#reservation-request .refund{
+	padding-bottom: 24px;
+	font-weight:300;
+	border-bottom: 1px solid #DDDDDD;
+}
+#reservation-request .refund div{
+	padding-bottom: 24px;
+}
+
+/* ////////////////////////////////////////////////// */
+
+#reservation-request .guide{
+	padding: 24px 0;
+	font-size: 16px;
+	font-weight: 500;
+	border-bottom: 1px solid #DDDDDD;
+}
+#reservation-request .guide p{
+	font-weight: 300;
+}
+
+/* ////////////////////////////////////////////////// */
+
+#reservation-request .guide2{
+	padding: 30px 0;
+	font-size: 12px;
+	font-weight: 400;
+}
+#reservation-request .guide2 span{
+	font-weight: 500;
+	text-decoration: underline;
+}
+/* ////////////////////////////////////////////////// */
+
+#reservation-request .reservation-request-btn button{
+	width: 120px;
+	height: 48px;
+	background-color:#ff2e5f;
+	border-radius: 5px;
+	border: none;
+	color: white;
+	font-size: 16px;
+	margin-bottom: 100px;
+}
+
+/* ////////////////////////////////////////////////// */
+/* ////////////////////////////////////////////////// */
+
+#reservation-request .home-info{
+	width: 465px;
+	height: 365px;
+	border: 1px solid #DDDDDD;
+	border-radius: 10px;
+	padding: 24px;
+}
+
+#reservation-request .home-info img{
+	width: 124px;
+	height: 106px;
+	border-radius: 10px; 
+}
+#reservation-request .home-info .home-info-detail{
+	font-size: 14px;
+	padding-bottom:20px;
+	border-bottom: 1px solid #DDDDDD;
+}
+#reservation-request .home-info .home-price ul{
+	padding-bottom: 10px;
+}
+#reservation-request .home-info .home-price ul:nth-child(3){
+	padding-bottom: 10px;
+	font-weight: 600;
+}
+
+

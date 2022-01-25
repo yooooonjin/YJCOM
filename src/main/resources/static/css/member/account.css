@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+
+#Account .account-view-size{
+	width: 1016px;
+	margin: 0 auto;
+}
+
+#Account h2{
+	font-size: 32px;
+}
+#Account .title{
+	padding: 64px 0 56px 16px;
+	font-weight: 300;
+}
+#Account .title a{
+	padding-left:15px;
+	font-weight: 500;
+	text-decoration: underline;
+}
+#Account i{
+	height: 32px;
+	color: black;
+	font-size: 25px;
+	
+}
+#Account .contents>div >div{
+	width: 328px;
+	height: 156px;
+	border-radius:15px;
+	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+	margin: 8px 0;
+	padding: 16px;
+	font-size: 14px;
+}
+#Account .contents h3{
+	font-weight: 400;
+}
+#Account .contents p{
+	font-weight: 300;
+	padding-top:5px;
+	color: #717171;
+}
+
+/* /////////////////////////////////////////// */
+#Account .comment{
+	font-size: 14px;
+	text-align: center;
+	padding: 50px 0 80px;
+}
+#Account .comment p:nth-child(2){
+	padding-top:5px;
+	text-decoration: underline;
+	font-weight: 500;
+}

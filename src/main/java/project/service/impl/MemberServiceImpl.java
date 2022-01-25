@@ -73,7 +73,6 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public void memberUpdate(MemberUpdateDto updateDto ,Model model) {
-		
 		memberRepository.findById(updateDto.getEmail()).map(entity->entity.updateNameAndPhonenumberAndAddress(updateDto)).get();
 				
 	}
@@ -112,6 +111,24 @@ public class MemberServiceImpl implements MemberService {
 						.build();
 		
 		homeReviewRepository.save(homeReviewEntity);
+	}
+	
+	//예약 요청 페이지
+	@Override
+	public String homeReserveRequest(long hno, HomeReserveDto reserveDto, Model model) {
+		HomeEntity homeEntity= homeRepository.findById(hno).get();
+		model.addAttribute("homesInfo", homeEntity);
+		model.addAttribute("reservationsInfo", reserveDto);
+		return "home/reservation-request";
+	}
+	
+	//개인정보
+	@Override
+	public String personalInfoPage(SecurityDto securityDto, Model model) {
+		//회원정보 데이터 //TODO DTO에 담아서 이동
+		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
+		model.addAttribute("memberInfo",entity);
+		return "member/personal-info";
 	}
 
 }

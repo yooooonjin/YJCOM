@@ -5,6 +5,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<th:block th:insert="/common/common.html::head" />
 		<link rel="stylesheet" href="/css/common/header-nav.css">
 		<link rel="stylesheet" href="/css/member/member-info.css">
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
 		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
 		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
@@ -38,143 +39,20 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<img src="/image/user_pic2.png" width="128px">
 						<p><a href="#">사진 업데이트하기</a></p>
 					</div>
-					<div class="default-profile">
-						<ul>
-							<li class="flex between">
-								<div class="flex">
-								<div>이름</div>
-								<div>[[${member.name}]]</div>
-								</div>
-							</li>
-							<li>
-								<div class="flex">
-								<div>이메일</div>
-								<div>[[${member.email}]]</div>
-								</div>
-							</li>
-							<li class="flex">
-								<div class="flex">
-								<div>번호</div>
-								<div>[[${member.phoneNumber}]]</div>
-								</div>
-							</li>
-							<li class="flex">
-								<div class="flex">
-								<div>주소</div>
-								<div>[[${member.address}]]</div>
-								</div>
-							</li>
-							<li>
-								<div class="flex">
-								<div>생일</div>
-								<div>[[${member.birthday}]]</div>
-								</div>
-							</li>
-						</ul>
+					
+					<div class="badge">
+						<h2>본인인증</h2>
+						<p>본인 인증 배지를 통해 본인 인증을 마쳤다는 사실을 다른 사용자에게 보여줄 수 있습니다.</p>
+						<button type="button">배지 받기</button>
 					</div>
 					
-					<!-- //////////////////////////////////////////////// -->
-					<div class="edit-profile" style="display: none;">
-						<ul>
-							<li class="flex between">
-								<div class="flex">
-								<div>이름</div>
-								<div><input name="name" class="name" type="text" th:value="${member.name}"></div>
-								</div>
-							</li>
-							<li>
-								<div class="flex">
-								<div>이메일</div>
-								<div>[[${member.email}]]</div>
-								<input name="email" class="email" type="hidden" th:value="${member.email}">
-								</div>
-							</li>
-							<li class="flex">
-								<div class="flex">
-								<div>번호</div>
-								<div><input name="phoneNumber" class="phoneNumber" type="text" th:value="${member.phoneNumber}"></div>
-								</div>
-							</li>
-							<li class="flex">
-								<div class="flex">
-								<div>주소</div>
-								<div><input name="address" class="address" type="text" th:value="${member.address}"></div>
-								</div>
-							</li>
-							<li>
-								<div class="flex">
-								<div>생일</div>
-								<div>[[${member.birthday}]]</div>
-								</div>
-							</li>
-						</ul>
+					<div class="confirm">
+						<h2>인증완료</h2>
+						<p><i class="fas fa-check"></i>이메일 주소</p>
+						<p><i class="fas fa-check"></i>전화번호</p>
 					</div>
-					<div class="edit">
-						<div>
-							<button class="btn-edit">프로필 수정</button>
-						</div>
-						<div class="flex center btn-profile-edit" style="display: none;">
-							<button class="btn-profile-edit-update">수정</button>
-							<button class="btn-profile-edit-cancel">취소</button>
-						</div>
-					</div>
-					
 				</div>
 			</section>
-			<script type="text/javascript">
-			
-				var token = $("meta[name='_csrf']").attr("content");
-				var header = $("meta[name='_csrf_header']").attr("content");
-				$(function(){
-					$(".btn-edit").click(function(){
-						$(this).hide();
-						$(".btn-profile-edit").show();
-						$(".default-profile").hide();
-						$(".edit-profile").show();
-					});
-					$(".btn-profile-edit-cancel, .btn-profile-edit-update").click(function(){
-						$(".btn-profile-edit").hide();
-						$(".default-profile").show();
-						$(".edit-profile").hide();
-						$(".btn-edit").show();
-					});
-					 
-
-					 $(document).ajaxSend(function(e, xhr, options) {
-					        xhr.setRequestHeader(header, token);
-					    });
-					 
-					$(".btn-profile-edit-update").click(function(){
-						
-						var email=$(".email").val();
-						var name=$(".name").val();
-						var phoneNumber=$(".phoneNumber").val();
-						var address=$(".address").val();
-						
-						$.ajax({
-							url:"/member",
-							type:"put",
-							data:{
-								email:email,
-								name:name,
-								phoneNumber:phoneNumber,
-								address:address},
-							success:function(){
-								 location.reload()
-								 /* loadingReplies() */
-							}
-						});
-					});
-					
-				});
-				
-				function loadingReplies(){
-       				$.ajax({
-       					url:"/member/info",
-       					type:"get"
-       				});	
-       			}
-			</script>
 			</div>
 			<div>
 			<section>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/home/reservation-request.css">
+	</head>
+	<body>
+		<header id="whitetype">
+		<div class="home-view-size">
+			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+				<div class="search" th:fragment="homeMain">
+				</div>
+			</th:block>
+		</div>
+		</header>
+		
+		<main class="reservation-request-view-size" id="reservation-request">
+			<div class="flex">
+				<a ><img src="/image/left.png"></a>
+				<h2>확인 및 결제</h2>
+			</div>
+			<th:block th:each="reservationInfo:${reservationsInfo}">
+			
+			<div class="flex between">
+				<div>
+					<div class="reservation-request">
+						<div class="comment">
+							<div>흔치 않은 기회입니다.</div>
+							<div>이 숙소는 보통 예약이 가득 차 있습니다.</div>
+						</div>
+						<div class="reservation-info">
+							<h3>예약 정보</h3>
+							<div class="flex between">
+								<div>날짜</div>
+								<div>
+									[[${#temporals.format(reservationInfo.checkIn,'MM월dd일')}]] ~ 
+									[[${#temporals.format(reservationInfo.checkOut,'MM월dd일')}]]
+								</div>
+							</div>
+							<div class="flex between">
+								<div>게스트</div>
+								<div>[[${reservationInfo.guestsStr}]]</div>
+							</div>
+						</div>
+						<div class="payment">
+							<h3>결제 수단</h3>
+							<div>
+								<div><input placeholder="신용카드 또는 체크카드"></div>
+								<div>
+									<input placeholder="카드번호">
+									<div class="flex">
+										<input placeholder="만료일">
+										<input placeholder="CVV">
+									</div>
+								</div>
+								<div><input placeholder="우편번호"></div>
+							</div>
+						</div>
+						<div class="required-input">
+							<h3>필수 입력 정보</h3>
+							<div class="flex between">
+								<div>
+									<div>호스트에게 메시지 보내기</div>
+									<div>호스트에게 여행 목적과 도착 예정 시간을 알려주세요.</div>
+								</div>
+								<button type="button">추가</button>
+							</div>
+							<div class="flex between">
+								<div>
+									<div>프로필 사진</div>
+									<div>호스트는 숙소에 묵는 게스트에 대해서 알고 싶어 합니다.</div>
+								</div>
+								<button type="button">추가</button>
+							</div>
+						</div>
+						<div class="refund">
+							<h3>환불 정책</h3>
+							<div>[[${#temporals.format(reservationInfo.checkIn,'MM월dd일')}]] 오후 12:00 전에 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다.</div>
+							<div>코로나19로 인한 여행 문제에는 정상참작이 가능한 상황 정책이 적용되지 않습니다. </div>
+						</div>
+						<div>
+							<div class="guide">
+								호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.
+								<p>예약 확정 전까지는 요금이 청구되지 않습니다.</p>
+							</div>
+						</div>
+						<div>
+							<div class="guide2">
+								아래 버튼을 선택함으로써, <span>호스트가 설정한 숙소 이용규칙, 에어비앤비 코로나19 방역 수칙 및 게스트 환불 정책</span>에 동의합니다.
+								호스트가 예약 요청을 수락하면 표시된 총액이 결제되는 데 동의합니다.
+							</div>
+						</div>
+						<div class="reservation-request-btn">
+							<button type="submit">확인 및 결제</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="home-info" th:each="homeInfo:${homesInfo}">
+				<input type="hidden" th:value="${homeInfo.hno}">
+					<div>
+						<div class=" home-info-detail flex">
+							<img src="/image/room-img-01.jpg">
+							<div>
+								<div>[[${homeInfo.homeType}]]</div>
+								<div>[[${homeInfo.homeName}]]</div>
+							</div>
+						</div>
+						<div>
+							<h3>요금 세부정보</h3>
+							<div class="home-price">
+								<ul class="flex between">
+									<li>[[${#numbers.formatInteger(homeInfo.homePrice,3,'COMMA')}]]원 x [[${reservationInfo.days}]]박</li>
+									<li class="periodhomeprice">[[${#numbers.formatInteger(homeInfo.homePrice*(reservationInfo.days),3,'COMMA')}]]원</li>
+								</ul>
+								
+								<ul class="flex between">
+									<li>세금 및 봉사료</li>
+									<li class="commission">[[${#numbers.formatInteger(homeInfo.homePrice*(reservationInfo.days)*0.1,3,'COMMA')}]]원</li>
+								</ul>
+								<ul class="flex between">
+									<li>총 요금</li>
+									<li class="total">[[${#numbers.formatInteger(homeInfo.homePrice*(reservationInfo.days)+(homeInfo.homePrice*(reservationInfo.days)*0.1),3,'COMMA')}]]원</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+			
+			</th:block>
+		</main>
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+		
+		
+	</body>
+</html>

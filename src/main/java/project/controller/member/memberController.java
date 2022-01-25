@@ -49,5 +49,23 @@ public class memberController {
 	public String homeReserve(@PathVariable long hno, @AuthenticationPrincipal SecurityDto securityDto, HomeReserveDto reserveDto) {
 		return service.homeReserve(hno,securityDto,reserveDto);
 	}
+	
+	//예약요청페이지
+	@PostMapping("/home/reserve/request/{hno}")
+	public String homeReserveRequestPage(@PathVariable long hno, HomeReserveDto reserveDto, Model model) {
+		return service.homeReserveRequest(hno,reserveDto,model);
+	}
+	
+	//계정
+	@GetMapping("/account")
+	public String accountPage(@AuthenticationPrincipal SecurityDto securityDto, Model model) {
+		model.addAttribute("user", securityDto);
+		return "member/account";
+	}
+	//개인정보
+	@GetMapping("/personalInfo")
+	public String personalInfoPage(@AuthenticationPrincipal SecurityDto securityDto, Model model) {
+		return service.personalInfoPage(securityDto,model);
+	}
 
 }

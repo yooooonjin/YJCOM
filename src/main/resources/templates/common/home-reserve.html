@@ -7,7 +7,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	</head>
 	<body>
 		<th:block th:fragment="home-reserve">
-		<form th:action="|/member/home/reserve/${hno}|" method="post">
+		<form th:action="|/member/home/reserve/request/${hno}|" method="post">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				<div id="home-reserve-form">
 					<div>[[${#numbers.formatInteger(homeDetail.homePrice,3,'COMMA')}]]원&nbsp;<span>/ 박</span></div>
@@ -152,7 +152,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<script type="text/javascript">
 		$(function(){
 			
-			
+			/* 
 			/////////////////////////사이드베너이동///////////////////////////
 			// 기본 위치(top)값
 			var floatPosition = parseInt($("#home-reserve-form").css('top'))
@@ -175,7 +175,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			    
 
 			}).scroll(); 
-			
+			 */
 			
 			
         });

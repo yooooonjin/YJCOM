@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/member/account.css">
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header id="whitetype">
+		<div class="home-view-size">
+			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+				<div class="search" th:fragment="homeMain">
+				</div>
+			</th:block>
+		</div>
+		</header>
+		
+		<main id="Account">
+			<div class="account-view-size">
+				<div class="title">
+					<h2>계정</h2>
+					<span sec:authentication="name"></span><a href="/member/info">프로필로 이동</a>
+				</div>
+				<div class="contents">
+					<div class="flex between">
+						<div class="flex column between">
+							<i class="far fa-address-card"></i>
+							<div>
+								<h3><a href="/member/personalInfo">개인정보</a></h3>
+								<p>개인정보 및 연락처를 알려주세요</p>
+							</div>
+						</div>
+						
+						<div class="flex column between">
+							<i class="fas fa-shield-alt"></i>
+							<div>
+								<h3>로그인 및 보안</h3>
+								<p>비밀번호를 변경하고 계정을 안전하게 보호하세요</p>
+							</div>
+						</div>
+						
+						<div class="flex column between">
+							<i class="far fa-credit-card"></i>
+							<div>
+								<h3>결제 및 대금 수령</h3>
+								<p>결제, 대금 수령, 쿠폰, 기프트카드 및 세금 검토하기</p>
+							</div>
+						</div>
+					</div>
+					<div class="flex between">
+						<div class="flex column between">
+							<i class="far fa-bell"></i>
+							<div>
+								<h3>알림</h3>
+								<p>알림 환경설정 및 연락 방식을 선택하세요</p>
+							</div>
+						</div>
+						
+						<div class="flex column between">
+							<i class="far fa-eye"></i>
+							<div>
+								<h3>개인정보 및 공개 설정</h3>
+								<p>연결된 앱, 공유하는 정보 및 공개 대상 관리하기</p>
+							</div>
+						</div>
+						
+						<div class="flex column between">
+							<i class="fas fa-globe-americas"></i>
+							<div>
+								<h3>글로벌 환경 설정</h3>
+								<p>기본 언어, 통화, 시간대 설정하기</p>
+							</div>
+						</div>
+					</div>
+					<div class="flex between">
+						<div class="flex column between">
+							<i class="fas fa-laptop-house"></i>
+							<div>
+								<h3>출장</h3>
+								<p>회사 이메일을 입력하면 출장에서 혜택을 누리실 수 있습니다.</p>
+							</div>
+						</div>
+						
+						<div class="flex column between">
+							<i class="fas fa-wave-square"></i>
+							<div>
+								<h3>전문 호스팅 도구</h3>
+								<p>에어비앤비에서 여러 숙소를 관리하신다면 전문 도구를 이용해보세요.</p>
+							</div>
+						</div>
+						
+						<div class="flex column between">
+							<i class="fas fa-gift"></i>
+							<div>
+								<h3>추천 크레딧 및 쿠폰</h3>
+								<p>₩0의 추천 크레딧과 쿠폰이 있습니다. 자세히 알아보기</p>
+							</div>
+						</div>
+					</div>
+				
+				</div>
+				
+				
+				<div class="comment">
+					<p>계정을 비활성화하셔야 하나요?</p>
+					<p>지금 처리하기</p>
+				</div>
+			</div>
+		
+		
+		
+		</main>
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+		
+		
+	</body>
+</html>
