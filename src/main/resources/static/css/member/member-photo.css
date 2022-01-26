@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+#member-photos .member-photos-view-size{
+	width: 768px;
+	margin: 0 auto;
+}
+
+#member-photos span{
+	font-weight: 500;
+}
+#member-photos h2{
+	font-size: 32px;
+}
+#member-photos .title{
+	padding: 64px 0 56px 0;
+	font-weight: 300;
+}
+#member-photos .title a{
+	padding-left:15px;
+	font-weight: 500;
+	text-decoration: underline;
+}
+
+/* /////////////////////////////////////////// */
+#member-photos .panel{
+	border: 1px solid #DDDDDD;
+	margin-bottom: 100px;
+}
+#member-photos .panel-header{
+	width: 100%;
+	background-color: #edefed;
+	border-bottom: 1px solid #DDDDDD;
+	padding: 12px 20px;
+}
+/* /////////////////////////////////////////// */
+#member-photos .panel-body{
+	width: 100%;
+	height:265px;
+	padding: 20px;
+}
+#member-photos .panel-body .image{
+	position: relative;
+	display: inline-block;
+	width: 225px;
+	height: 225px;
+}
+#member-photos .panel-body .image span:nth-child(1){
+	display: inline-block;
+	width: 225px;
+	height: 225px;
+}
+#member-photos .panel-body .image img{
+	border-radius: 50%;
+}
+#member-photos .panel-body .image .img-disp{
+	background-image:url("/image/user_pic2.png");
+	position: absolute;
+	top:0;
+	left:0;
+	display:inline-block;
+	width: 225px;
+	height:225px;
+	border-radius: 50%;
+	z-index: 20;
+	background-size: contain; 
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#member-photos .panel-body .guide{
+	padding-left: 24px;
+}
+#member-photos .panel-body p{
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 1.5em;
+	margin-bottom: 15px;
+}
+#member-photos .panel-body .photo-style{
+	text-align: center;
+	display: inline-block;
+	width:100%;
+	padding:9px 27px;
+	font-size: 16px;
+	font-weight: 400;
+	background-color: white;
+	border: 1px solid #a9a9a9;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+
+
+
+

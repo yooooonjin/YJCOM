@@ -1,25 +1,26 @@
 package project.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import project.domain.dto.MemberUpdateDto;
 import project.domain.dto.home.HomeListDto;
 import project.domain.dto.home.HomeReserveDto;
-import project.domain.dto.home.HomeReviewDto;
 import project.domain.entity.HomeEntity;
 import project.domain.entity.HomeEntityRepository;
 import project.domain.entity.HomeReviewEntity;
@@ -47,7 +48,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		//회원정보 데이터 //TODO DTO에 담아서 이동
 		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
-		model.addAttribute("member",entity);
+		model.addAttribute("memberInfo",entity);
 		
 		//내가 등록한 집 데이터
 		List<HomeEntity> homeEntity = homeRepository.findAllByMember_email(entity.getEmail());
@@ -129,6 +130,37 @@ public class MemberServiceImpl implements MemberService {
 		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
 		model.addAttribute("memberInfo",entity);
 		return "member/personal-info";
+	}
+	
+	//프로필 이미지 업로드
+	@Transactional
+	@Override
+	public String photoUpload(MultipartFile fileImg,SecurityDto securityDto) {
+		
+		String photoName=securityDto.getUsername()+"_photo";
+		String path="/image/member/";
+		
+		ClassPathResource cpr = new ClassPathResource("static"+path);
+		
+		try {
+			File location=cpr.getFile();
+			fileImg.transferTo(new File(location,photoName));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		memberRepository.findById(securityDto.getUsername()).map(e->e.updatePhotoName(photoName));
+		
+		return path+photoName;
+		
+	}
+	
+	//프로필 사진 페이지
+	@Override
+	public String memberPhotoPage(Model model,SecurityDto securityDto) {
+		String photoName= memberRepository.findById(securityDto.getUsername()).get().getPhotoName();
+		model.addAttribute("photo", photoName);
+		return "member/member-photo";
 	}
 
 }

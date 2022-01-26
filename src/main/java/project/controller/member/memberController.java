@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import project.domain.dto.MemberUpdateDto;
@@ -29,6 +30,17 @@ public class memberController {
 	@GetMapping("/info")
 	public String memberInfo(Model model, @AuthenticationPrincipal SecurityDto securityDto,@RequestParam(defaultValue = "1") int page) {
 		return service.memberInfo(model,securityDto,page);
+	}
+	//프로필 사진 업로드 페이지 이동
+	@GetMapping("/info/photo")
+	public String memberPhotoPage(Model model,@AuthenticationPrincipal SecurityDto securityDto) {
+		return service.memberPhotoPage(model,securityDto);
+	}
+	//프로필 사진 업로드
+	@ResponseBody
+	@PostMapping("/info/photo")
+	public String memberPhotoUpload(MultipartFile fileImg,@AuthenticationPrincipal SecurityDto securityDto) {
+		return service.photoUpload(fileImg,securityDto);
 	}
 	//회원정보수정
 	@ResponseBody

@@ -32,12 +32,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<main class="flex around view-size">
 		<div>
 			<section>
-				<div id="member-profile">
+				<div id="member-profile" th:each="member:${memberInfo}">
 					<h1>프로필</h1>
 					
 					<div class="profile-img">
-						<img src="/image/user_pic2.png" width="128px">
-						<p><a href="#">사진 업데이트하기</a></p>
+						<img th:unless="${member.photoName}" src="/image/user_pic2.png" width="128px">
+						<img th:if="${member.photoName}" class="member-photo" th:src="|/image/member/${member.photoName}|" width="128px">
+						<p><a href="/member/info/photo">사진 업데이트하기</a></p>
 					</div>
 					
 					<div class="badge">
@@ -47,7 +48,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</div>
 					
 					<div class="confirm">
-						<h2>인증완료</h2>
+						<h2>[[${member.name}]] 인증완료</h2>
 						<p><i class="fas fa-check"></i>이메일 주소</p>
 						<p><i class="fas fa-check"></i>전화번호</p>
 					</div>

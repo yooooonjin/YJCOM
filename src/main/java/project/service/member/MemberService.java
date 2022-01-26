@@ -1,10 +1,10 @@
 package project.service.member;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import project.domain.dto.MemberUpdateDto;
 import project.domain.dto.home.HomeReserveDto;
-import project.domain.dto.home.HomeReviewDto;
 import project.security.dto.SecurityDto;
 
 public interface MemberService {
@@ -21,6 +21,10 @@ public interface MemberService {
 	String homeReserveRequest(long hno, HomeReserveDto reserveDto, Model model);
 
 	String personalInfoPage(SecurityDto securityDto, Model model);
+
+	String photoUpload(MultipartFile fileImg, SecurityDto securityDto);
+
+	String memberPhotoPage(Model model, SecurityDto securityDto);
 
 
 }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/member/member-photo.css">
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+	</head>
+	<body>
+		<header id="whitetype">
+		<div class="home-view-size">
+			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+				<div class="search" th:fragment="homeMain">
+				</div>
+			</th:block>
+		</div>
+		</header>
+		
+		<main id="member-photos">
+				<div class=" member-photos-view-size member-photo">
+					<div class="title">
+						<span>프로필 &emsp;>&emsp;프로필 사진</span>
+						<h2>프로필 사진</h2>
+					</div>
+					
+					<script type="text/javascript">
+						$(function(){
+							
+							$("#photo").change(fileUpload);
+							
+							var token = $("meta[name='_csrf']").attr("content");
+							var header = $("meta[name='_csrf_header']").attr("content");
+							
+							 $(document).ajaxSend(function(e, xhr, options) {
+							        xhr.setRequestHeader(header, token);
+						    });
+							
+							
+						});
+						
+						function fileUpload(){
+							var fileData=$(this)[0].files[0];
+							
+							console.log(fileData);
+							var formdata=new FormData();
+							formdata.append("fileImg", fileData);
+							
+							$.ajax({
+								url:"/member/info/photo",
+								type:"post",
+								contentType: false,
+								processData: false,
+								data: formdata, /* //파일을 추가한 formdata */
+								success: function(result){
+									$(".img-disp").css("background-image", "url("+result+")");
+								}
+								
+							});
+						}
+						
+						
+					</script>
+					
+					<div class="panel">
+						<div class="panel-header">
+							<p>프로필 사진</p>
+						</div>
+						<div class="panel-body flex">
+							<div>
+								<div class="image">
+									<img th:unless="${photo}" src="/image/user_pic2.png">
+									<img th:if="${photo}" class="img-disp" th:src="|/image/member/${photo}|">
+								</div>
+							</div>
+							<div class="guide">
+								<p>얼굴이 나온 프로필 사진을 통해서 다른 호스트와 게스트에게 나를 알릴 수 있습니다.
+								 모든 에어비앤비 호스트는 프로필 사진이 있어야 합니다.
+								  에어비앤비는 게스트에게 프로필 사진을 요청하지 않지만, 호스트는 요청할 수 있습니다.
+								   호스트가 게스트에게 사진을 요청하는 경우에도, 예약이 확정된 후에만 사진을 볼 수 있습니다.</p>
+								<input type="file" name="photoName" id="photo" class="photo" style="display: none;">
+								<label for="photo" class="photo-style">파일 업로드하기</label>
+							</div>
+						
+						</div>
+						
+						
+					</div>
+					
+					
+				</div>
+		</main>
+		
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+		
+		
+	</body>
+</html>
