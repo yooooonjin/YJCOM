@@ -10,6 +10,12 @@
 	border-radius: 15px;
 	margin-top: 50px;
 }
+
+#home-reserve-form input::placeholder{
+	color: black;
+	font-weight: 300;
+}
+
 /* ////////////////////////////////////////// */
 #home-reserve-form .home-reserve-info{
 	border: 1px solid #DDDDDD;

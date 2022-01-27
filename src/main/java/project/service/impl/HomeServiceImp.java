@@ -1,8 +1,8 @@
 package project.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,13 +10,14 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.internal.build.AllowSysOut;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,6 +35,7 @@ import project.domain.entity.ReservationEntity;
 import project.domain.entity.ReservationEntityRepository;
 import project.security.dto.SecurityDto;
 import project.service.home.HomeService;
+import project.util.FileUtils;
 import project.util.PageInfo;
 
 @Log4j2
@@ -162,8 +164,30 @@ public class HomeServiceImp implements HomeService {
 			
 			//후기//TODO dto에 담기
 			List<HomeReviewEntity> homeReview = reviewRepository.findAllByHome_hno(hno);
-			model.addAttribute("homeReview", homeReview);
+			model.addAttribute("homeReviews", homeReview);
 			return "home/home-detail";
+		}
+		
+		//메인이미지 temp 폴더 업로드
+		@Override
+		public String tempMainImgUpload(MultipartFile fileImg) {
+			String path="/image/temp/";
+			//FileUtils.tempImgUpload(fileImg, tempPath);
+			
+			String fileName="main-img.jpg";
+			//path+fileName : 이미지 url 주소 -->리턴하면되는 값
+			//파일업로드 처리--bin폴더에//////////////////
+			ClassPathResource cpr=new ClassPathResource("static"+path);
+			try {
+				File tempLocation=cpr.getFile();
+				fileImg.transferTo(new File(tempLocation, fileName));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return path+fileName;
+			
+			//return tempPath+fileImg.getOriginalFilename();
 		}
 
 }

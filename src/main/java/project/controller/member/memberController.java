@@ -48,7 +48,6 @@ public class memberController {
 	public void memberUpdate(MemberUpdateDto updateDto,Model model) {
 		service.memberUpdate(updateDto,model);
 	}
-	
 	//리뷰 작성
 	@ResponseBody
 	@PostMapping("/home/review/{hno}/{resNo}")

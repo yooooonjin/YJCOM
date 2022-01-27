@@ -6,6 +6,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<link rel="stylesheet" href="/css/home/home-reg.css">
 		<link rel="stylesheet" href="/css/common/header-nav.css">
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
 	</head>
 	<body>
 	<header id="whitetype">
@@ -94,6 +99,100 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<textarea name="homeIntro"></textarea>									
 								</div>
 							</div>
+							
+							
+							<div class="flex">
+								<p>커버 이미지</p>
+								<div class="main-image">
+									<label for="main-img" class="main-style">
+										<i class="far fa-images"></i>
+									</label>
+									<img class="main-img-disp">
+									<input name="main-img" type="file" id="main-img" style="display: none;">
+								</div>
+							</div>
+							
+							<div class="flex">
+								<p>상세 이미지</p>
+								<div>
+									<div class="flex between sub-image">
+										<div>
+											<label for="sub-image1" class="sub-style">
+												<i class="far fa-images"></i>
+												<img class="sub-img-disp1">
+											</label>
+											<input name="sub-image1" type="file" style="display: none;" id="sub-image1">
+										</div>
+										<div>
+											<label for="sub-image2" class="sub-style">
+												<i class="far fa-images"></i>
+												<img class="sub-img-disp2">
+											</label>
+											<input name="sub-image2" type="file" style="display: none;" id="sub-image2">
+										</div>
+									</div>
+									<div class="flex between sub-image">
+										<div>
+											<label for="sub-image3" class="sub-style">
+												<i class="far fa-images"></i>
+												<img class="sub-img-disp3">
+											</label>
+											<input name="sub-image3" type="file" style="display: none;" id="sub-image3">
+										</div>
+										<div>
+											<label for="sub-image4" class="sub-style">
+												<i class="far fa-images"></i>
+												<img class="sub-img-disp4">
+											</label>
+											<input name="sub-image4" type="file" style="display: none;" id="sub-image4">
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<script type="text/javascript">
+								$(function(){
+									
+									$("#main-img").change(tempUpload,function(){
+										$(this).siblings(".main-img-disp").attr("src","/image/temp/main-img.jpg");
+									});
+									
+									var token = $("meta[name='_csrf']").attr("content");
+									var header = $("meta[name='_csrf_header']").attr("content");
+									
+									 $(document).ajaxSend(function(e, xhr, options) {
+									        xhr.setRequestHeader(header, token);
+								    });
+									
+								});
+								
+								function tempUpload(){
+									
+									//input 태그의 file에 접근자
+									//console.log($(this)[0].files[0]);
+									var fileData=$(this)[0].files[0];
+									var formdata=new FormData();
+									formdata.append("fileImg", fileData);
+									
+									$.ajax({
+										url:"/home/reg/tempMainImgUpload",
+										type: "post",
+										contentType: false,
+										processData: false,
+										data: formdata, /* //파일을 추가한 formdata */
+										success: function(result){/*  @ResponseBody 문자열이 result변수에 저장  */
+											if(result=="fileSize-error"){
+												alert("파일용량이 너무큽니다. 2MB제한!");
+											}else if(result=="contentType-error"){
+												alert("이미지 파일이 아닙니다.");
+											}
+										}
+									});
+								}
+								
+								
+							</script>
+							
 							<button type="submit">등록하기</button>
 						</div>
 					</form>	

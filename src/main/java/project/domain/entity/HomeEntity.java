@@ -30,7 +30,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@ToString(exclude = {"reviews"})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

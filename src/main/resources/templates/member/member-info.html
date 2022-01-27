@@ -36,8 +36,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<h1>프로필</h1>
 					
 					<div class="profile-img">
-						<img th:unless="${member.photoName}" src="/image/user_pic2.png" width="128px">
-						<img th:if="${member.photoName}" class="member-photo" th:src="|/image/member/${member.photoName}|" width="128px">
+						<img class="member-photo" th:src="|/image/member/${member.photoName}|" width="128px"  height="128px">
 						<p><a href="/member/info/photo">사진 업데이트하기</a></p>
 					</div>
 					
@@ -48,7 +47,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</div>
 					
 					<div class="confirm">
-						<h2>[[${member.name}]] 인증완료</h2>
+						<h2>[[${member.name}]]님 인증완료</h2>
 						<p><i class="fas fa-check"></i>이메일 주소</p>
 						<p><i class="fas fa-check"></i>전화번호</p>
 					</div>
@@ -84,6 +83,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					var hno= $(this).siblings(".home-id").val();
 					var resNo= $(this).siblings(".reservation-id").val();
 					
+					var token = $("meta[name='_csrf']").attr("content");
+					var header = $("meta[name='_csrf_header']").attr("content");
+					
+					 $(document).ajaxSend(function(e, xhr, options) {
+					        xhr.setRequestHeader(header, token);
+				    });
+					
 					$.ajax({
 						url:"/member/home/review/"+hno+"/"+resNo,
 						type:"post",
@@ -101,7 +107,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				/////////////////////////날짜값///////////////////////////
 				
 					
-	            var checkin = $(".checkin").val();
+	            /* var checkin = $(".checkin").val();
 	            var checkout = $(".checkout").val();
 				
 				console.log("체크인날짜는:"+ checkin);
@@ -136,7 +142,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					$(".total").html(total.toLocaleString()+"원");
 					$("#total").val(total);
 					
-				}
+				} */
 				
 				
 			});
@@ -145,8 +151,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="guest-part">
 					<P>예약한 숙소</P>
 					<div class="reserve-room flex">
-						<div th:unless="${reservedHomes}">현재 투숙 예정 숙소가 없습니다.</div>
-						<div  th:each="reservedHome:${reservedHomes}">
+						<div th:each="reservedHome:${reservedHomes}">
+						<div th:unless="${reservedHome}">현재 투숙 예정 숙소가 없습니다.</div>
 							<div class="reserve-room-list" >
 								<div class="reserve-info1 flex">
 									<div><img src="/image/room-img-01.jpg" width="140px" height="110px"></div>
@@ -231,7 +237,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							</div>
 						</div>
 					</div>
-					<div id="paging">
+					<div id="paging" th:unless="${pageTot eq 0}">
 						<span th:each="paging:${#numbers.sequence( 1, pageTot)}">
 	       					<a th:href="|/member/info?page=${paging}|"></a>
 	       				</span>
@@ -241,6 +247,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div id="host-part" style="display: none;">
 					<div class="reserve-room">
 						<P>내가 등록한 숙소</P>
+						<div th:unless="${hostHome}">등록한 숙소가 없습니다.</div>
 						<div th:each="hostHome:${hostHome}">
 							<div class="reserve-room-list flex" >
 								<div><img src="/image/room-img-01.jpg" width="280px" height="180px"></div>

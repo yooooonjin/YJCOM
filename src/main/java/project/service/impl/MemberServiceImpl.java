@@ -67,6 +67,8 @@ public class MemberServiceImpl implements MemberService {
 		
 		model.addAttribute("reservedHomes",reservationEntity);
 		
+		System.out.println(reservationEntity.getTotalPages());
+		
 		
 		return "member/member-info";
 	}
@@ -137,7 +139,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String photoUpload(MultipartFile fileImg,SecurityDto securityDto) {
 		
-		String photoName=securityDto.getUsername()+"_photo";
+		String photoName=securityDto.getUsername()+"_photo.jpg";
 		String path="/image/member/";
 		
 		ClassPathResource cpr = new ClassPathResource("static"+path);

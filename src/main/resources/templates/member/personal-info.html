@@ -23,7 +23,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<main id="personal-info">
 				<div class=" account-view-size" th:each="member:${memberInfo}">
 					<div class="title">
-						<span>계정 &emsp;>&emsp;개인정보</span>
+						<a href="/member/account">계정</a><span> &emsp;>&emsp;개인정보</span>
 						<h2>개인정보</h2>
 					</div>
 					<div class="flex between">

@@ -22,7 +22,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<main id="member-photos">
 				<div class=" member-photos-view-size member-photo">
 					<div class="title">
-						<span>프로필 &emsp;>&emsp;프로필 사진</span>
+						<a href="/member/info">프로필</a><span> &emsp;>&emsp;프로필 사진</span>
 						<h2>프로필 사진</h2>
 					</div>
 					
@@ -55,13 +55,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								processData: false,
 								data: formdata, /* //파일을 추가한 formdata */
 								success: function(result){
-									$(".img-disp").css("background-image", "url("+result+")");
+									$(".img-disp").attr("src", result);
 								}
 								
 							});
 						}
-						
-						
+												
 					</script>
 					
 					<div class="panel">
@@ -71,8 +70,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<div class="panel-body flex">
 							<div>
 								<div class="image">
-									<img th:unless="${photo}" src="/image/user_pic2.png">
-									<img th:if="${photo}" class="img-disp" th:src="|/image/member/${photo}|">
+									<img class="img-disp" th:src="|/image/member/${photo}|">
 								</div>
 							</div>
 							<div class="guide">

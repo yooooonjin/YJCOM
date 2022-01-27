@@ -1,6 +1,7 @@
 package project.service.home;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import project.domain.dto.home.HomeSearchDto;
 import project.domain.dto.home.homeRegDto;
@@ -15,5 +16,7 @@ public interface HomeService {
 	String homeDetail(Model model, long hno);
 
 	String homesearch(Model model, int page, HomeSearchDto searchDto);
+
+	String tempMainImgUpload(MultipartFile file);
 	
 }
