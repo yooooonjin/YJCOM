@@ -107,7 +107,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<label for="main-img" class="main-style">
 										<i class="far fa-images"></i>
 									</label>
-									<img class="main-img-disp">
+									<img class="main-image-disp image-disp">
+									<input class="imageName" type="hidden" value="main-img">
 									<input name="main-img" type="file" id="main-img" style="display: none;">
 								</div>
 							</div>
@@ -116,46 +117,47 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<p>상세 이미지</p>
 								<div>
 									<div class="flex between sub-image">
-										<div>
+										<div class="sub-image-content">
 											<label for="sub-image1" class="sub-style">
 												<i class="far fa-images"></i>
-												<img class="sub-img-disp1">
 											</label>
+											<img class="sub-image-disp image-disp">
+											<input class="imageName" type="hidden" value="sub1-img">
 											<input name="sub-image1" type="file" style="display: none;" id="sub-image1">
 										</div>
-										<div>
+										<div class="sub-image-content">
 											<label for="sub-image2" class="sub-style">
 												<i class="far fa-images"></i>
-												<img class="sub-img-disp2">
 											</label>
+											<img class="sub-image-disp image-disp">
+											<input class="imageName" type="hidden" value="sub2-img">
 											<input name="sub-image2" type="file" style="display: none;" id="sub-image2">
 										</div>
 									</div>
 									<div class="flex between sub-image">
-										<div>
+										<div class="sub-image-content">
 											<label for="sub-image3" class="sub-style">
 												<i class="far fa-images"></i>
-												<img class="sub-img-disp3">
 											</label>
+											<img class="sub-image-disp image-disp">
+											<input class="imageName" type="hidden" value="sub3-img">
 											<input name="sub-image3" type="file" style="display: none;" id="sub-image3">
 										</div>
-										<div>
+										<div class="sub-image-content">
 											<label for="sub-image4" class="sub-style">
 												<i class="far fa-images"></i>
-												<img class="sub-img-disp4">
 											</label>
+											<img class="sub-image-disp image-disp">
+											<input class="imageName" type="hidden" value="sub4-img">
 											<input name="sub-image4" type="file" style="display: none;" id="sub-image4">
 										</div>
 									</div>
+									
 								</div>
 							</div>
 							
 							<script type="text/javascript">
 								$(function(){
-									
-									$("#main-img").change(tempUpload,function(){
-										$(this).siblings(".main-img-disp").attr("src","/image/temp/main-img.jpg");
-									});
 									
 									var token = $("meta[name='_csrf']").attr("content");
 									var header = $("meta[name='_csrf_header']").attr("content");
@@ -163,8 +165,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									 $(document).ajaxSend(function(e, xhr, options) {
 									        xhr.setRequestHeader(header, token);
 								    });
+									 
+									$("#main-img").change(tempUpload);
+									$("#sub-image1").change(tempUpload);
+									$("#sub-image2").change(tempUpload);
+									$("#sub-image3").change(tempUpload);
+									$("#sub-image4").change(tempUpload);
 									
 								});
+								
 								
 								function tempUpload(){
 									
@@ -172,10 +181,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									//console.log($(this)[0].files[0]);
 									var fileData=$(this)[0].files[0];
 									var formdata=new FormData();
+									var imageName=$(this).siblings(".imageName").val();
+									
 									formdata.append("fileImg", fileData);
+									formdata.append("imageName", imageName);
+									
+									var target=$(this).siblings(".image-disp");
 									
 									$.ajax({
-										url:"/home/reg/tempMainImgUpload",
+										url:"/home/reg/tempsubImgUpload",
 										type: "post",
 										contentType: false,
 										processData: false,
@@ -186,6 +200,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 											}else if(result=="contentType-error"){
 												alert("이미지 파일이 아닙니다.");
 											}
+										
+											target.attr("src",result);
 										}
 									});
 								}

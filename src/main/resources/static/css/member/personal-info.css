@@ -73,6 +73,10 @@
 
 /* ///////////////////////////////////////////////// */
 
+#personal-info .edit-profile span{
+	padding: 0 10px 0 5px;
+}
+
 #personal-info .edit button{
 	border: 1px solid black;
 	background-color: white;

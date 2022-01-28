@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public void memberUpdate(MemberUpdateDto updateDto ,Model model) {
-		memberRepository.findById(updateDto.getEmail()).map(entity->entity.updateNameAndPhonenumberAndAddress(updateDto)).get();
+		memberRepository.findById(updateDto.getEmail()).map(entity->entity.updateMemberInfo(updateDto)).get();
 				
 	}
 	//숙소예약

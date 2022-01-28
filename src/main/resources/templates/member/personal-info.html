@@ -36,9 +36,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<div>성명</div>
 									<div th:if="${member.gender eq 'F'}">여성</div>
 									<div th:if="${member.gender eq 'M'}">남성</div>
+									<div th:unless="${member.gender}">지정되지 않음</div>
 								</div>
 								<div>
-									<div>생년월일</div><div>[[${#temporals.format(member.birthday,'yyyy년 MM월 dd일')}]]</div>
+									<div>생년월일</div><div th:if="${member.birthday}">[[${#temporals.format(member.birthday,'yyyy년 MM월 dd일')}]]</div>
+									<div th:unless="${member.birthday}">생년월일을 입력해주세요.</div>
 								</div>
 								<div>
 									<div>이메일주소</div><div>[[${member.email}]]</div>
@@ -46,12 +48,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<div>
 									<div>전화번호</div>
 									<div>
-										[[${member.phoneNumber}]]
+										<div th:if="${member.phoneNumber}">[[${member.phoneNumber}]]</div>
+										<div th:unless="${member.phoneNumber}">연락처를 입력해주세요.</div>
 										<div>연락처 번호(예약이 확정된 게스트와 에어비앤비가 연락할 번호) 다른 전화번호를 추가하고 번호별 사용 목적을 정하실 수 있습니다.</div>
 									</div>
 								</div>
 								<div>
-									<div>주소</div><div>[[${member.address}]]</div>
+									<div>주소</div><div th:if="${member.address}">[[${member.address}]]</div>
+									<div th:unless="${member.address}">주소를 입력해주세요.</div>
 								</div>
 							</div>
 						
@@ -61,11 +65,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								</div>
 								<div>
 									<div>성명</div>
-									<div th:if="${member.gender eq 'F'}">여자</div>
-									<div th:if="${member.gender eq 'M'}">남자</div>
+									<div>
+										<input type="radio" name="gender" value="F"><span>여자</span>
+										<input type="radio" name="gender" value="M"><span>남자</span>
+									</div>
 								</div>
 								<div>
-									<div>생년월일</div><div>[[${member.birthday}]]</div>
+									<div>생년월일</div>
+									<div><input name="birthday" class="birthday" type="date" th:value="${member.birthday}"></div>
 								</div>
 								<div>
 									<div>이메일주소</div><div>[[${member.email}]]</div>
@@ -149,6 +156,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					
 					var email=$(".email").val();
 					var name=$(".name").val();
+					var gender=$("input[name=gender]").val();
+					var birthday=$(".birthday").val();
 					var phoneNumber=$(".phoneNumber").val();
 					var address=$(".address").val();
 					console.log(email);
@@ -158,6 +167,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						data:{
 							email:email,
 							name:name,
+							gender:gender,
+							birthday:birthday,
 							phoneNumber:phoneNumber,
 							address:address},
 						success:function(){

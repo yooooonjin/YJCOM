@@ -31,9 +31,20 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<button type="submit">로그인</button>
 								</li>
 							</ul>
-							<p class="join"><a href="/join">회원가입</a></p>
-						</form>	
+						</form>
 					</div>
+					<div class="social-login">
+						<div>
+							<span class="line"></span><span class="or">또는</span><span class="line"></span>
+						</div>
+						<div class="google-login">
+							<a href="/oauth2/authorization/google">
+								<img src="/image/google-logo.png" width="30px">
+								<span>구글로 로그인하기</span>
+							</a>
+						</div>
+					</div>
+					<p class="join"><a href="/join">회원가입</a></p>
 				</div>
 			</div>
 			<script type="text/javascript">

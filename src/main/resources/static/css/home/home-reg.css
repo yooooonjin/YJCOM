@@ -57,10 +57,10 @@
 /* ////////////////////////// */
 #home-reg .main-image{
 	position: relative;
+	margin-top: 10px;
 }
 #home-reg .main-image .main-style{
 	display:inline-block;
-	margin-top: 10px;
 	width: 600px;
 	height: 520px;
 	z-index: 10;
@@ -69,37 +69,42 @@
 	font-size: 30px;
 	line-height: 520px;
 }
-#home-reg .main-image .main-img-disp{
+#home-reg .main-image .main-image-disp{
 	position: absolute;
 	top:0;
 	left:0;
 	width: 600px;
 	height: 520px;
-	background-color:gray;
+	z-index: -3;
 	background-size: contain; 
 	background-repeat: no-repeat;
 	background-position: center;
 }
+/* ////////////////////////// */
 #home-reg .sub-image{
 	width: 600px;
 }
-#home-reg .sub-image .sub-style{
-	display:inline-block;
-	position: relative;
+#home-reg .sub-image-content{
 	margin-top: 10px;
+	position: relative;
+}
+#home-reg .sub-image-content .sub-style{
+	display:inline-block;
 	width: 295px;
 	height: 260px;
+	z-index: 10;
 }
 #home-reg .sub-image .sub-style i{
 	font-size: 20px;
 	line-height: 260px;
 }
-#home-reg .sub-image .sub-style img{
+#home-reg .sub-image .sub-image-disp{
 	position: absolute;
 	top:0;
 	left:0;
 	width: 295px;
 	height: 260px;
+	z-index: -3;
 	background-size: contain; 
 	background-repeat: no-repeat;
 	background-position: center;

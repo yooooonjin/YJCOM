@@ -18,5 +18,7 @@ public interface HomeService {
 	String homesearch(Model model, int page, HomeSearchDto searchDto);
 
 	String tempMainImgUpload(MultipartFile file);
+
+	String tempSubImgUpload(MultipartFile fileImg, String imageName);
 	
 }

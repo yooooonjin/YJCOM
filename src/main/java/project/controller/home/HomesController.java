@@ -58,7 +58,15 @@ public class HomesController {
 	@ResponseBody
 	@PostMapping("/reg/tempMainImgUpload")
 	public String tempMainImgUpload(MultipartFile fileImg) {
+		System.out.println(fileImg.getOriginalFilename());
 		return homeService.tempMainImgUpload(fileImg);
+	}
+	//숙소 서브 이미지 temp 폴더에 임시 보관
+	@ResponseBody
+	@PostMapping("/reg/tempsubImgUpload")
+	public String tempSubImgUpload(MultipartFile fileImg, String imageName) {
+		System.out.println("name"+imageName);
+		return homeService.tempSubImgUpload(fileImg,imageName);
 	}
 	
 }

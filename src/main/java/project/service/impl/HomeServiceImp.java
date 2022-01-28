@@ -189,5 +189,23 @@ public class HomeServiceImp implements HomeService {
 			
 			//return tempPath+fileImg.getOriginalFilename();
 		}
+		@Override
+		public String tempSubImgUpload(MultipartFile fileImg, String imageName) {
+			String path="/image/temp/";
+			//FileUtils.tempImgUpload(fileImg, tempPath);
+			
+			String fileName=imageName+".jpg";
+			//path+fileName : 이미지 url 주소 -->리턴하면되는 값
+			//파일업로드 처리--bin폴더에//////////////////
+			ClassPathResource cpr=new ClassPathResource("static"+path);
+			try {
+				File tempLocation=cpr.getFile();
+				fileImg.transferTo(new File(tempLocation, fileName));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			return path+fileName;
+		}
 
 }

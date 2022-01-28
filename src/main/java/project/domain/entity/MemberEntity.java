@@ -36,16 +36,20 @@ public class MemberEntity extends BaseEntity {
 	private String name;
 	@Column(nullable = false)
 	private String password;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private String gender;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private String phoneNumber;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private LocalDate birthday;
-	@Column(nullable = false)
+	//@Column(nullable = false)
 	private String address;
 	
 	private String photoName;
+	
+	private boolean isSocial; //소셜여부확인
+	
+	
 	
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -61,10 +65,12 @@ public class MemberEntity extends BaseEntity {
 		return this;
 	}
 	
-	public MemberEntity updateNameAndPhonenumberAndAddress(MemberUpdateDto dto) {
+	public MemberEntity updateMemberInfo(MemberUpdateDto dto) {
 		this.name=dto.getName();
 		this.phoneNumber=dto.getPhoneNumber();
 		this.address=dto.getAddress();
+		this.gender=dto.getGender();
+		this.birthday=dto.getBirthday();
 		return this;
 	}
 	
