@@ -10,4 +10,8 @@ public interface HomeReviewEntityRepository extends JpaRepository<HomeReviewEnti
 
 	List<HomeReviewEntity> findAllByHome_hno(long hno);
 
+	void deleteByHome_hno(long hno);
+
+	List<HomeReviewEntity> findByHome_hno(long hno);
+
 }

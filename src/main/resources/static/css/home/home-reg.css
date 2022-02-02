@@ -8,51 +8,136 @@
 .select-view-size{
 	width: 600px;
 }
-
-#home-reg input::placeholder{
-	color: black;
+/* //////////////////////////////////////// */
+#home-reg h2{
+	font-size: 32px;
+}
+#home-reg .title{
+	padding: 54px 0 30px 0;
+	text-align: left;
+}
+#home-reg .title span{
+	font-weight: 300;
 }
 /* //////////////////////////////////////// */
 #home-reg .home-reg{
 	text-align: center;
-	margin-top: 35px;
+}
+#home-reg .home-reg-info>div{
+	margin-top: 30px;
 }
 
-#home-reg p{
+#home-reg .home-reg-info>div> p{
 	width:130px;
 	text-align: left;
 	font-size: 15px;
 	font-weight: 500;
-	margin-top: 20px;
 	color: black;
 }
 #home-reg input{
 	width: 600px;
 	height: 55px;
-	padding: 0 10px;
-	margin-top: 10px;
-	border: 1px solid #e9e9e9;
+	padding: 0 20px;
+	border: 1px solid #DDDDDD;
 	border-radius: 8px;
 	outline: none;
 }
+#home-reg .home-address-part>div:nth-child(2){
+	margin-top: 10px;
+}
+
+/* ///////////////////////////////////////////////// */
+#home-reg .home-detail-number{
+	padding: 0 20px;
+	border: 1px solid #DDDDDD;
+	border-radius: 8px;
+	line-height:55px;
+	font-size: 13px;
+}
+#home-reg .home-detail-number p{
+	width: 60px;
+}
+#home-reg .home-detail-number> div:not(:nth-child(4))::after{
+	content: "|";
+	line-height: 55px;
+	color: #DDDDDD;
+	font-weight: lighter;
+	padding: 0 16px;
+	
+}
+#home-reg .home-detail-number input{
+	width: 40px;
+	text-align: center;
+	border: none;
+	font-weight: 600;
+	padding: 0;
+}
+/* ////////////////////////// */
+#home-reg input[type="radio"], input[type="checkbox"]{
+  display:none;
+}
+
+#home-reg .home-type{
+	width: 600px;
+	height: 55px;
+	border:1px solid #DDDDDD;
+	border-radius: 8px;
+}
+
+#home-reg .box-radio-input input[type="radio"] + span{
+  display:inline-block;
+  background:none;
+  text-align:center;
+  height:55px;
+  line-height:53px;
+  font-weight:400;
+  cursor:pointer;
+  width: 200px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+#home-reg .box-radio-input input[type="radio"]:checked + span{
+  background:rgb(247, 247, 247);
+  border:1px solid black;
+}
+
+/* ///////////////////////////////////////////////// */
+#home-reg .home-option>div >div:nth-child(2){
+	margin-top: 8px;
+}
+#home-reg .home-option input[type="checkbox"]:checked + label{
+  background:rgb(247, 247, 247);
+  border:1px solid black;
+  color:black;
+}
+
+#home-reg .home-option .checkbox-style {
+	display:inline-block;
+	width: 195px;
+	height: 120px;
+	border:1px solid #DDDDDD;
+	border-radius: 8px;
+	text-align:center;
+	cursor:pointer;
+}
+#home-reg .home-option .checkbox-style i {
+	display:inline-block;
+	width: 100%;
+	padding-top: 35px;
+}
+#home-reg .home-option .checkbox-style span {
+	display:inline-block;
+	font-size: 14px;
+	padding-top: 5px;
+}
+/* ////////////////////////// */
 #home-reg textarea{
 	width: 600px;
 	height: 200px;
 	padding: 10px 10px;
-	margin-top: 10px;
-	border: 1px solid #e9e9e9;
-	border-radius: 6px;
+	border: 1px solid #DDDDDD;
+	border-radius: 8px;
 	outline: none;
-}
-#home-reg .homePrice p{
-	font-size: 17px;
-	color: black;
-	padding: 5px 5px 0 0;
-	font-weight : 500;
-}
-#home-reg .home-detail-number input{
-	width: 145px;
-	text-align: center;
 }
 /* ////////////////////////// */
 #home-reg .main-image{
@@ -109,40 +194,17 @@
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
 /* ////////////////////////// */
 #home-reg button{
-	margin:40px 0 40px 0
-	;
+	margin:70px 0 80px 0;
 	border: none;
 	width: 200px;
 	height: 50px;
 	background-color: #ff2e5f;
-	border-radius: 3px;
+	border-radius: 8px;
 	color: white;
 	font-size: 18px;
 	font-weight: 600;	
 	cursor: pointer;
-}
-/* ////////////////////////// */
-#home-reg .box-radio-input input[type="radio"], input[type="checkbox"]{
-  display:none;
-}
-#home-reg .box-radio-input input[type="radio"] + span, input[type="checkbox"] + span{
-	margin:10px 0 0 0;
-  display:inline-block;
-  background:none;
-  border:1px solid #e9e9e9;  
-  text-align:center;
-  height:45px;
-  line-height:43px;
-  font-weight:400;
-  cursor:pointer;
-  width: 194px;
-  font-size: 14px;
-  border-radius: 6px;
-}
-#home-reg .box-radio-input input[type="radio"]:checked + span, input[type="checkbox"]:checked + span{
-  background:rgb(247, 247, 247);
-  border:1px solid black;
-  color:black;
 }

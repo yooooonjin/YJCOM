@@ -14,7 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import project.domain.dto.home.HomeSearchDto;
-import project.domain.dto.home.homeRegDto;
+import project.domain.dto.home.HomeImgRegDto;
+import project.domain.dto.home.HomeRegDto;
 import project.security.dto.SecurityDto;
 import project.service.home.HomeService;
 
@@ -48,25 +49,17 @@ public class HomesController {
 	public String homeRegPage() {
 		return "home/home-reg";
 	}
-	//숙소 등록
-	@PostMapping("/reg")
-	public String homeReg(homeRegDto regDto, @AuthenticationPrincipal SecurityDto securityDto) {
-		log.info("memberId={}",securityDto.getUsername());
-		return homeService.homeReg(regDto,securityDto);
-	}
-	//숙소 메인 이미지 temp 폴더에 임시 보관
-	@ResponseBody
-	@PostMapping("/reg/tempMainImgUpload")
-	public String tempMainImgUpload(MultipartFile fileImg) {
-		System.out.println(fileImg.getOriginalFilename());
-		return homeService.tempMainImgUpload(fileImg);
-	}
 	//숙소 서브 이미지 temp 폴더에 임시 보관
 	@ResponseBody
-	@PostMapping("/reg/tempsubImgUpload")
+	@PostMapping("/reg/tempImgUpload")
 	public String tempSubImgUpload(MultipartFile fileImg, String imageName) {
 		System.out.println("name"+imageName);
-		return homeService.tempSubImgUpload(fileImg,imageName);
+		return homeService.tempImgUpload(fileImg,imageName);
+	}
+	//숙소 등록
+	@PostMapping("/reg")
+	public String homeReg(HomeRegDto regDto, @AuthenticationPrincipal SecurityDto securityDto,HomeImgRegDto imgRegDto) {
+		return homeService.homeReg(regDto,securityDto,imgRegDto);
 	}
 	
 }

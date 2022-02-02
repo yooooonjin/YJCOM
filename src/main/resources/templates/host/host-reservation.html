@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/host/host-reservation.css">
+		<link rel="stylesheet" href="/css/common/header-nav.css">
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+	</head>
+	<body>
+	<th:block th:insert="/common/login.html::login"/>
+	<header id="whitetype">
+	<div class="view-size">
+	<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+		<div class="search" th:fragment="homeMain">
+			<div class="big-search" th:fragment="indexMain">
+				<ul class="flex">
+					<li><a href="/home/list">숙소</a></li> 
+					<li><a href="#">체험</a></li>
+					<li><a href="#">온라인체험</a></li>
+				</ul>
+			</div>
+		</div>
+	</th:block>
+	</div>
+	</header>
+		
+		<main>
+			<section id="reservation" class="host-view-size">
+				<div>
+					<div class="title">
+						<span>에어비앤비 호스트가 되어보세요.</span>
+						<h2>호스트</h2>
+					</div>
+				</div>
+				
+				<div class="select">
+					<ul class="flex">
+						<li class="hosting-btn"><a href="/host">등록한 숙소</a></li>
+						<li class="reservation-btn target">예약</li>
+						<li><a href="/home/reg">새로운 숙소 등록하기</a></li>
+					</ul>
+				</div>
+				<!-- /////////////////////////////////예약/////////////////////////////////////////// -->
+					<div class="view-size flex reservation-container">
+						<div th:each="reservation:${reservations}">
+							<div class="home-reservation" >
+								<div class="home-name">
+									<a th:href="|/home/detail/${reservation.home.hno}|">[[${reservation.home.homeName}]]</a>
+								</div>
+								<div class="reservation-info">
+									<div class="date flex between">
+										<p>숙박 일정</p>
+										<span class="schedule">[[${#temporals.format(reservation.checkIn,'MM월dd일')}]] ~ [[${#temporals.format(reservation.checkOut,'MM월dd일')}]]</span>
+									</div>
+									<div class="guests flex between">
+										<p>게스트 인원</p>
+										<span>[[${reservation.guests}]]명</span>
+									</div>
+									<div class="total-price">
+										<div class="flex between">
+											<p>총 합계</p>
+											<span>[[${#numbers.formatInteger(reservation.totalPrice,3,'COMMA')}]]원</span>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+			</section>
+		</main>
+		
+		<script type="text/javascript">
+		
+		
+			 $(function(){
+				 
+				 $(".reservation-btn").click(function(){
+					 $(this).addClass("target");
+					 $(".hosting-btn").removeClass("target");
+					 
+				 });
+				 $(".hosting-btn").click(function(){
+					 $(this).addClass("target");
+					 $(".reservation-btn").removeClass("target");
+					 
+				 });
+			 });
+			
+			</script>
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+	
+	</body>
+</html>

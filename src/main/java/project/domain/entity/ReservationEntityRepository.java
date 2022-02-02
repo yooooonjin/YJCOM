@@ -10,12 +10,14 @@ import org.springframework.data.util.Streamable;
 
 public interface ReservationEntityRepository extends JpaRepository<ReservationEntity, Long> {
 
-	List<ReservationEntity> findAllByMember_email(String email);
 
 
 	Page<ReservationEntity> findAllByMember_email(String email, Pageable pageable);
 
 
 	List<ReservationEntity> findByHome_hno(long hno);
+
+
+
 
 }

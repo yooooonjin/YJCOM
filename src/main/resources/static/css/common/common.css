@@ -5,7 +5,7 @@
 h1{position: absolute; left: -99999px;}
 li{list-style: none;}
 a{text-decoration: none; color: black;}
-input::placeholder{color: #a9a9a9;}
+input::placeholder{color: black;}
 
 
 .flex{display: flex;}
@@ -19,4 +19,12 @@ input::placeholder{color: #a9a9a9;}
 .view-size{width: 1280px; margin: 0 auto};
 .index-view-size{width: 1440px; margin: 0 auto;}
 .home-view-size{width: 1600px; margin: 0 auto;}
+
+/* //크롬 자동완성 하늘색 배경 제거 */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+}
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
 

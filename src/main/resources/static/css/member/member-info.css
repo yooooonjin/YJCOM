@@ -67,47 +67,108 @@
 	margin-right: 10px;
 }
 /* //////////////////////////////////////// */
-#part{
-	width: 850px;
-	border-bottom: 1px solid #e9e9e9;
-}
-#part li{
-	display:inline-block;
-	width:120px;
-	margin:30px 10px 0 10px;
-	height:33px;
-	font-weight: bolder;
-	text-align: center;
-	cursor: pointer;
-}
-#part li p{
-	margin-top:9px;
-	border-bottom: 3px solid #ff2e5f;
-}
-/* //////////////////////////////////////// */
-#part-detail{
+#guest{
 	width: 850px;
 	margin: 0 auto;
 }
 /* //////////////////////////////////////// */
-#part-detail{
+#guest{
 	margin-top:30px;
 }
-#part-detail p{
+#guest p{
 	font-size: 20px;
 	font-weight: 600;
 	margin: 30px 0 10px;
 }
+
+/* ////////////////게스트/////////////////////// */
+#guest .reserve-home{
+	width: 850px;
+}
+#guest .reserve-home-list{
+	height: 480px;
+	padding: 17px;
+	width: 390px;
+	border-radius: 10px;
+	border: 1px solid #e9e9e9;
+	margin-right: 30px;
+	/* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); */
+	
+}
+#guest .reserve-home img{
+	border-radius: 5px;
+}
+#guest .reserve-home .home-info{
+	padding-left: 18px;
+}
+#guest .reserve-home .home-type{
+	font-size: 10px;
+}
+#guest .reserve-home .home-name{
+	font-size: 12px;
+	font-weight: 500;
+}
+#guest .reserve-home .home-info{
+	position: relative;
+}
+#guest .reserve-home .home-number{
+	margin-top:5px;
+	font-size: 10px;
+}
+#guest .reserve-home .home-number span{
+	margin-top:5px;
+	font-size: 10px;
+}
+#guest .reserve-home .home-number> div>div:not(:last-child)::after{
+	content: "·";
+	padding: 0 1px;
+}
+
+#guest .reserve-home-info{
+	padding-bottom: 15px;
+}
+#guest .reservation-info{
+	border-top: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+	padding: 15px 15px 15px;
+	margin-bottom: 5px;
+}
+#guest .reservation-price-info>div{
+	color: black;
+	font-size: 14px;
+}
+#guest .reservation-price-info .detail-price{
+	margin-top: 6px;
+}
+#guest .reservation-price-info>div:last-child span:last-child{
+	margin-top: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: black;
+}
+#guest .reservation-price-info>div:last-child span:first-child{
+	padding-top:15px;
+	font-weight: 500;
+}
+#guest h3{
+	font-size: 16px;
+	padding-bottom: 2px;
+}
+#guest .reserve-room-list span{
+	display:inline-block;
+	font-size: 12px;
+	font-weight: 400;
+}
 /* /////////////////리뷰/////////////////// */
 #review div p{
 	margin:0;
-	padding: 15px 9px 0 0;
+	padding: 10px 9px 10px 0;
 	font-size: 17px;
 	font-weight: 500;
 }
 #review div p:nth-child(2){
 	margin:0;
-	padding: 15px 8px 0 0;
+	padding: 10px 8px 0 0;
 	font-size: 11px;
 	line-height: 30px;
 	font-weight: lighter;
@@ -118,9 +179,6 @@
 	font-size: 11px !important;
 	font-weight: 400 !important;
 }
-#review .review-write-btn{
-	cursor: pointer;
-}
 #review .review-write-area{
 	padding:5px 10px;
 	width: 100%;
@@ -129,10 +187,7 @@
 	font-size: 11px;
 	border: 1px solid #DDDDDD;
 }
-#review .edit-button {
-	padding-top: 10px;
-}
-#review .submit-btn, .cancel-btn {
+#review .submit-btn {
 	background-color:white;
 	border: 1px solid #a9a9a9;
 	padding: 2px 8px;
@@ -142,84 +197,7 @@
 	margin-left:3px;
 }
 
-/* ////////////////게스트/////////////////////// */
-#guest-part .reserve-room{
-	width: 850px;
-}
-#guest-part .reserve-room-list{
-	height: 470px;
-	padding: 17px;
-	width: 390px;
-	border-radius: 10px;
-	border: 1px solid #e9e9e9;
-	margin-right: 30px;
-	/* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); */
-	
-}
-#guest-part .reserve-room img{
-	border-radius: 5px;
-}
-#guest-part .reserve-room .home-info{
-	padding-left: 18px;
-}
-#guest-part .reserve-room .home-type{
-	font-size: 10px;
-}
-#guest-part .reserve-room .home-name{
-	font-size: 12px;
-	font-weight: 500;
-}
-#guest-part .reserve-room .home-info{
-	position: relative;
-}
-#guest-part .reserve-room .home-number{
-	margin-top:5px;
-	font-size: 10px;
-}
-#guest-part .reserve-room .home-number span{
-	margin-top:5px;
-	font-size: 10px;
-}
-#guest-part .reserve-room .home-number> div>div:not(:last-child)::after{
-	content: "·";
-	padding: 0 1px;
-}
-
-#guest-part .reserve-info1{
-	padding-bottom: 15px;
-}
-#guest-part .reserve-info0{
-	border-top: 1px solid #DDDDDD;
-	border-bottom: 1px solid #DDDDDD;
-	padding: 15px 15px 15px;
-}
-#guest-part .reserve-info4>div{
-	color: black;
-	font-weight: lighter;
-	font-size: 14px;
-}
-#guest-part .reserve-info4 .detail-price1{
-	margin-top: 6px;
-}
-#guest-part .reserve-info4>div:last-child span:last-child{
-	margin-top: 8px;
-	font-size: 16px;
-	font-weight: 600;
-	color: black;
-}
-#guest-part .reserve-info4>div:last-child span:first-child{
-	padding-top:15px;
-	font-weight: 500;
-}
-#guest-part h3{
-	font-size: 16px;
-	padding-bottom: 2px;
-}
-#guest-part .reserve-room-list span{
-	display:inline-block;
-	font-size: 12px;
-	font-weight: 400;
-}
+/* ////////////////////////////////////////////////// */
 #paging{
 	text-align: center;
 	width: 810px;
@@ -236,75 +214,7 @@
 	background-color: black;
 }
 
-/* /////////////////호스트/////////////////////// */
-#host-part .reserve-room-list{
-	padding: 20px 20px 20px 20px;
-	margin: 0 auto 8px;
-	width: 850px;
-	border-radius: 10px;
-	border: 1px solid #e9e9e9;
-	/* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); */
-	
-}
-#host-part .reserve-room-list{
-	margin: 0 auto 20px;
-	
-}
-#host-part .reserve-room img{
-	border-radius: 10px;
-}
-#host-part .reserve-room .home-info{
-	width:450px;
-	padding-left: 30px;
-}
-#host-part .reserve-room .home-name{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	font-size: 16px;
-	font-weight: 700;
-}
-#host-part .reserve-room .home-info{
-	position: relative;
-}
-#host-part .reserve-room .home-number{
-	margin-top:10px;
-	font-size: 13px;
-}
-#host-part .reserve-room .home-number span{
-	font-weight: 500;
-}
-#host-part .reserve-room .home-number div:not(:last-child)::after{
-	content: "·";
-	color: black;
-	padding: 0 5px;
-}
-#host-part .reserve-room .home-price{
-	position: absolute;
-	bottom: 0;
-}
-#host-part .reserve-room .home-price li{
-	font-size: 18px;
-	font-weight: 600;
-}
-#host-part .reserve-room .home-price li span{
-	font-size: 15px;
-	font-weight: 400;
-}
-#host-part .reserve-room .home-filter{
-	margin-top:15px;
-}
-#host-part .reserve-room .home-filter span{
-	display: inline-block;
-	border: 1px solid #a9a9a9;
-	background-color: white;
-	padding: 0.4em 1.2em;
-	border-radius: 13px;
-	margin:0 5px 12px 0;
-	font-size: 11px;
-}
 /* //////////////////////////////////////// */
-
 #part-detail .review{
 	margin-bottom: 80px;
 }

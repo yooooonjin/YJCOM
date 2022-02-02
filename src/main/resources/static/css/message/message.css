@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+#message .message-view-size{
+	width: 1600px;
+	margin: 0 auto;
+}
+
+/* /////////////////////////////////////////// */
+#message{
+	min-height: 700px;
+}
+#message .left-content{
+	height:100vh;
+	width: 373px;
+	border-right: 1px solid #DDDDDD;
+	
+}
+#message .left-title{
+	border-bottom: 1px solid #DDDDDD;
+}
+#message .left-title, .right-title {
+	line-height:72px;
+	height: 72px;
+	padding: 0 20px;
+	font-size: 15px;
+	margin-bottom: 17px;
+}
+/* //////////////////////////////////////////////// */
+#message .left-content .select-target{
+	border: 2px solid black;
+}
+#message .left-content .left-message {
+	margin: 0 auto 15px;
+	width: 345px;
+	height: 70px;
+	background-color: #f7f7f7;
+	border-radius: 10px;
+	padding: 0 30px 0 12px;
+	cursor: pointer;
+}
+#message .left-content .left-message:hover{
+	border: 2px solid black;
+}
+
+#message .left-content .left-message .target-photo {
+	margin: auto 0;
+}
+#message .left-content .left-message .target-photo img {
+	border-radius: 50%;
+}
+#message .left-content .left-message .target {
+	line-height:70px;
+	font-size: 14px;
+	padding-left: 15px;
+	width: 100%;
+}
+#message .left-content .left-message .target .unread {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background-color: #ff2e5f;
+	margin: auto 0;
+}
+/* //////////////////////////////////////////////// */
+#message .right-content .right-title{
+	width:1000px;
+	border-bottom: 1px solid #DDDDDD;
+	font-weight: 500;
+	
+}
+/* //////////////////////////////////////////////// */
+#message .right-content .message-content{
+	margin: 0 auto;
+	width: 588px;
+	text-align: center;
+}
+#message .right-content .message-content .date{
+	padding: 24px 22px 15px;
+	font-size: 12px;
+	color: #717171;
+	font-weight: 500;
+}
+#message .right-content .message-content .sender-photo img{
+	border-radius: 50%;
+}
+#message .right-content .message-content .message-sender .message-detail{
+	padding-left: 12px;
+	text-align: left;
+}
+#message .right-content .message-content .message-sender .sender-name{
+	font-weight: 600;
+}
+#message .right-content .message-content .message-sender .send-time{
+	line-height:1.8em;
+	padding-left:8px;
+	font-size:12px;
+	color: #717171;
+}
+#message .right-content .message-content .message-sender .content{
+	padding-top:15px;
+	font-size:15px;
+	font-weight: 300;
+	margin-bottom: 24px;
+}
+/* //////////////////////////////////////////////// */
+#message .right-content .message-write{
+	margin: 50px auto;
+	width:525px;
+	height:44px;
+	border-radius:22px;
+	border: 2px solid black;
+}
+#message .right-content .message-write .write-area{
+	width:484px;
+	height:40px;
+	border: none;
+	outline: none;
+	background-color: rgba(0,0,0,0);
+	padding: 9px 15px;
+}
+#message .right-content .message-write .send-btn{
+	padding: 7px 2px 0 0;
+	cursor: pointer;
+}
+#message .right-content .message-write i{
+	font-size: 25px;
+}

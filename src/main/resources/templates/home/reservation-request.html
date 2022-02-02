@@ -6,6 +6,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<link rel="stylesheet" href="/css/home/reservation-request.css">
 	</head>
 	<body>
+		<th:block th:insert="/common/login.html::login"/>
 		<header id="whitetype">
 		<div class="home-view-size">
 			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
@@ -67,19 +68,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						</div>
 						<div class="required-input">
 							<h3>필수 입력 정보</h3>
-							<div class="flex between">
+							<div>
 								<div>
 									<div>호스트에게 메시지 보내기</div>
 									<div>호스트에게 여행 목적과 도착 예정 시간을 알려주세요.</div>
 								</div>
-								<button type="button">추가</button>
-							</div>
-							<div class="flex between">
 								<div>
-									<div>프로필 사진</div>
-									<div>호스트는 숙소에 묵는 게스트에 대해서 알고 싶어 합니다.</div>
+									<textarea name="message"></textarea>
 								</div>
-								<button type="button">추가</button>
 							</div>
 						</div>
 						<div class="refund">

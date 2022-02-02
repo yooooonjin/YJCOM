@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/host/host-info.css">
+		<link rel="stylesheet" href="/css/common/header-nav.css">
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+	</head>
+	<body>
+	<th:block th:insert="/common/login.html::login"/>
+	<header id="whitetype">
+	<div class="view-size">
+	<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+		<div class="search" th:fragment="homeMain">
+			<div class="big-search" th:fragment="indexMain">
+				<ul class="flex">
+					<li><a href="/home/list">숙소</a></li> 
+					<li><a href="#">체험</a></li>
+					<li><a href="#">온라인체험</a></li>
+				</ul>
+			</div>
+		</div>
+	</th:block>
+	</div>
+	</header>
+		
+		<main>
+			<section id="host" class="host-view-size">
+				<div>
+					<div class="title">
+						<span>에어비앤비 호스트가 되어보세요.</span>
+						<h2>호스트</h2>
+					</div>
+				</div>
+				
+				<div class="select">
+					<ul class="flex">
+						<li class="hosting-btn target">등록한 숙소</li>
+						<li class="reservation-btn"><a href="/host/reservation">예약</a></li>
+						<li><a href="/home/reg">새로운 숙소 등록하기</a></li>
+					</ul>
+				</div>
+				<!-- /////////////////////////////////등록한 숙소/////////////////////////////////////////// -->
+				<div class="hosting" >
+					<div class="flex">
+						<div class="host-home" th:each="hostHome:${hostHomes}">
+							<div class="home-img">
+								<img th:src="|/image/home-img/${hostHome.hno}_main-img.jpg|">
+								<div class="delete-btn"><i class="fas fa-trash-alt"></i></div>
+								<input class="hno" type="hidden" th:value="${hostHome.hno}">
+							</div>
+							<div class="home-info">
+								<div>
+									<div class="home-type">[[${hostHome.homeType}]]</div>
+									<div class="home-name"><a th:href="|/home/detail/${hostHome.hno}|">[[${hostHome.homeName}]]</a></div>
+								</div>
+								<div class="home-number">
+									<div class="flex">
+										<div>최대인원 <span>[[${hostHome.maximumNumber}]]</span>명</div>
+										<div>침대 <span>[[${hostHome.bedNumber}]]</span>개</div>
+										<div>침실 <span>[[${hostHome.bedroomNumber}]]</span>개</div>
+										<div>욕실 <span>[[${hostHome.bathroomNumber}]]</span>개</div>
+									</div>
+								</div>
+								<div class="home-filter">
+									<span th:each="hoH : ${hostHome.homeOptionSet}">[[${hoH.homeOption}]]</span>
+								</div>
+								<div class="home-price">
+									<p>[[${#numbers.formatInteger(hostHome.homePrice,3,'COMMA')}]]원&nbsp;<span>/ 박</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="paging" th:unless="${pageTot eq 0}">
+						<span th:each="paging:${#numbers.sequence( 1, pageTot)}">
+	       					<a th:href="|/host?page=${paging}|"></a>
+	       				</span>
+					</div>
+				</div>
+			</section>
+			
+			
+			<script type="text/javascript">
+			
+			
+				 $(function(){
+					 
+					 var token = $("meta[name='_csrf']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr("content");
+						
+						 $(document).ajaxSend(function(e, xhr, options) {
+						        xhr.setRequestHeader(header, token);
+					    });
+					 
+					 
+					 
+					 $(".reservation-btn").click(function(){
+						 $(this).addClass("target");
+						 $(".hosting-btn").removeClass("target");
+						 
+					 });
+					 $(".hosting-btn").click(function(){
+						 $(this).addClass("target");
+						 $(".reservation-btn").removeClass("target");
+						 
+					 });
+					 
+					 //숙소 삭제
+					$(".delete-btn").click(function(){
+						var hno=$(this).siblings(".hno").val();
+						 
+						 $.ajax({
+							url:"/host",
+							type:"delete",
+							data:{hno:hno},
+							success:function(){
+								 location.reload();
+							}
+						 });
+					});
+					 
+				 });
+				 
+
+					 
+			</script>
+		
+		
+		</main>
+		
+		
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+	
+	</body>
+</html>
+
+
+

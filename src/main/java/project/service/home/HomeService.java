@@ -4,12 +4,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import project.domain.dto.home.HomeSearchDto;
-import project.domain.dto.home.homeRegDto;
+import project.domain.dto.home.HomeImgRegDto;
+import project.domain.dto.home.HomeRegDto;
 import project.security.dto.SecurityDto;
 
 public interface HomeService {
 
-	String homeReg(homeRegDto regDto, SecurityDto securityDto);
+	String homeReg(HomeRegDto regDto, SecurityDto securityDto, HomeImgRegDto imgRegDto);
 
 	String homeList(Model model, int page);
 
@@ -17,8 +18,6 @@ public interface HomeService {
 
 	String homesearch(Model model, int page, HomeSearchDto searchDto);
 
-	String tempMainImgUpload(MultipartFile file);
-
-	String tempSubImgUpload(MultipartFile fileImg, String imageName);
+	String tempImgUpload(MultipartFile fileImg, String imageName);
 	
 }

@@ -65,8 +65,6 @@ public class HomeEntity extends BaseEntity {
 	@Column(nullable = false)
 	private String homeIntro;
 	
-	private String homePhoto;
-	
 	@Column(nullable = false)
 	private String useable;
 	
@@ -82,9 +80,15 @@ public class HomeEntity extends BaseEntity {
 	@JoinColumn(name = "email")
 	private MemberEntity member;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy ="home" )
+	@OneToMany(fetch = FetchType.LAZY, mappedBy ="home")
 	@Builder.Default
 	private List<ReservationEntity> reservations = new Vector<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy ="home")
+	@Builder.Default
+	private List<HomeImageEntity> homeImages = new Vector<>();
+	
+	
 	
 	public boolean isreservations(LocalDate checkin, LocalDate checkout) {
 		

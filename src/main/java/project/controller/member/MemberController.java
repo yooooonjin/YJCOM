@@ -22,7 +22,7 @@ import project.service.member.MemberService;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 @Controller
-public class memberController {
+public class MemberController {
 	
 	private final MemberService service;
 	
@@ -55,16 +55,16 @@ public class memberController {
 		service.reviewWrite(resNo,hno, securityDto,review);
 	}
 	
-	//숙소예약
-	@PostMapping("/home/reserve/{hno}")
-	public String homeReserve(@PathVariable long hno, @AuthenticationPrincipal SecurityDto securityDto, HomeReserveDto reserveDto) {
-		return service.homeReserve(hno,securityDto,reserveDto);
-	}
 	
 	//예약요청페이지
 	@PostMapping("/home/reserve/request/{hno}")
 	public String homeReserveRequestPage(@PathVariable long hno, HomeReserveDto reserveDto, Model model) {
 		return service.homeReserveRequest(hno,reserveDto,model);
+	}
+	//숙소예약
+	@PostMapping("/home/reserve/{hno}")
+	public String homeReserve(@PathVariable long hno, @AuthenticationPrincipal SecurityDto securityDto, HomeReserveDto reserveDto,String message) {
+		return service.homeReserve(hno,securityDto,reserveDto,message);
 	}
 	
 	//계정
@@ -78,5 +78,7 @@ public class memberController {
 	public String personalInfoPage(@AuthenticationPrincipal SecurityDto securityDto, Model model) {
 		return service.personalInfoPage(securityDto,model);
 	}
+	
+	
 
 }

@@ -20,14 +20,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name="HomeImage")
 @Entity
-public class HomeImage {
+public class HomeImageEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long ino;
 	
-	@Column(nullable = false)
-	private String filePath;
 	@Column(nullable = false)
 	private String fileOrgName;
 	@Column(nullable = false)

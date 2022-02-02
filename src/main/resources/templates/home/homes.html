@@ -6,6 +6,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<link rel="stylesheet" href="/css/home/homes.css">
 	</head>
 	<body>
+		<th:block th:insert="/common/login.html::login"/>
 		<header id="whitetype">
 		<div class="home-view-size">
 			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
@@ -48,11 +49,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<main class="flex home-view-size">
 			<section class="left-main">
 				<div id="home-list">
-					<div class="home-list" th:each="homes,status:${homes}">
+					<div class="home-list" th:each="homes:${homes}">
 						<h1>집정보</h1>
 						<input type="hidden" id="homeAddress" th:value="${homes.homeAddress}">
 						<div class="flex between">
-							<div><img src="/image/room-img-01.jpg" width="300px" height="200px"></div>
+							<div><img th:src="|/image/home-img/${homes.hno}_main-img.jpg|" width="300px" height="200px"></div>
 							<div class="home-info">
 								<div>
 									<ul>
@@ -87,8 +88,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<section>
 							<div id="infowindow">
 								<div>
-								 	<img class="info-img" src="/image/room-img-01.jpg">
-								 	<img onclick="closeOverlay()" class="info-close" src="/image/x.png">
+								 	<img class="info-img" th:src="|/image/home-img/${homes.hno}_main-img.jpg|">
+								 	<img class="info-close" src="/image/x.png">
 								 	<div class="info">
 									 	<div class="info-home-type">[[${homes.homeType.homeType}]]</div>
 									 	<a class="info-home-name" th:href="|/home/detail/${homes.hno}|">[[${homes.homeName}]]</a>
@@ -140,7 +141,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = {
 		        center: new kakao.maps.LatLng(37.6568255, 127.021725), // 지도의 중심좌표
-		        level: 6 // 지도의 확대 레벨
+		        level: 7 // 지도의 확대 레벨
 		    };  
 
 			// 지도를 생성
@@ -161,6 +162,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			     if (status === kakao.maps.services.Status.OK) {
 
 			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+			        map.setCenter(coords);
 
 			        var imageSize = new kakao.maps.Size(50, 60); 
 			        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
@@ -169,12 +171,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			        var marker = new kakao.maps.Marker({
 			            position: coords,
 			            image : markerImage,
-			            clickable: true
+			            clickable: true,
+			            map:map
 			        });
 			        
-			        marker.setMap(map);
 			        
-			        var iwContent = '<div style="padding:5px;  font-size:30px;">Hello World!</div>'
 			     	var content = document.getElementById("infowindow");
 			        var iwRemoveable=false;
 			        
@@ -188,6 +189,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				     kakao.maps.event.addListener(marker, 'click', function() {
 				         // 마커 위에 인포윈도우를 표시
 				         customOverlay.setMap(map);  
+				         
 				   });
 				  // 커스텀 오버레이를 닫기 위해 호출되는 함수
 					   function closeOverlay() {
@@ -200,6 +202,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		 	 
 			}); 
 			
+			
+			$(function(){
+				
+				$(".info-close").click(function(){
+					$(this).parents("div").parents("#infowindow").hide();
+				});
+				
+			});
 					
 			
 			/*[/]*/

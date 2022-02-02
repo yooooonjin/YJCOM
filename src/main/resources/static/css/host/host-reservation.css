@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+.host-view-size{
+	width: 1280px;
+	margin: 0 auto;
+}
+/* //////////////////////////////////////// */
+#reservation h2{
+	font-size: 32px;
+}
+#reservation .title{
+	padding: 54px 0 30px 0;
+	text-align: left;
+}
+#reservation .title span{
+	font-weight: 300;
+}
+/* //////////////////////////////////////// */
+#reservation .select{
+	margin:0 0 30px;
+
+}
+#reservation .select li{
+	line-height:40px;
+	height: 40px;
+	border: 1px solid #DDDDDD;
+	padding: 0 2em;
+	font-size: 14px;
+	border-radius: 20px;
+	margin-right: 10px;
+	font-weight: 300;
+	cursor: pointer;
+}
+#reservation .select li:hover{
+	border: 1px solid black;
+}
+
+#reservation{
+	min-height: 500px;
+}
+/* ////////////////////////////////////////////// */
+#reservation .reservation-container{
+	flex-wrap : wrap;
+	margin-bottom: 80px;
+}
+
+/* ////////////////////////////////////////////// */
+#reservation .home-reservation{
+	margin: 15px 15px 0 0;
+	width: 300px;
+	height :150px;
+	border: 1px solid #DDDDDD;
+	border-radius: 10px;
+	padding: 10px 15px;
+}
+/* ////////////////////////////////////////////// */
+#reservation .home-name{
+	font-size: 15px;
+	font-weight: 500;
+	margin-top:5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#reservation .reservation-info{
+	margin-top:20px;
+	font-size: 14px;
+	font-weight: 400;
+}
+#reservation .reservation-info>div{
+	margin-top:5px;
+}
+#reservation .reservation-info .total-price{
+	margin-top:10px;
+	font-weight: 600;
+}
+#reservation .reservation-info .total-price p{
+	line-height: 24px;
+}
+#reservation .reservation-info .total-price span{
+	font-size:15px;
+}
+/* ////////////////////////////////////////////// */
+#paging{
+	text-align: center;
+	margin-bottom: 80px;
+}
+#paging span a{
+	display:inline-block;
+	width: 9px;
+	height: 9px;
+	border:1px solid black;
+	border-radius: 50%;
+	margin: 40px 6px 0;
+}
+#paging span a:hover{
+	background-color: black;
+}
+
+/* ////////////////////////////////////////////// */
+#reservation .target{
+	border:2px solid black !important;
+	background-color: #f7f7f7;
+}
+
+
+
+
+
+
+
+
+

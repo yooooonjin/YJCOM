@@ -2,7 +2,11 @@ package project.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -27,6 +31,8 @@ import project.domain.entity.HomeReviewEntity;
 import project.domain.entity.HomeReviewEntityRepository;
 import project.domain.entity.MemberEntity;
 import project.domain.entity.MemberEntityRepository;
+import project.domain.entity.MessageEntity;
+import project.domain.entity.MessageEntityRepository;
 import project.domain.entity.ReservationEntity;
 import project.domain.entity.ReservationEntityRepository;
 import project.security.dto.SecurityDto;
@@ -41,6 +47,8 @@ public class MemberServiceImpl implements MemberService {
 	private final HomeEntityRepository homeRepository;
 	private final ReservationEntityRepository reservationRepository;
 	private final HomeReviewEntityRepository homeReviewRepository;
+	private final MessageEntityRepository messageRepository;
+	
 	
 	//프로필 정보
 	@Override
@@ -50,14 +58,8 @@ public class MemberServiceImpl implements MemberService {
 		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
 		model.addAttribute("memberInfo",entity);
 		
-		//내가 등록한 집 데이터
-		List<HomeEntity> homeEntity = homeRepository.findAllByMember_email(entity.getEmail());
-		//dto로 변환
-		List<HomeListDto> hostHome= homeEntity.stream().map(HomeListDto::new).collect(Collectors.toList());
-		model.addAttribute("hostHome",hostHome);
 		
 		//예약한 집 데이터 //TODO DTO에 담아서 이동
-//		List<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(entity.getEmail());
 		Pageable pageable =PageRequest.of(page-1, 2, Direction.DESC, "resNo");
 		
 		Page<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(entity.getEmail(),pageable);
@@ -67,7 +69,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		model.addAttribute("reservedHomes",reservationEntity);
 		
-		System.out.println(reservationEntity.getTotalPages());
 		
 		
 		return "member/member-info";
@@ -79,10 +80,11 @@ public class MemberServiceImpl implements MemberService {
 		memberRepository.findById(updateDto.getEmail()).map(entity->entity.updateMemberInfo(updateDto)).get();
 				
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	//숙소예약
-	//Dto에서 Entity로 변환할지 결정
 	@Override
-	public String homeReserve(long hno, SecurityDto securityDto, HomeReserveDto reserveDto) {
+	public String homeReserve(long hno, SecurityDto securityDto, HomeReserveDto reserveDto, String message) {
 		
 		//문자열로 넘어온 게스트 수를 정수로 변환
 		String guestsStr=reserveDto.getGuestsStr();
@@ -98,23 +100,20 @@ public class MemberServiceImpl implements MemberService {
 						.home(homeRepository.findById(hno).get())
 						.build();
 		
-		
-		
 		reservationRepository.save(entity);
+		
+		
+		MessageEntity messageEntity=MessageEntity.builder()
+				.sender(memberRepository.findById(securityDto.getUsername()).get())
+				.receiver(homeRepository.findById(hno).get().getMember())
+				.message(message)
+				.build();
+		
+		messageRepository.save(messageEntity);
 		
 		return "redirect:/member/info";
 	}
 	
-	//후기 작성
-	@Override
-	public void reviewWrite(long resNo, long hno,SecurityDto securityDto, String review) {
-		HomeReviewEntity homeReviewEntity = HomeReviewEntity.builder().review(review)
-						.member(memberRepository.findById(securityDto.getUsername()).get())
-						.home(homeRepository.findById(hno).get()).reservation(reservationRepository.findById(resNo).get())		
-						.build();
-		
-		homeReviewRepository.save(homeReviewEntity);
-	}
 	
 	//예약 요청 페이지
 	@Override
@@ -124,6 +123,19 @@ public class MemberServiceImpl implements MemberService {
 		model.addAttribute("reservationsInfo", reserveDto);
 		return "home/reservation-request";
 	}
+	
+	//후기 작성
+	@Override
+	public void reviewWrite(long resNo, long hno,SecurityDto securityDto, String review) {
+		HomeReviewEntity homeReviewEntity = HomeReviewEntity.builder().review(review)
+				.member(memberRepository.findById(securityDto.getUsername()).get())
+				.home(homeRepository.findById(hno).get()).reservation(reservationRepository.findById(resNo).get())		
+				.build();
+		
+		homeReviewRepository.save(homeReviewEntity);
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	//개인정보
 	@Override
@@ -164,5 +176,7 @@ public class MemberServiceImpl implements MemberService {
 		model.addAttribute("photo", photoName);
 		return "member/member-photo";
 	}
+	
+	
 
 }

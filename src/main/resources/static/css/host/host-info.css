@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+.host-view-size{
+	width: 1280px;
+	margin: 0 auto;
+}
+/* //////////////////////////////////////// */
+#host h2{
+	font-size: 32px;
+}
+#host .title{
+	padding: 54px 0 30px 0;
+	text-align: left;
+}
+#host .title span{
+	font-weight: 300;
+}
+/* //////////////////////////////////////// */
+#host .select{
+	margin:0 0 30px;
+
+}
+#host .select li{
+	line-height:40px;
+	height: 40px;
+	border: 1px solid #DDDDDD;
+	padding: 0 2em;
+	font-size: 14px;
+	border-radius: 20px;
+	margin-right: 10px;
+	font-weight: 300;
+	cursor: pointer;
+}
+#host .select li:hover{
+	border: 1px solid black;
+}
+
+#host .hosting{
+	min-height: 350px;
+}
+
+/* ////////////////////////////////////////////// */
+#host .host-home{
+	margin-right: 20px;
+	width: 300px;
+	height :300px;
+	border: 1px solid #DDDDDD;
+	border-radius: 10px;
+}
+/* ////////////////////////////////////////////// */
+#host .host-home .home-img{
+	position: relative;
+}
+#host .host-home .home-img img{
+	width: 100%;
+	height: 130px;
+	border-radius: 10px 10px 0 0;
+}
+#host .host-home .home-img .delete-btn{
+	position: absolute;
+	width:25px;
+	height:25px;
+	top:10px;
+	right: 10px;
+	text-align: center;
+	border-radius: 50%;
+	cursor: pointer;
+	background-color: rgba(255,255,255,0.2);
+}
+#host .host-home .home-img div:hover{
+	background-color: rgba(255,255,255,0.5);
+}
+#host .host-home .home-img i{
+	font-size: 14px;
+}
+#host .host-home .home-info{
+	padding: 10px 15px;
+}
+#host .host-home .home-info .home-type{
+	font-size: 13px;
+}
+#host .host-home .home-info .home-name{
+	font-size: 15px;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-top:5px;
+}
+#host .host-home .home-info .home-name{
+	font-size: 15px;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#host .host-home .home-info .home-number{
+	margin-top:8px;
+	font-size: 13px;
+	font-weight: 300;
+}
+#host .host-home .home-info .home-number div:not(:last-child)::after{
+	content: "·";
+	color: black;
+	padding: 0 3px;
+}
+#host .host-home .home-info .home-filter{
+	font-size: 12px;
+	font-weight: 300;
+}
+#host .host-home .home-info .home-filter span{
+	padding-right: 5px;
+}
+#host .host-home .home-info .home-price{
+	text-align:right;
+	margin-top:20px;
+	font-size: 15px;
+	font-weight: 600;
+}
+#host .host-home .home-info .home-price span{
+	font-size: 13px;
+	font-weight: 400;
+}
+/* ////////////////////////////////////////////// */
+#paging{
+	text-align: center;
+	margin-bottom: 80px;
+}
+#paging span a{
+	display:inline-block;
+	width: 9px;
+	height: 9px;
+	border:1px solid black;
+	border-radius: 50%;
+	margin: 40px 6px 0;
+}
+#paging span a:hover{
+	background-color: black;
+}
+
+/* ////////////////////////////////////////////// */
+#host .target{
+	border:2px solid black !important;
+	background-color: #f7f7f7;
+}
+
+
+
+
+
+
+
+
+

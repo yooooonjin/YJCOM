@@ -13,7 +13,7 @@ public interface MemberService {
 
 	void memberUpdate(MemberUpdateDto updateDto, Model model);
 
-	String homeReserve(long hno, SecurityDto securityDto, HomeReserveDto reserveDto);
+	String homeReserve(long hno, SecurityDto securityDto, HomeReserveDto reserveDto, String message);
 
 
 	void reviewWrite(long resNo, long hno, SecurityDto securityDto, String review);

@@ -1,5 +1,6 @@
 package project.domain.dto.home;
 
+import java.util.List;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import project.domain.entity.HomeEntity;
 import project.domain.entity.HomeOption;
 import project.domain.entity.HomeType;
 import project.domain.entity.MemberEntity;
+import project.domain.entity.ReservationEntity;
 
 
 @Builder
@@ -32,9 +34,9 @@ public class HomeListDto {
 	
 	private Set<HomeOption> homeOptionSet;
 	
-	private String homeIntro;
+	private List<ReservationEntity> reservations;
 	
-	private String homePhoto;
+	private String homeIntro;
 	
 	private MemberEntity member;
 
@@ -51,7 +53,6 @@ public class HomeListDto {
 			this.homeType = entity.getHomeType();
 			this.homeOptionSet=entity.getHomeOptionSet();
 			this.homeIntro = entity.getHomeIntro();
-			this.homePhoto = entity.getHomePhoto();
 			this.member = entity.getMember();
 	
 	}

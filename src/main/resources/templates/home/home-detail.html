@@ -19,7 +19,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			</div>
 		</header>
 			
-		<main th:each="homeDetail:${homeDetail}">
+		<main th:each="homeDetail:${homeDetails}">
 			<section id="room-title">
 				<div class="room-title detail-view-size">
 					<ul>
@@ -34,25 +34,18 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<li>공유하기</li>
 						</ul>
 					</div>
-					<!-- <div class="room-img visual-area">
-						<ol class="flex images">
-							<li style="background-image: url('/image/home-img/room-img (2).jpg');"></li>
-							<li style="background-image: url('/image/home-img/room-img (3).jpg');"></li>
-							<li style="background-image: url('/image/home-img/room-img (4).jpg');"></li>
-						</ol>
-					</div> -->
 					<div class="room-image flex between">
 						<div class="main-image">
-							<img src="/image/home-img/room-img (1).jpg">
+							<img th:src="|/image/home-img/${homeDetail.hno}_main-img.jpg|">
 						</div>
 						<div class="sub-image">
 							<div class="flex">
-								<img src="/image/home-img/room-img (2).jpg">
-								<img src="/image/home-img/room-img (3).jpg">
+								<img th:src="|/image/home-img/${homeDetail.hno}_sub1-img.jpg|">
+								<img th:src="|/image/home-img/${homeDetail.hno}_sub2-img.jpg|">
 							</div>
 							<div class="flex">
-								<img src="/image/home-img/room-img (4).jpg">
-								<img src="/image/home-img/room-img (2).jpg">
+								<img th:src="|/image/home-img/${homeDetail.hno}_sub3-img.jpg|">
+								<img th:src="|/image/home-img/${homeDetail.hno}_sub4-img.jpg|">
 							</div>
 						</div>
 						

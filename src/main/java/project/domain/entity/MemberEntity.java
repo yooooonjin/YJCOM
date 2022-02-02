@@ -36,13 +36,9 @@ public class MemberEntity extends BaseEntity {
 	private String name;
 	@Column(nullable = false)
 	private String password;
-	//@Column(nullable = false)
 	private String gender;
-	//@Column(nullable = false)
 	private String phoneNumber;
-	//@Column(nullable = false)
 	private LocalDate birthday;
-	//@Column(nullable = false)
 	private String address;
 	
 	private String photoName;

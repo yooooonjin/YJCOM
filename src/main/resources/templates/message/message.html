@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/message/message.css">
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<th:block th:insert="/common/login.html::login"/>
+		<header id="whitetype">
+		<div class="home-view-size">
+			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+				<div class="search" th:fragment="homeMain">
+				</div>
+			</th:block>
+		</div>
+		</header>
+		
+		<main id="message">
+				<div class=" home-view-size flex">
+					
+					<section class="left-content">
+						<div class="left-title">
+							<p>메세지</p>
+						</div>
+						<div class="left-message-list" th:each="target:${targets}">
+							<div class="left-message flex">
+								<div class="target-photo">
+									<img th:src="|/image/member/${target.photoName}|" width="50px" height="50px;">
+								</div>
+								<div class="target flex between">
+									<input type="hidden" class="target-email" th:value="${target.email}">
+									<div>[[${target.name}]]</div>
+									<th:block  th:each="unread:${unread}">
+										<div class="unread" th:if="${target.email eq unread}"></div>
+									</th:block>
+								</div>
+							</div>
+						</div>
+					</section>
+					
+					<section class="right-content">
+						<div class="right-title">
+						</div>
+					<!-- ///////////////////////대화 내용 들어가는 부분/////////////////////// -->						
+					</section>
+					
+				</div>
+		</main>
+		<script type="text/javascript">
+			$(function(){
+				
+				//메세지 디테일페이지
+				$(".left-message").click(function(){
+					
+					$(".left-message").removeClass("select-target");
+					
+					$(this).addClass("select-target");
+					
+					$(this).children(".target").children(".unread").removeClass("unread");
+					
+					var targetEmail= $(this).children(".target").children(".target-email").val();
+					$.ajax({
+						url:"/member/message/detail",
+						type:"get",
+						data:{
+							targetEmail:targetEmail
+						},
+						success:function(result){
+							$(".right-content").html(result);
+						}
+					});
+					
+				});
+				
+			});
+			
+			function loadingMessage(targetName){
+				var targetEmail=targetName;
+   				$.ajax({
+   					url:"/member/message/detail",
+   					type:"get",
+   					data:{targetEmail:targetEmail},
+   					success: function(result){
+   						$(".right-content").html(result);
+   					}
+   				});	
+   			}
+		
+		
+		
+		</script>
+		
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+		
+		
+	</body>
+</html>

@@ -2,9 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<th:block th:fragment="blacktype(main)">	
-
 		
+<th:block th:fragment="blacktype(main)">	
+		<script type="text/javascript">
+			$(function(){
+				var photoName=$(".photo-name").attr("value");
+				$(".user-photo").attr("src","/image/member/"+photoName);
+			});
+			
+			$(".photo-name").change(function(){
+				$(".user-photo").attr("src","/image/member/"+photoName);
+			});
+		</script>
+
+
 		<section class="flex between">
 				<div class="logo">
 					<a href="/"><img src="/image/airbnb_logo-w.png" width=120px></a>
@@ -16,18 +27,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				
 				<div class="member">
 					<ul class="flex end">
-						<li sec:authorize="isAuthenticated()"><span sec:authentication="name">이메일 표기</span></li>
+						<li sec:authorize="isAuthenticated()"><span sec:authentication="principal.name">이메일 표기</span></li>
 						<li class="img">
 							<p>
 								<img class="line" src="/image/line.png" width="15px;">
-								<img class="user_pic" src="/image/user_pic2.png" width="30px;">
+								<th:block sec:authorize="isAnonymous()"><img class="user_pic" src="/image/member/default_photo.jpg" width="30px" height="30px"></th:block>
+								<th:block sec:authorize="isAuthenticated()"><img class="user_pic user-photo" width="30px" height="30px"></th:block>
+								<th:block sec:authorize="isAuthenticated()"><input type="hidden" class="photo-name" th:value="${#authentication.principal.photoName}"></th:block>
 							</p>
 						</li>
 					</ul>
 				<th:block th:insert="/common/header-nav.html::header-nav"/>	
-				
 				</div>
 		</section>
+		
+		
 </th:block>	
 
 
@@ -47,13 +61,26 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<li class="img">
 						<p>
 							<img class="line" src="/image/line.png" width="15px;">
-							<img class="user_pic" src="/image/user_pic2.png" width="30px;">
+							<th:block sec:authorize="isAnonymous()"><img class="user_pic" src="/image/member/default_photo.jpg" width="30px" height="30px"></th:block>
+							<th:block sec:authorize="isAuthenticated()"><img class="user_pic user-photo" src="/image/member/default_photo.jpg" width="30px" height="30px"></th:block>
+							<th:block sec:authorize="isAuthenticated()"><input type="hidden" class="photo-name" th:value="${#authentication.principal.photoName}"></th:block>
 						</p>
 					</li>
 				</ul>
 			<th:block th:insert="/common/header-nav.html::header-nav"/>	
 			</div>
 		</section>
+		
+		<script type="text/javascript">
+			$(function(){
+				var photoName=$(".photo-name").attr("value");
+				$(".user-photo").attr("src","/image/member/"+photoName);
+
+				$(".photo-name").change(function(){
+					$(".user-photo").attr("src","/image/member/"+photoName);
+				});
+			});
+		</script>
 </th:block>	
 	
 	

@@ -19,13 +19,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<div sec:authorize="isAuthenticated()">
 					<ul>
 						<li><a href="/member/account">계정</a></li>
-						<li><a href="#">메세지</a></li>
+						<li><a href="/member/message">메세지</a></li>
 						<li><a href="#">위시리스트</a></li>
 					</ul>
 					<ul>
 						<li><a href="/home/reg">숙소등록</a></li>
-						<li><a href="/host/home">숙소관리</a></li>
-						<li><a href="/member/home/review">후기</a></li>
+						<li><a href="/host">숙소관리</a></li>
 					</ul>
 					<ul>
 						<form id="logout" action="/logout" method="post">

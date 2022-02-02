@@ -1,57 +1,68 @@
 @charset "UTF-8";
 
-img{
+#join img{
 	margin-top: 20px;
 }
 
 #join{
 	width: 400px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-	margin: 50px auto 0;
+	margin: 40px auto 0;
 	padding: 20px;
 	text-align: center;
 }
+#join .join-title p{
+	text-align: left;
+	font-size: 15px;
+	font-weight: 400;
+	color: black;
+}
+#join .join-title h2{
+	text-align: left;
+	font-size: 30px;
+	font-weight: 600;
+	color: black;
+}
 
 #join .join-form{
-	margin-top: 20px;
+	margin: 20px 0 80px;
 }
-p{
+#join p{
 	text-align: left;
 	font-size: 12px;
 	padding: 5px 0 0 5px;
 	color: #ff2e5f;
 }
 
-input{
+#join input{
 	width: 350px;
 	height: 45px;
 	padding: 0 10px;
-	margin-top: 15px;
-	border: 1px solid #e9e9e9;
+	margin-top: 20px;
+	border: 1px solid #a9a9a9;
 }
-button{
+#join button{
 	margin-top:20px;
 	border: none;
 	width: 350px;
 	height: 50px;
 	background-color: #ff2e5f;
-	border-radius: 3px;
+	border-radius: 8px;
 	color: white;
 	font-size: 18px;
 	font-weight: 600;	
 	cursor: pointer;
 }
-.join{
+#join .join{
 	padding: 10px 0 20px 0;
 	font-size: 14px;
 	text-align: center;
 }
 
 /* ////////////////////////// */
-.box-radio-input input[type="radio"]{
+#join .box-radio-input input[type="radio"]{
   display:none;
 }
-.box-radio-input input[type="radio"] + span{
+#join .box-radio-input input[type="radio"] + span{
 	margin:15px 5px 0 5px;
   display:inline-block;
   background:none;
@@ -64,8 +75,9 @@ button{
   width: 170px;
   font-size: 14px;
 }
-.box-radio-input input[type="radio"]:checked + span{
-  background: #ff2e5f;
-  color:#fff;
+#join .box-radio-input input[type="radio"]:checked + span{
+	background:rgb(247, 247, 247);
+  border:2px solid black;
+  color:black;
 }
 

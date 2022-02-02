@@ -13,7 +13,7 @@ import project.domain.entity.MemberEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class homeRegDto {
+public class HomeRegDto {
 	
 	private String homeName;
 	private String homeAddress;
@@ -33,8 +33,6 @@ public class homeRegDto {
 	private String homePhoto;
 	
 	private MemberEntity member;
-	
-	
 	
 
 }
