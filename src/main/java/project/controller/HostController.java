@@ -1,4 +1,4 @@
-package project.controller.host;
+package project.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

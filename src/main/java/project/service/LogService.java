@@ -1,4 +1,4 @@
-package project.service.log;
+package project.service;
 
 import project.domain.dto.JoinDto;
 

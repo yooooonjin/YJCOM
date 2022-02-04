@@ -1,4 +1,4 @@
-package project.controller.home;
+package project.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import project.domain.dto.home.HomeSearchDto;
 import project.domain.dto.home.HomeImgRegDto;
 import project.domain.dto.home.HomeRegDto;
 import project.security.dto.SecurityDto;
-import project.service.home.HomeService;
+import project.service.HomeService;
 
 @Log4j2
 @RequestMapping("/home")

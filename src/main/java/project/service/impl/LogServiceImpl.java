@@ -10,7 +10,7 @@ import project.domain.dto.JoinDto;
 import project.domain.entity.MemberEntity;
 import project.domain.entity.MemberEntityRepository;
 import project.domain.entity.MemberRole;
-import project.service.log.LogService;
+import project.service.LogService;
 @RequiredArgsConstructor
 @Service
 public class LogServiceImpl implements LogService {

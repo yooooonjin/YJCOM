@@ -1,4 +1,4 @@
-package project.service.message;
+package project.service;
 
 import org.springframework.ui.Model;
 
@@ -10,6 +10,6 @@ public interface MessageService {
 
 	String messageDetail(SecurityDto securityDto, Model model, String targetEmail);
 
-	void messageDetailWrite(SecurityDto securityDto, Model model, String targetName, String message);
+	void messageDetailWrite(SecurityDto securityDto, Model model, String targetId, String message);
 
 }

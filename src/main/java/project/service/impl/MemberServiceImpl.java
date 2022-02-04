@@ -36,7 +36,7 @@ import project.domain.entity.MessageEntityRepository;
 import project.domain.entity.ReservationEntity;
 import project.domain.entity.ReservationEntityRepository;
 import project.security.dto.SecurityDto;
-import project.service.member.MemberService;
+import project.service.MemberService;
 
 @Log4j2
 @RequiredArgsConstructor

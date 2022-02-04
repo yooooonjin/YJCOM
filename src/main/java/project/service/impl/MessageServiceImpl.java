@@ -20,7 +20,7 @@ import project.domain.entity.MessageEntity;
 import project.domain.entity.MessageEntityRepository;
 import project.domain.entity.ReservationEntityRepository;
 import project.security.dto.SecurityDto;
-import project.service.message.MessageService;
+import project.service.MessageService;
 
 @RequiredArgsConstructor
 @Service
@@ -103,9 +103,9 @@ public class MessageServiceImpl implements MessageService {
 	//메세지 보냈을 때 페이지 리로딩안됨
 	//메세지 디테일 페이지에서 메세지 보내기
 	@Override
-	public void messageDetailWrite(SecurityDto securityDto, Model model, String targetName, String message) {
+	public void messageDetailWrite(SecurityDto securityDto, Model model, String targetId, String message) {
 	
-		MemberEntity receiver= memberRepository.findById(targetName).get();
+		MemberEntity receiver= memberRepository.findById(targetId).get();
 		
 		MessageEntity messageEntity=MessageEntity.builder()
 									.sender(memberRepository.findById(securityDto.getUsername()).get())

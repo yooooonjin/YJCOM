@@ -1,4 +1,4 @@
-package project.controller.log;
+package project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
 import project.domain.dto.JoinDto;
-import project.service.log.LogService;
+import project.service.LogService;
 
 @RequiredArgsConstructor
 @Controller

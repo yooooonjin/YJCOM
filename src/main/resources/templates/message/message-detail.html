@@ -5,7 +5,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <section class="right-content">
 	<div class="right-title">
 		<p>[[${targetName.name}]]</p>
-		<input type="hidden" class="targetName" th:value="${targetName.email}">
+		<input type="hidden" class="targetId" th:value="${targetName.email}">
 	</div>
 	<div>
 		<div class="message-content" th:each="targetMessage:${targetMessages}">
@@ -48,13 +48,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			 //메세지 페이지에서 메세지 보내기
 			$(".send-btn").click(function(){
 				var message=$(this).siblings(".write-area").val();
-				var targetName=$(".targetName").val();
+				var targetId=$(".targetId").val();
 				$.ajax({
 					url:"/member/message/detail",
 					type:"post",
-					data:{message:message ,targetName:targetName},
+					data:{message:message ,targetId:targetId},
 					success:function(){
-						loadingMessage(targetName);
+						loadingMessage(targetId);
 					}
 				});
 			});

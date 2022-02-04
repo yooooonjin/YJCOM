@@ -1,4 +1,4 @@
-package project.service.home;
+package project.service;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;

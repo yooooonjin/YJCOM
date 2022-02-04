@@ -80,8 +80,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				
 			});
 			
-			function loadingMessage(targetName){
-				var targetEmail=targetName;
+			function loadingMessage(targetId){
+				var targetEmail=targetId
    				$.ajax({
    					url:"/member/message/detail",
    					type:"get",

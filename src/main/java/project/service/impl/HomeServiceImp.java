@@ -37,7 +37,7 @@ import project.domain.entity.MemberRole;
 import project.domain.entity.ReservationEntity;
 import project.domain.entity.ReservationEntityRepository;
 import project.security.dto.SecurityDto;
-import project.service.home.HomeService;
+import project.service.HomeService;
 import project.util.PageInfo;
 
 @Log4j2

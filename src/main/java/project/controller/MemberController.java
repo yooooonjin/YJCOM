@@ -1,4 +1,4 @@
-package project.controller.member;
+package project.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import project.domain.dto.MemberUpdateDto;
 import project.domain.dto.home.HomeReserveDto;
 import project.domain.dto.home.HomeReviewDto;
 import project.security.dto.SecurityDto;
-import project.service.member.MemberService;
+import project.service.MemberService;
 
 @RequiredArgsConstructor
 @RequestMapping("/member")
