@@ -14,7 +14,7 @@ public interface HomeService {
 
 	String homeList(Model model, int page);
 
-	String homeDetail(Model model, long hno);
+	String homeDetail(Model model, long hno, HomeSearchDto searchDto);
 
 	String homesearch(Model model, int page, HomeSearchDto searchDto);
 

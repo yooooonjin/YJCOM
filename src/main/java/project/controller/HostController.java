@@ -32,10 +32,10 @@ public class HostController {
 		service.homeDelete(hno);
 	}
 	
-	//예약 페이지 이동
+	//예약 페이지
 	@GetMapping("/reservation")
-	public String reservationPage(Model model, @AuthenticationPrincipal SecurityDto securityDto,@RequestParam(defaultValue = "1") int page) {
-		return service.reservationPage(model,securityDto,page);
+	public String reservationPage(Model model, @AuthenticationPrincipal SecurityDto securityDto) {
+		return service.reservationPage(model,securityDto);
 	}
 
 }

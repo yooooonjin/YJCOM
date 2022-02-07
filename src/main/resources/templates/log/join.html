@@ -30,14 +30,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 							<ul>
 								<li>
-									<input class="email-check" name="email" type="text" placeholder="이메일을 입력하세요" autocomplete="off" required="required">
+									<input class="email-check email" name="email" type="text" placeholder="이메일을 입력하세요" autocomplete="off" required="required">
 									<p></p>
 								</li>
 								<li>
 									<input name="name" type="text" placeholder="이름을 입력하세요" autocomplete="off" required="required">
 								</li>
 								<li>
-									<input class="password-check" name="password" type="password"  placeholder="비밀번호를 입력하세요" required="required">
+									<input class="password-check password" name="password" type="password"  placeholder="비밀번호를 입력하세요" required="required">
 									<p></p>
 								</li>
 								<li class="flex center">
@@ -45,7 +45,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<label for="gender2" class="box-radio-input"><input name="gender" type="radio" id="gender2" value="M"><span>남자</span></label>
 								</li>
 								<li>
-									<input class="phoneNumber-check" name="phoneNumber" type="tel" placeholder="전화번호를 입력하세요" autocomplete="off">
+									<input class="phoneNumber-check phoneNumber" name="phoneNumber" type="tel" placeholder="전화번호를 입력하세요" autocomplete="off">
 									<p></p>
 								</li>
 								<li>
@@ -67,10 +67,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							
 							$(".email-check").on("propertychange change keyup paste input", function(){
 								
-								var email = $('input[name=email]').val();
+								var email = $(".email").val();
 								
 								var checkText = "";
-								var emailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+								var emailRegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
 
 								if( !emailRegExp.test(email) ) {
 									checkText="잘못된 형식의 이메일입니다.";
@@ -78,18 +79,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								
 								if(checkText!= ""){
 									$(this).siblings("p").html(checkText);
-									$(this).siblings("p").addClass("vali");
 									$(this).siblings("p").slideDown();
 								} else {
-									$(this).siblings("p").slideUp(function(){
-										$(this).removeClass("vali");
-									});
+									$(this).siblings("p").slideUp();
 								}
 
 							});
 							$(".password-check").on("propertychange change keyup paste input", function(){
 								
-								var password = $('input[name=password]').val();
+								var password = $(".password").val();
 								
 								var checkText = "";
 								var passwordRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
@@ -100,18 +98,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								
 								if(checkText!= ""){
 									$(this).siblings("p").html(checkText);
-									$(this).siblings("p").addClass("vali");
 									$(this).siblings("p").slideDown();
 								} else {
-									$(this).siblings("p").slideUp(function(){
-										$(this).removeClass("vali");
-									});
+									$(this).siblings("p").slideUp();
 								}
 
 							});
 							$(".phoneNumber-check").on("propertychange change keyup paste input", function(){
 								
-								var phoneNumber = $('input[name=phoneNumber]').val();
+								var phoneNumber = $(".phoneNumber").val();
 								
 								var checkText = "";
 								var phoneNumberRegExp = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -122,12 +117,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								
 								if(checkText!= ""){
 									$(this).siblings("p").html(checkText);
-									$(this).siblings("p").addClass("vali");
 									$(this).siblings("p").slideDown();
 								} else {
-									$(this).siblings("p").slideUp(function(){
-										$(this).removeClass("vali");
-									});
+									$(this).siblings("p").slideUp();
 								}
 
 							});

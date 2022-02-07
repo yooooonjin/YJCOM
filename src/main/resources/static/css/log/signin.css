@@ -1,0 +1,99 @@
+#login .login{
+	width: 450px;
+	margin: 60px auto 80px;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	background-color: white;
+	position: relative;
+}
+
+#login .login-title{
+	text-align: center;
+	height: 64px;
+	line-height:64px;
+	margin: 0;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+#login .log-form{
+	padding: 20px 20px 10px 20px;
+}
+#login p{
+	text-align: left;
+	font-size: 14px;
+	margin-top: 10px;
+}
+#login .error{
+	text-align: left;
+	font-size: 20px;
+	font-weight: 600;
+	letter-spacing: -.7px;
+	margin-bottom: 20px;
+	text-decoration: underline;
+}
+
+#login input{
+	width: 100%;
+	height: 56px;
+	padding: 5px;
+	margin-top: 5px;
+}
+#login button{
+	margin-top:20px;
+	border: none;
+	width: 100%;
+	height: 48px;
+	background-color: #ff2e5f;
+	border-radius: 8px;
+	color: white;
+	font-size: 18px;
+	font-weight: 600;	
+	cursor: pointer;
+}
+/* //////////////소셜로그인/////////////////// */
+#login .social-login{
+	padding: 0 20px 10px;
+}
+#login .social-login .line{
+	display:inline-block;
+	width:40%;
+	border-top: 1px solid #DDDDDD;
+	top: 3px;
+}
+#login .social-login .or{
+	padding: 0 10px;
+	font-size: 12px;
+	color: black;
+}
+#login .social-login .google-login a{
+	position:relative;
+	margin-top:20px;
+	display: inline-block;
+	padding: 10px 12px;
+	width: 100%;
+	height: 48px;
+	border: 1px solid black;
+	border-radius: 8px;
+	text-align: left;
+}
+#login .social-login .google-login a:hover{
+	border: 2px solid black;
+}
+#login .social-login .google-login span{
+	position:absolute;
+	top:0;
+	left: 0;
+	display:inline-block;
+	font-size: 14px;
+	width: 100%;
+	line-height: 48px;
+	text-align: center;
+}
+/* ///////////////////////////////// */
+#login .join{
+	padding: 10px 0 20px 0;
+	font-size: 14px;
+	text-align:center;
+}

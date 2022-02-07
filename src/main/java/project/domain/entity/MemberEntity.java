@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import project.domain.dto.MemberUpdateDto;
+import project.domain.dto.member.MemberUpdateDto;
 
 
 @Builder
@@ -44,6 +44,7 @@ public class MemberEntity extends BaseEntity {
 	private String photoName;
 	
 	private boolean isSocial; //소셜여부확인
+	private String userIp;
 	
 	
 	

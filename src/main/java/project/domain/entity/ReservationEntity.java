@@ -51,7 +51,7 @@ public class ReservationEntity extends BaseEntity {
 	@ManyToOne
 	private HomeEntity home;
 	
-	@OneToOne(mappedBy = "reservation", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "reservation")
 	private HomeReviewEntity review;
 	
 	

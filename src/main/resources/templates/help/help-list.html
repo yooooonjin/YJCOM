@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/help/help-list.css">
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+	</head>
+	<body>
+	
+		<th:block th:insert="/common/login.html::login"/>
+		<header id="whitetype">
+		<div class="view-size">
+			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+				<div class="search" th:fragment="homeMain">
+				</div>
+			</th:block>
+		</div>
+		</header>
+		
+		<main>
+			<div id="help" class="view-size">
+				<div class="title flex">
+					<h2 sec:authentication="principal.name"></h2>
+					<h2>님, 안녕하세요. 무엇을 도와드릴까요?</h2>
+				</div>
+				<div class="category flex between">
+					<div class="detail-category">
+						<div><img src="/image/help/help1.jpg"></div>
+						<input value="예약 및 여행">
+					</div>
+					<div class="detail-category">
+						<div><img src="/image/help/help2.jpg"></div>
+						<input value="숙소 호스팅">
+					</div>
+					<div class="detail-category">
+						<div><img src="/image/help/help3.jpg"></div>
+						<input value="체험 호스팅">
+					</div>
+					<div class="detail-category">
+						<div><img src="/image/help/help4.jpg"></div>
+						<input value="회사 출장관리">
+					</div>
+				</div>
+				
+				<div class="search-wrap flex between">
+					<div>
+						<select class="select-condition" name="select-condition">
+							<option value="subject">제목</option>
+							<option value="email">작성자</option>
+						</select>
+						<input class="select-keyword" placeholder="검색어를 입력해주세요.">
+						<button class="select-btn">검색</button>
+					</div>
+					<div>
+						<div><a href="/help/write" class="write-btn">글쓰기</a></div>
+					</div>
+				</div>
+				
+				<div class="help-wrap">
+					<div>
+						<ul class="help-title flex">
+							<li>구분</li>
+							<li>제목</li>
+							<li>작성자</li>
+							<li>등록일</li>
+						</ul>
+					</div>
+					<div class="help-part">
+						<ul class="help-content flex" th:each="boardDto:${boardList}">
+							<li>[[${boardDto.category}]]</li>
+							<li><i class="far fa-lightbulb"></i>[[${boardDto.subject}]]</li>
+							<li>[[${boardDto.email}]]</li>
+							<li>[[${boardDto.createdDate.toLocalDate}]]</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</main>
+		
+		<script type="text/javascript">
+			$(function(){
+				
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+				 $(document).ajaxSend(function(e, xhr, options) {
+				        xhr.setRequestHeader(header, token);
+				    });
+				
+				$(".detail-category").click(function(){
+					var category=$(this).children("input").val();
+					$.ajax({
+						url:"/help/category",
+						type:"get",
+						data:{category:category},
+						success: function(result){
+	   						$(".help-part").html(result);
+	   					}
+					});
+				});	
+				
+				$(".select-btn").click(function(){
+					var condition=$(".select-condition").val();
+					var keyword=$(".select-keyword").val();
+					$.ajax({
+						url:"/help/keyword",
+						type:"get",
+						data:{
+							condition:condition,
+							keyword:keyword
+						},
+						success: function(result){
+	   						$(".help-part").html(result);
+	   					}
+					})
+				});
+			});
+		</script>
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+	</body>
+</html>

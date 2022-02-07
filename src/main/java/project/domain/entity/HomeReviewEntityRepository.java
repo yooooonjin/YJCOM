@@ -14,4 +14,6 @@ public interface HomeReviewEntityRepository extends JpaRepository<HomeReviewEnti
 
 	List<HomeReviewEntity> findByHome_hno(long hno);
 
+	List<HomeReviewEntity> findByMember_email(String username);
+
 }

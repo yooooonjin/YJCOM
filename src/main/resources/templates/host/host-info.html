@@ -48,6 +48,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<!-- /////////////////////////////////등록한 숙소/////////////////////////////////////////// -->
 				<div class="hosting" >
 					<div class="flex">
+						<div th:if="${none}">[[${none}]]</div>
 						<div class="host-home" th:each="hostHome:${hostHomes}">
 							<div class="home-img">
 								<img th:src="|/image/home-img/${hostHome.hno}_main-img.jpg|">

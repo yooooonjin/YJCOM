@@ -57,7 +57,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			
 			<div class="member">
 				<ul class="flex end">
-					<li sec:authorize="isAuthenticated()"><span sec:authentication="name">이메일 표기</span></li>
+					<li sec:authorize="isAuthenticated()"><span sec:authentication="principal.name">이메일 표기</span></li>
 					<li class="img">
 						<p>
 							<img class="line" src="/image/line.png" width="15px;">

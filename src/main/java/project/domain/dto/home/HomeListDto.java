@@ -31,15 +31,15 @@ public class HomeListDto {
 	private int bathroomNumber;
 	
 	private HomeType homeType;
-	
 	private Set<HomeOption> homeOptionSet;
-	
-	private List<ReservationEntity> reservations;
 	
 	private String homeIntro;
 	
+	private List<ReservationEntity> reservations;
 	private MemberEntity member;
 
+	
+	
 	public HomeListDto(HomeEntity entity) {
 	
 			this.hno=entity.getHno();

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="project.mybatis.mapper.BoardMapper">
+	<insert id="boadSave" useGeneratedKeys="true" keyProperty="bno">
+		insert into help_board (email, category, subject, content, read_count, created_date, updated_date)
+		values (#{email}, #{category}, #{subject}, #{content} ,0, sysdate(), sysdate())
+	</insert>
+	<select id="boardList" resultType="project.domain.dto.helpBoard.HelpBoardListDto">
+		select * from help_board
+	</select>
+	<select id="boardCategoryList" resultType="project.domain.dto.helpBoard.HelpBoardListDto">
+		select * from help_board where category=#{category}
+	</select>
+	<select id="boardSubjectKeywordList" resultType="project.domain.dto.helpBoard.HelpBoardListDto">
+		select * from help_board where subject like CONCAT('%', #{keyword}, '%')
+	</select>
+	<select id="boardEmailKeywordList" resultType="project.domain.dto.helpBoard.HelpBoardListDto">
+		select * from help_board where email like CONCAT('%', #{keyword}, '%')
+	</select>
+</mapper>

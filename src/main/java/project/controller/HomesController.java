@@ -19,7 +19,6 @@ import project.domain.dto.home.HomeRegDto;
 import project.security.dto.SecurityDto;
 import project.service.HomeService;
 
-@Log4j2
 @RequestMapping("/home")
 @RequiredArgsConstructor
 @Controller
@@ -40,16 +39,15 @@ public class HomesController {
 	}
 	//집 상세페이지
 	@GetMapping("/detail/{hno}")
-	public String homesDetail(Model medel, @PathVariable long hno) {
-		return homeService.homeDetail(medel,hno);
-		//return "home/home-detail";
+	public String homesDetail(Model medel, @PathVariable long hno, HomeSearchDto searchDto) {
+		return homeService.homeDetail(medel,hno,searchDto);
 	}
 	//숙소 등록 페이지
 	@GetMapping("/reg")
 	public String homeRegPage() {
 		return "home/home-reg";
 	}
-	//숙소 서브 이미지 temp 폴더에 임시 보관
+	//숙소 이미지 temp 폴더에 임시 보관
 	@ResponseBody
 	@PostMapping("/reg/tempImgUpload")
 	public String tempSubImgUpload(MultipartFile fileImg, String imageName) {

@@ -1,0 +1,9 @@
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<ul class="help-content flex" th:each="boardDto:${boardList}">
+		<li>[[${boardDto.category}]]</li>
+		<li><i class="far fa-lightbulb"></i>[[${boardDto.subject}]]</li>
+		<li>[[${boardDto.email}]]</li>
+		<li>[[${boardDto.createdDate.toLocalDate}]]</li>
+	</ul>
+</html>

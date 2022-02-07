@@ -19,9 +19,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<input th:value="${#temporals.format(searchDto.checkin,'MM월dd일')}" placeholder="날짜입력" readonly="readonly">
 							<th:block th:if="${searchDto.checkin}">~</th:block>
 							<input th:if="${searchDto.checkout}" th:value="${#temporals.format(searchDto.checkout,'MM월dd일')}" readonly="readonly">
+							<input type="hidden" name="checkin" th:value="${searchDto.checkin}">
+							<input type="hidden" name="checkout" th:value="${searchDto.checkout}">
 						</div>
 						<div>
-							<input th:value="${searchDto.guestsStr}" placeholder="게스트추가" readonly="readonly">
+							<input name="guestsStr" th:value="${searchDto.guestsStr}" placeholder="게스트추가" readonly="readonly">
 							<a><img src="/image/search-01.png" width="30px"></a>
 						</div>
 					</div>
@@ -150,7 +152,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			/*[# th:each="homes : ${homes}"]*/
 			
 			
-			var homeAddress= /*[[${homes.homeAddress}]]*/;
+			var homeAddress= /*[[${homes.homeAddress}]]*/
 			
 			var geocoder = new kakao.maps.services.Geocoder();
 			var imageSrc = "/image/airbnb_marker.png"; 
@@ -191,17 +193,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				         customOverlay.setMap(map);  
 				         
 				   });
-				  // 커스텀 오버레이를 닫기 위해 호출되는 함수
+				/*   // 커스텀 오버레이를 닫기 위해 호출되는 함수
 					   function closeOverlay() {
-						 /*  customOverlay.setMap(null);      */
-						 alert("클릭됨");
-						}
-				     
+						 customOverlay.setMap(null);
+						} */
 			    } 
-			    
-		 	 
 			}); 
-			
 			
 			$(function(){
 				

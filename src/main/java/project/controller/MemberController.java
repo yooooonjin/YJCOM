@@ -3,6 +3,7 @@ package project.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
-import project.domain.dto.MemberUpdateDto;
 import project.domain.dto.home.HomeReserveDto;
 import project.domain.dto.home.HomeReviewDto;
+import project.domain.dto.member.MemberUpdateDto;
 import project.security.dto.SecurityDto;
 import project.service.MemberService;
 
@@ -79,6 +80,12 @@ public class MemberController {
 		return service.personalInfoPage(securityDto,model);
 	}
 	
+	//계정삭제
+	@ResponseBody
+	@DeleteMapping
+	public void memberDelete(@AuthenticationPrincipal SecurityDto securityDto) {
+		service.memberDelete(securityDto);
+	}
 	
 
 }

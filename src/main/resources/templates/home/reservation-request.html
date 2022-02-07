@@ -74,7 +74,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<div>호스트에게 여행 목적과 도착 예정 시간을 알려주세요.</div>
 								</div>
 								<div>
-									<textarea name="message"></textarea>
+									<textarea name="message" required="required"></textarea>
 								</div>
 							</div>
 						</div>
@@ -105,7 +105,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				<input type="hidden" th:value="${homeInfo.hno}">
 					<div>
 						<div class=" home-info-detail flex">
-							<img src="/image/room-img-01.jpg">
+							<img th:src="|/image/home-img/${homeInfo.hno}_main-img.jpg|">
 							<div>
 								<div>[[${homeInfo.homeType}]]</div>
 								<div>[[${homeInfo.homeName}]]</div>

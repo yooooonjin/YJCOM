@@ -5,6 +5,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		<th:block th:insert="/common/common.html::head" />
 		<link rel="stylesheet" href="/css/member/account.css">
 		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<!-- /////////////////////////ajax+시큐리티 사용 시//////////////////////////////////////// -->
 	</head>
 	<body>
 		<th:block th:insert="/common/login.html::login"/>
@@ -102,13 +106,36 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				
 				</div>
 				
-				
 				<div class="comment">
-					<p>계정을 비활성화하셔야 하나요?</p>
-					<p>지금 처리하기</p>
+					<p>이 옵션을 사용하면 더 이상 로그인할 수 없으며 관련 법률에 따라 개인정보가 삭제됩니다.</p>
+					<p class="member-delete-btn">계정 삭제 요청</p>
 				</div>
 			</div>
+		<script type="text/javascript">
+		$(function(){
+			 //계정 삭제
+			 
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(header, token);
+			});
+			
+			$(".member-delete-btn").click(function(){
+				 $.ajax({
+					url:"/member",
+					type:"delete",
+					success:function(){
+						window.location.href="/";
+					}
+					
+				 });
+			});
+			
+			
+		});
 		
+		</script>
 		
 		
 		</main>

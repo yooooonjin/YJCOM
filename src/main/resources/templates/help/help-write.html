@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<th:block th:insert="/common/common.html::head" />
+		<link rel="stylesheet" href="/css/help/help-write.css">
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		<script src="/summernote/summernote-lite.js"></script>
+		<script src="/summernote/lang/summernote-ko-KR.js"></script>
+		<script src="/summernote/summernote-mySetting.js"></script>
+		<link rel="stylesheet" href="/summernote/summernote-lite.css">
+	</head>
+	<body>
+	
+		<th:block th:insert="/common/login.html::login"/>
+		<header id="whitetype">
+		<div class="view-size">
+			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
+				<div class="search" th:fragment="homeMain">
+				</div>
+			</th:block>
+		</div>
+		</header>
+		
+		<main>
+			<div id="help-write" class="view-size">
+				<div class="title">
+					<h2>윤진님, 안녕하세요. 무엇을 도와드릴까요?</h2>
+				</div>
+				<section>
+					<div class="wrap view-size">
+						<form action="/help/write" method="post">
+							<div class=" subject flex">
+								<select class="category" name="category">
+									<option value="예약 및 여행">예약 및 여행</option>
+									<option value="숙소 호스팅">숙소 호스팅</option>
+									<option value="체험 호스팅">체험 호스팅</option>
+									<option value="회사 출장관리">회사 출장관리</option>
+								</select>
+								<div><i class="far fa-lightbulb"></i></div>
+								<input type="text" name="subject">	
+							</div>
+							<div>
+								<textarea class="summernote"  name="content" placeholder="내용입력"></textarea>	
+							</div>
+							<div class="button flex center">
+								<input type="hidden"  th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+								<div><button class="submit-btn" type="submit">글쓰기 완료</button></div>
+								<div><a class="list-btn" href="/help">목록 가기</a></div>
+							</div>
+						</form>
+					</div>
+				</section>
+			</div>
+		</main>
+		
+		<script type="text/javascript">
+			$(function(){
+			});
+		
+		</script>
+		
+		<footer>
+			<th:block th:insert="/common/footer::footer"/>	
+		</footer>
+	</body>
+</html>

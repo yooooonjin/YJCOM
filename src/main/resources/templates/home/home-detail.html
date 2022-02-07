@@ -4,12 +4,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<th:block th:insert="/common/common.html::head" />
 		<link rel="stylesheet" href="/css/home/home-detail.css">
-		<link rel="stylesheet" href="/css/common/home-reserve.css">
+		<link rel="stylesheet" href="/css/home/home-reserve.css">
 		<link rel="stylesheet" href="/css/common/datepicker-home-detail.css">
 		<script type="text/javascript" src="/js/visual.js"></script>
 		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
+		<th:block th:insert="/common/login.html::login"/>
 		<header id="whitetype">
 			<div class="detail-view-size">
 			<th:block th:replace="~{/common/header::whitetype(~{this::homeMain})}">
@@ -84,8 +85,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div>
 								<h2>후기</h2>
 								<div id="review-list">
+									<div  th:if="${none}">[[${none}]]</div>
 									<div class="review flex" th:each="homeReview:${homeReviews}">
-									<div th:unless="${homeReview}">후기가 존재하지 않습니다.</div>
 										<div>
 											<img th:src="|/image/member/${homeReview.member.photoName}|" width="60px" height="60px" style="border-radius: 50%;">
 											<p>[[${homeReview.member.name}]]</p>
@@ -100,7 +101,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							
 						</div>
 					</div>
-					<th:block th:insert="/common/home-reserve.html::home-reserve"/>
+					<th:block th:insert="/home/home-reserve.html::home-reserve"/>
 				</div>
 			</section>
 			

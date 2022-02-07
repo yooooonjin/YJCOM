@@ -93,22 +93,22 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			<section id="guest">
 				<P>예약한 숙소</P>
 				<div class="reserve-home flex">
+					<div th:if="${none}">[[${none}]]</div>
 					<div th:each="reservedHome:${reservedHomes}">
-					<div th:unless="${reservedHome}">현재 투숙 예정 숙소가 없습니다.</div>
 						<div class="reserve-home-list" >
 							<div class="reserve-home-info flex">
-								<div><img th:src="|/image/home-img/${reservedHome.home.hno}_main-img.jpg|" width="140px" height="110px"></div>
+								<div><img th:src="|/image/home-img/${reservedHome.hno}_main-img.jpg|" width="140px" height="110px"></div>
 								<div class="home-info">
 									<div>
 										<ul>
-											<li class="home-type">[[${reservedHome.home.homeType}]]</li>
-											<li class="home-name"><a th:href="|/home/detail/${reservedHome.home.hno}|">[[${reservedHome.home.homeName}]]</a></li>
+											<li class="home-type">[[${reservedHome.homeType}]]</li>
+											<li class="home-name"><a th:href="|/home/detail/${reservedHome.hno}|">[[${reservedHome.homeName}]]</a></li>
 											<li class="home-number">
 												<div class="flex">
-													<div>최대인원 <span>[[${reservedHome.home.maximumNumber}]]</span>명 </div>
-													<div>침대 <span>[[${reservedHome.home.bedNumber}]]</span>개 </div>
-													<div>침실 <span>[[${reservedHome.home.bedroomNumber}]]</span>개 </div>
-													<div>욕실 <span>[[${reservedHome.home.bathroomNumber}]]</span>개</div>
+													<div>최대인원 <span>[[${reservedHome.maximumNumber}]]</span>명 </div>
+													<div>침대 <span>[[${reservedHome.bedNumber}]]</span>개 </div>
+													<div>침실 <span>[[${reservedHome.bedroomNumber}]]</span>개 </div>
+													<div>욕실 <span>[[${reservedHome.bathroomNumber}]]</span>개</div>
 												</div>
 											</li>
 										</ul>
@@ -131,13 +131,13 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<div class="reservation-price-info">
 									<h3>요금 세부 정보</h3>
 									<div class="detail-price flex between">
-										<input class="homeprice" type="hidden" th:value="${reservedHome.home.homePrice}">
-										<span>[[${#numbers.formatInteger(reservedHome.home.homePrice,3,'COMMA')}]]원 X <span>[[${reservedHome.days}]]</span></span>
-										<span>[[${#numbers.formatInteger((reservedHome.home.homePrice*reservedHome.days),3,'COMMA')}]]원</span>
+										<input class="homeprice" type="hidden" th:value="${reservedHome.homePrice}">
+										<span>[[${#numbers.formatInteger(reservedHome.homePrice,3,'COMMA')}]]원 X <span>[[${reservedHome.days}]]</span></span>
+										<span>[[${#numbers.formatInteger((reservedHome.homePrice*reservedHome.days),3,'COMMA')}]]원</span>
 									</div>
 									<div class="flex between">
 										<span>서비스 수수료</span>
-										<span>[[${#numbers.formatInteger((reservedHome.home.homePrice*reservedHome.days)*0.1,3,'COMMA')}]]원</span>
+										<span>[[${#numbers.formatInteger((reservedHome.homePrice*reservedHome.days)*0.1,3,'COMMA')}]]원</span>
 									</div>
 									<div class="flex between">
 										<span>총 합계</span>
@@ -151,9 +151,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<div>
 										<div class="flex">
 											<p>내가 작성한 후기</p>
-											<p>[[${reservedHome.review.createdDate.toLocalDate}]]</p>
+											<p>[[${reservedHome.createdDate.toLocalDate}]]</p>
 										</div>
-										<div class="review-data">[[${reservedHome.review.review}]]</div>
+										<div class="review-data">[[${reservedHome.review}]]</div>
 									</div>
 									
 								</div>
@@ -165,7 +165,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 										</div>
 										<div class="edit-button">
 											<input class="reservation-id" type="hidden" th:value="${reservedHome.resNo}">
-											<input class="home-id" type="hidden" th:value="${reservedHome.home.hno}">
+											<input class="home-id" type="hidden" th:value="${reservedHome.hno}">
 											<button class="submit-btn" type="submit">등록하기</button>
 										</div>
 									</div>

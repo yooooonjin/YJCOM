@@ -51,7 +51,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<div>
 										<div th:if="${member.phoneNumber}">[[${member.phoneNumber}]]</div>
 										<div th:unless="${member.phoneNumber}">연락처를 입력해주세요.</div>
-										<div>연락처 번호(예약이 확정된 게스트와 에어비앤비가 연락할 번호) 다른 전화번호를 추가하고 번호별 사용 목적을 정하실 수 있습니다.</div>
+										<div class="phone-number-comment">연락처 번호(예약이 확정된 게스트와 에어비앤비가 연락할 번호) 다른 전화번호를 추가하고 번호별 사용 목적을 정하실 수 있습니다.</div>
 									</div>
 								</div>
 								<div>
@@ -67,8 +67,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 								<div>
 									<div>성명</div>
 									<div>
-										<input type="radio" name="gender" value="F"><span>여자</span>
-										<input type="radio" name="gender" value="M"><span>남자</span>
+										<input type="radio" name="gender" value="F"><span>여성</span>
+										<input type="radio" name="gender" value="M"><span>남성</span>
 									</div>
 								</div>
 								<div>
@@ -133,7 +133,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				
 				var token = $("meta[name='_csrf']").attr("content");
 				var header = $("meta[name='_csrf_header']").attr("content");
+				 $(document).ajaxSend(function(e, xhr, options) {
+				        xhr.setRequestHeader(header, token);
+				    });
 			
+				 
 				$(".btn-edit").click(function(){
 					$(this).hide();
 					$(".default-profile").hide();
@@ -148,20 +152,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					$(".btn-edit").show();
 				});
 				 
-
-				 $(document).ajaxSend(function(e, xhr, options) {
-				        xhr.setRequestHeader(header, token);
-				    });
-				 
 				$(".btn-profile-edit-update").click(function(){
 					
 					var email=$(".email").val();
 					var name=$(".name").val();
-					var gender=$("input[name=gender]").val();
+					var gender=$("input:radio[name=gender]:checked").val();
 					var birthday=$(".birthday").val();
 					var phoneNumber=$(".phoneNumber").val();
 					var address=$(".address").val();
-					console.log(email);
+					
 					$.ajax({
 						url:"/member",
 						type:"put",
@@ -174,19 +173,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							address:address},
 						success:function(){
 							 location.reload()
-							 /* loadingReplies() */
 						}
 					});
 				});
 				
 			});
 			
-			function loadingReplies(){
-      				$.ajax({
-      					url:"/member/info",
-      					type:"get"
-      				});	
-   			}
 		</script>
 		
 		<footer>

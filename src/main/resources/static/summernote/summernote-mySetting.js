@@ -46,14 +46,14 @@ setting = {
 function uploadSummernoteImageFile(file, el) {
 	data = new FormData();
 	data.append("file", file);
-	
+	//csrf 적용한경우..아니면제거
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
 	
 	$.ajax({
 		beforeSend:function(xhr){
 			xhr.setRequestHeader(header, token);
-		},
+		},////csrf 적용한경우..아니면 제거
 		data: data,
 		type: "POST",
 		url: "/uploadSummernoteImageFile",

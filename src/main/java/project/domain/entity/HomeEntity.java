@@ -89,7 +89,7 @@ public class HomeEntity extends BaseEntity {
 	private List<HomeImageEntity> homeImages = new Vector<>();
 	
 	
-	
+	//예약 가능한 날짜가 있는 숙소만 반환
 	public boolean isreservations(LocalDate checkin, LocalDate checkout) {
 		
 		reservations=reservations.stream()

@@ -47,6 +47,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 				</div>
 				<!-- /////////////////////////////////예약/////////////////////////////////////////// -->
 					<div class="view-size flex reservation-container">
+						<div th:if="${none}">[[${none}]]</div>
 						<div th:each="reservation:${reservations}">
 							<div class="home-reservation" >
 								<div class="home-name">

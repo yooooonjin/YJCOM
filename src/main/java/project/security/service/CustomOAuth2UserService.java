@@ -48,7 +48,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService{
 			email=oauth2User.getAttribute("email");
 			name=oauth2User.getAttribute("name");
 		}else if(registrationId.equals("naver")) {
-			
 		}
 		//가입여부 체크
 		Optional<SecurityDto> check= memberEntityRepository.findById(email).map(SecurityDto::new);

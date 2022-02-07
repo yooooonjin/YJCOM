@@ -1,6 +1,6 @@
 package project.service;
 
-import project.domain.dto.JoinDto;
+import project.domain.dto.log.JoinDto;
 
 public interface LogService {
 

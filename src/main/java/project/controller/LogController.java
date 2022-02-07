@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
-import project.domain.dto.JoinDto;
+import project.domain.dto.log.JoinDto;
 import project.service.LogService;
 
 @RequiredArgsConstructor
@@ -14,9 +14,9 @@ public class LogController {
 	
  	private final LogService service;
 	
- 	@GetMapping("/login")
+ 	@GetMapping("/signin")
  	public String loginPage() {
- 		return "log/login";
+ 		return "log/signin";
  	}
  	
  	@GetMapping("/join")

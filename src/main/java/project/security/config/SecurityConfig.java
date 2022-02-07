@@ -10,13 +10,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import lombok.RequiredArgsConstructor;
 import project.security.service.CustomOAuth2UserService;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -31,14 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 			
 		http.authorizeHttpRequests()// 요청에 의한 보안검사 시작
-			.antMatchers("/","/login","/join","/home/**").permitAll() //인증필요없이 누구나 접근가능
+			.antMatchers("/","/signin","/join","/home/**").permitAll() //인증필요없이 누구나 접근가능
+			.antMatchers("/member/**","/help/**").hasRole("USER") //USER 권한
 			.antMatchers("/host/**").hasRole("HOST") //HOST 권한
-			.antMatchers("/member/**").hasRole("USER") //USER 권한
-			.antMatchers("/admin/**").hasRole("ADMIN") //ADMIN 권한
 			.anyRequest().authenticated();//어떤 요청에도 보안검사
 			
 		http.formLogin()//보안 검증은 formLogin방식
-//			.loginPage("/login")
+			.loginPage("/signin")
 			.loginProcessingUrl("/login")//로그인페이지의 action
 			.usernameParameter("email")//로그인페이지 username->email
 			;
@@ -57,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/css/**");
 		web.ignoring().antMatchers("/image/**");
 		web.ignoring().antMatchers("/js/**");
+		web.ignoring().antMatchers("/summernote/**");
 	}
 
 	

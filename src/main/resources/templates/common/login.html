@@ -14,8 +14,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<div class="log-form">
 						<form action="/login" method="post">
 						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-						<div class="error" th:if="${param.error}">
-						[[${session["SPRING_SECURITY_LAST_EXCEPTION"].message}]]
+						<div class="error" th:if="${error!=null}">
 						</div>		
 							<ul>
 								<li class="welcome">에어비앤비에 오신 것을 환영합니다.</li>
@@ -41,6 +40,12 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<a href="/oauth2/authorization/google">
 								<img src="/image/google-logo.png" width="30px">
 								<span>구글로 로그인하기</span>
+							</a>
+						</div>
+						<div class="google-login">
+							<a href="/oauth2/authorization/naver">
+								<img src="/image/naver-logo.png" width="30px">
+								<span>네이버로 로그인하기</span>
 							</a>
 						</div>
 					</div>

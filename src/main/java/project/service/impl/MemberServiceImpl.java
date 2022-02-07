@@ -2,11 +2,7 @@ package project.service.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.Vector;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -16,20 +12,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import project.domain.dto.MemberUpdateDto;
-import project.domain.dto.home.HomeListDto;
 import project.domain.dto.home.HomeReserveDto;
-import project.domain.entity.HomeEntity;
+import project.domain.dto.member.MemberInfoDto;
+import project.domain.dto.member.MemberUpdateDto;
+import project.domain.dto.member.PersonalInfoDto;
+import project.domain.dto.member.ReservedHomeInfoDto;
+import project.domain.dto.reserve.ReservationRequestHomeDto;
+import project.domain.entity.HelpBoardEntityRepository;
 import project.domain.entity.HomeEntityRepository;
 import project.domain.entity.HomeReviewEntity;
 import project.domain.entity.HomeReviewEntityRepository;
-import project.domain.entity.MemberEntity;
 import project.domain.entity.MemberEntityRepository;
 import project.domain.entity.MessageEntity;
 import project.domain.entity.MessageEntityRepository;
@@ -48,49 +47,50 @@ public class MemberServiceImpl implements MemberService {
 	private final ReservationEntityRepository reservationRepository;
 	private final HomeReviewEntityRepository homeReviewRepository;
 	private final MessageEntityRepository messageRepository;
+	private final HelpBoardEntityRepository helpBoardRepository;
 	
 	
 	//프로필 정보
 	@Override
 	public String memberInfo(Model model, SecurityDto securityDto, int page) {
 		
-		//회원정보 데이터 //TODO DTO에 담아서 이동
-		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
-		model.addAttribute("memberInfo",entity);
+		//회원정보 데이터
+		MemberInfoDto memberInfo= memberRepository.findById(securityDto.getUsername()).map(MemberInfoDto::new).orElseThrow();
+		model.addAttribute("memberInfo",memberInfo);
 		
 		
-		//예약한 집 데이터 //TODO DTO에 담아서 이동
+		//예약한 집 데이터
 		Pageable pageable =PageRequest.of(page-1, 2, Direction.DESC, "resNo");
+		Page<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(memberInfo.getEmail(),pageable);
+		List<ReservedHomeInfoDto> reservedHomes= reservationEntity.map(ReservedHomeInfoDto::new).get().collect(Collectors.toList());
 		
-		Page<ReservationEntity> reservationEntity = reservationRepository.findAllByMember_email(entity.getEmail(),pageable);
+		if(reservationEntity.isEmpty()) {
+			model.addAttribute("none","현재 투숙 예정 숙소가 없습니다.");
+		}
 		
 		
+		model.addAttribute("reservedHomes",reservedHomes);
 		model.addAttribute("pageTot",reservationEntity.getTotalPages());
-		
-		model.addAttribute("reservedHomes",reservationEntity);
-		
-		
 		
 		return "member/member-info";
 	}
+	
 	//회원정보 수정
 	@Transactional
 	@Override
 	public void memberUpdate(MemberUpdateDto updateDto ,Model model) {
 		memberRepository.findById(updateDto.getEmail()).map(entity->entity.updateMemberInfo(updateDto)).get();
-				
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////////////////////////
 	//숙소예약
 	@Override
 	public String homeReserve(long hno, SecurityDto securityDto, HomeReserveDto reserveDto, String message) {
 		
 		//문자열로 넘어온 게스트 수를 정수로 변환
 		String guestsStr=reserveDto.getGuestsStr();
-		String guestStr_=guestsStr.replaceAll("[^0-9]", "");
-		if(guestStr_==null || guestStr_.equals(""))guestStr_="0";
-		int guests = Integer.parseInt(guestStr_);
+		String guestsStr_=guestsStr.replaceAll("[^0-9]", "");
+		if(guestsStr_==null || guestsStr_.equals(""))guestsStr_="0";
+		int guests = Integer.parseInt(guestsStr_);
 		
 		//예약
 		ReservationEntity entity = ReservationEntity.builder()
@@ -102,7 +102,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		reservationRepository.save(entity);
 		
-		
+		//호스트에게 메세지 전송
 		MessageEntity messageEntity=MessageEntity.builder()
 				.sender(memberRepository.findById(securityDto.getUsername()).get())
 				.receiver(homeRepository.findById(hno).get().getMember())
@@ -114,12 +114,11 @@ public class MemberServiceImpl implements MemberService {
 		return "redirect:/member/info";
 	}
 	
-	
 	//예약 요청 페이지
 	@Override
 	public String homeReserveRequest(long hno, HomeReserveDto reserveDto, Model model) {
-		HomeEntity homeEntity= homeRepository.findById(hno).get();
-		model.addAttribute("homesInfo", homeEntity);
+		ReservationRequestHomeDto homesInfo= homeRepository.findById(hno).map(ReservationRequestHomeDto::new).orElseThrow();
+		model.addAttribute("homesInfo", homesInfo);
 		model.addAttribute("reservationsInfo", reserveDto);
 		return "home/reservation-request";
 	}
@@ -140,9 +139,9 @@ public class MemberServiceImpl implements MemberService {
 	//개인정보
 	@Override
 	public String personalInfoPage(SecurityDto securityDto, Model model) {
-		//회원정보 데이터 //TODO DTO에 담아서 이동
-		MemberEntity entity= memberRepository.findById(securityDto.getUsername()).get();
-		model.addAttribute("memberInfo",entity);
+		//회원정보 데이터
+		PersonalInfoDto memberInfo= memberRepository.findById(securityDto.getUsername()).map(PersonalInfoDto::new).orElseThrow();
+		model.addAttribute("memberInfo",memberInfo);
 		return "member/personal-info";
 	}
 	
@@ -176,7 +175,20 @@ public class MemberServiceImpl implements MemberService {
 		model.addAttribute("photo", photoName);
 		return "member/member-photo";
 	}
-	
-	
+	//계정 삭제
+	@Override
+	public void memberDelete(SecurityDto securityDto) {
+		
+		String email=securityDto.getUsername();
+		
+		homeReviewRepository.findByMember_email(email).forEach(e->homeReviewRepository.deleteById(e.getRno()));
+		reservationRepository.findByMember_email(email).forEach(e->reservationRepository.deleteById(e.getResNo()));
+		homeRepository.findByMember_email(email).forEach(e->homeRepository.deleteById(e.getHno()));
+		messageRepository.findBySender_emailOrReceiver_email(email,email).forEach(e->messageRepository.deleteById(e.getMno()));
+		helpBoardRepository.findByMember_email(email).forEach(e->helpBoardRepository.deleteById(e.getBno()));
+		memberRepository.deleteById(email);
+		
+		SecurityContextHolder.clearContext();
+	}
 
 }
