@@ -51,7 +51,6 @@ public class HomesController {
 	@ResponseBody
 	@PostMapping("/reg/tempImgUpload")
 	public String tempSubImgUpload(MultipartFile fileImg, String imageName) {
-		System.out.println("name"+imageName);
 		return homeService.tempImgUpload(fileImg,imageName);
 	}
 	//숙소 등록

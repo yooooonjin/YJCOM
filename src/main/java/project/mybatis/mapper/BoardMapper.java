@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import project.domain.dto.helpBoard.HelpBoardKeywordDto;
 import project.domain.dto.helpBoard.HelpBoardListDto;
 import project.domain.dto.helpBoard.HelpBoardWriteDto;
 
@@ -12,12 +13,10 @@ public interface BoardMapper {
 
 	List<HelpBoardListDto> boardList();
 
-	void boadSave(HelpBoardWriteDto writeDto);
+	void boardSave(HelpBoardWriteDto writeDto);
 
 	List<HelpBoardListDto> boardCategoryList(String category);
 
-
-	List<HelpBoardListDto> boardSubjectKeywordList(String keyword);
-	List<HelpBoardListDto> boardEmailKeywordList(String keyword);
+	List<HelpBoardListDto> boardKeywordList(HelpBoardKeywordDto keywordDto);
 
 }

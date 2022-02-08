@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.springframework.ui.Model;
 
+import project.domain.dto.helpBoard.HelpBoardKeywordDto;
 import project.domain.dto.helpBoard.HelpBoardWriteDto;
 
 public interface HelpBoardService {
@@ -14,6 +15,6 @@ public interface HelpBoardService {
 
 	String helpCategory(Model model, String category);
 
-	String helpKeyword(Model model, String condition, String keyword);
+	String helpKeyword(Model model, HelpBoardKeywordDto keywordDto);
 
 }

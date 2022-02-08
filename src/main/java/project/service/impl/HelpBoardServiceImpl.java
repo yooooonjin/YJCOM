@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import lombok.RequiredArgsConstructor;
+import project.domain.dto.helpBoard.HelpBoardKeywordDto;
 import project.domain.dto.helpBoard.HelpBoardListDto;
 import project.domain.dto.helpBoard.HelpBoardWriteDto;
 import project.mybatis.mapper.BoardMapper;
@@ -22,7 +23,7 @@ public class HelpBoardServiceImpl implements HelpBoardService {
 	@Override
 	public String helpWrite(Principal principal, HelpBoardWriteDto writeDto) {
 		writeDto.setEmail(principal.getName());
-		boardMapper.boadSave(writeDto);
+		boardMapper.boardSave(writeDto);
 		return "redirect:/help";
 	}
 	//도움말 전체 리스트
@@ -39,19 +40,12 @@ public class HelpBoardServiceImpl implements HelpBoardService {
 		model.addAttribute("boardList", result);
 		return "help/help-detail";
 	}
+	//키워드 검색
 	@Override
-	public String helpKeyword(Model model, String condition, String keyword) {
+	public String helpKeyword(Model model, HelpBoardKeywordDto keywordDto) {
 		
-		//제목중 keyword 포함 리스트
-		if(condition.equals("subject")) {
-			List<HelpBoardListDto> result=boardMapper.boardSubjectKeywordList(keyword);
-			model.addAttribute("boardList", result);
-		}
-		//제목중 keyword 포함 리스트
-		if(condition.equals("email")) {
-			List<HelpBoardListDto> result=boardMapper.boardEmailKeywordList(keyword);
-			model.addAttribute("boardList", result);
-		}
+		List<HelpBoardListDto> result=boardMapper.boardKeywordList(keywordDto);
+		model.addAttribute("boardList", result);
 		return "help/help-detail";
 	}
 

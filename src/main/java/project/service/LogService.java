@@ -6,4 +6,6 @@ public interface LogService {
 
 	String join(JoinDto joinDto);
 
+	String emailCheck(String email);
+
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import project.domain.dto.helpBoard.HelpBoardKeywordDto;
 import project.domain.dto.helpBoard.HelpBoardWriteDto;
 import project.service.HelpBoardService;
 
@@ -27,15 +28,12 @@ public class HelpBoardController {
 	//카테고리별 리스트
 	@GetMapping("/category")
 	public String helpCategoryPage(Model model, String category) {
-		System.out.println(category);
 		return service.helpCategory(model,category);
 	}
 	//키워드 리스트
 	@GetMapping("/keyword")
-	public String helpKeywordPage(Model model,String condition ,String keyword) {
-		System.out.println(condition);
-		System.out.println(keyword);
-		return service.helpKeyword(model,condition,keyword);
+	public String helpKeywordPage(Model model, HelpBoardKeywordDto keywordDto) {
+		return service.helpKeyword(model,keywordDto);
 	}
 	//도움말 쓰기 페이지
 	@GetMapping("/write")

@@ -13,7 +13,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					<ul>
 						<li><a class="login-btn">로그인</a></li>
 						<li><a href="/join">회원가입</a></li>
-						<li><a href="#">도움말</a></li>
 					</ul>
 				</div>
 				<div sec:authorize="isAuthenticated()">
@@ -24,7 +23,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 					</ul>
 					<ul>
 						<li><a href="/home/reg">숙소등록</a></li>
-						<li><a href="/host">숙소관리</a></li>
+						<li  sec:authorize="hasRole('ROLE_HOST')"><a href="/host">숙소관리</a></li>
 					</ul>
 					<ul>
 						<li><a href="/help">도움말</a></li>

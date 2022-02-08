@@ -130,8 +130,6 @@ public class HomeServiceImpl implements HomeService {
 			reservationEntity.forEach(e->{
 				LocalDate checkin= e.getCheckIn();
 				LocalDate checkout= e.getCheckOut();
-				//reservationDates.add(checkin);
-				//reservationDates.add(checkout);
 				checkin.datesUntil(checkout).forEach(date-> reservationDates.add(date));
 			});
 			model.addAttribute("reservationDates", reservationDates);

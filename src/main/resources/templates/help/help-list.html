@@ -56,7 +56,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 						<input class="select-keyword" placeholder="검색어를 입력해주세요.">
 						<button class="select-btn">검색</button>
 					</div>
-					<div>
+					<div sec:authorize="hasRole('ROLE_HOST')">
 						<div><a href="/help/write" class="write-btn">글쓰기</a></div>
 					</div>
 				</div>

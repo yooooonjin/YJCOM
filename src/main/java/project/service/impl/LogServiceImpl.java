@@ -1,5 +1,7 @@
 package project.service.impl;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -38,6 +40,17 @@ public class LogServiceImpl implements LogService {
 		memberRepository.save(entity);
 		
 		return "redirect:/";
+	}
+	//아이디 중복체크
+	@Override
+	public String emailCheck(String email) {
+		
+		String result="*존재하는 아이디입니다.";
+		Optional<MemberEntity> member= memberRepository.findById(email);
+		if(member.isEmpty()) {
+			return null;
+		}
+		return result;
 	}
 
 }
