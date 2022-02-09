@@ -24,8 +24,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 		
 		<main>
 			<div id="help-write" class="view-size">
-				<div class="title">
-					<h2>윤진님, 안녕하세요. 무엇을 도와드릴까요?</h2>
+				<div class="title flex">
+					<h2 sec:authentication="principal.name"></h2>
+					<h2>님, 안녕하세요. 무엇을 도와드릴까요?</h2>
 				</div>
 				<section>
 					<div class="wrap view-size">
