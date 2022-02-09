@@ -10,4 +10,5 @@ public interface HomeImageEntityRepository extends JpaRepository<HomeImageEntity
 
 	List<HomeImageEntity> findByHome_hno(long hno);
 
+
 }

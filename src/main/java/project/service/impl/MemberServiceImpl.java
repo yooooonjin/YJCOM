@@ -27,6 +27,7 @@ import project.domain.dto.member.ReservedHomeInfoDto;
 import project.domain.dto.reserve.ReservationRequestHomeDto;
 import project.domain.entity.HelpBoardEntityRepository;
 import project.domain.entity.HomeEntityRepository;
+import project.domain.entity.HomeImageEntityRepository;
 import project.domain.entity.HomeReviewEntity;
 import project.domain.entity.HomeReviewEntityRepository;
 import project.domain.entity.MemberEntityRepository;
