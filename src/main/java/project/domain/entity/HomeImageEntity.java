@@ -2,6 +2,7 @@ package project.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class HomeImageEntity {
 	private int orderNo;
 	
 	@JoinColumn(name = "hno")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private HomeEntity home;
 	
 	

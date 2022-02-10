@@ -44,11 +44,11 @@ public class ReservationEntity extends BaseEntity {
 	private String reserveStatus;
 	
 	@JoinColumn(name = "email")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private MemberEntity member;
 	
 	@JoinColumn(name = "hno")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private HomeEntity home;
 	
 	@OneToOne(mappedBy = "reservation")

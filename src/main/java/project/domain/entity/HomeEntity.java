@@ -76,15 +76,15 @@ public class HomeEntity extends BaseEntity {
 		homeOptionSet.add(homeOption);
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "email")
 	private MemberEntity member;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy ="home")
+	@OneToMany(mappedBy ="home")
 	@Builder.Default
 	private List<ReservationEntity> reservations = new Vector<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy ="home")
+	@OneToMany(mappedBy ="home")
 	@Builder.Default
 	private List<HomeImageEntity> homeImages = new Vector<>();
 	
