@@ -61,7 +61,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 							<div class="flex between">
 								<div>
 									<div>
-										<p class="home-sub-title">[[${homeDetail.member.name}]]님이 호스팅하는 [[${homeDetail.homeType.homeType}]]</p>
+										<p class="home-sub-title">[[${homeDetail.name}]]님이 호스팅하는 [[${homeDetail.homeType.homeType}]]</p>
 									</div>
 									<div class="home-number flex">
 										<div>최대인원 <span>[[${homeDetail.maximumNumber}]]</span>명</div>
@@ -71,7 +71,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									</div>
 								</div>
 								<div>
-									<img th:src="|/image/member/${homeDetail.member.photoName}|" width="56px" height="56px" style="border-radius: 50%;">
+									<img th:src="|/image/member/${homeDetail.photoName}|" width="56px" height="56px" style="border-radius: 50%;">
 								</div>
 							</div>
 							<div>
@@ -88,8 +88,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 									<div  th:if="${none}">[[${none}]]</div>
 									<div class="review flex" th:each="homeReview:${homeReviews}">
 										<div>
-											<img th:src="|/image/member/${homeReview.member.photoName}|" width="60px" height="60px" style="border-radius: 50%;">
-											<p>[[${homeReview.member.name}]]</p>
+											<img th:src="|/image/member/${homeReview.photoName}|" width="60px" height="60px" style="border-radius: 50%;">
+											<p>[[${homeReview.name}]]</p>
 										</div>
 										<div>
 											<div>[[${homeReview.createdDate.toLocalDate}]]</div>

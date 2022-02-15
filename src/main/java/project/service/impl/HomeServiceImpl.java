@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import project.domain.dto.home.HomeDetailListDto;
 import project.domain.dto.home.HomeImgRegDto;
 import project.domain.dto.home.HomeListDto;
 import project.domain.dto.home.HomeRegDto;
@@ -112,13 +113,15 @@ public class HomeServiceImpl implements HomeService {
 	}
 	
 	//집 디테일 페이지
+		@Transactional
 		@Override
 		public String homeDetail(Model model, long hno, HomeSearchDto searchDto) {
 			
 			System.out.println("체크인 : " +searchDto.getCheckin());
 			
 			//집 정보 가져오기
-			HomeListDto homeDetails= homeRepository.findById(hno).map(HomeListDto::new).orElseThrow();
+			HomeDetailListDto homeDetails= homeRepository.findById(hno).map(HomeDetailListDto::new).orElseThrow();
+			System.out.println("호스트이름 : "+homeDetails.getName());
 			model.addAttribute("homeDetails", homeDetails);
 			
 		

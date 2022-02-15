@@ -52,6 +52,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	//프로필 정보
+	@Transactional
 	@Override
 	public String memberInfo(Model model, SecurityDto securityDto, int page) {
 		

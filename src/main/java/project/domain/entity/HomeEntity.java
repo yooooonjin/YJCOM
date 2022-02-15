@@ -76,7 +76,7 @@ public class HomeEntity extends BaseEntity {
 		homeOptionSet.add(homeOption);
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "email")
 	private MemberEntity member;
 	

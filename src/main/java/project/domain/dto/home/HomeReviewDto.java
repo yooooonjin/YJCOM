@@ -18,14 +18,16 @@ public class HomeReviewDto {
 	
 	private long rno;
 	private String review;
-	private MemberEntity member;
+	private String name;
+	private String photoName;
 	private HomeEntity home;
 	private LocalDateTime createdDate;
 	private LocalDateTime updateDate;
 	
 	public HomeReviewDto(HomeReviewEntity entity) {
 		this.review = entity.getReview();
-		this.member = entity.getMember();
+		this.name=entity.getMember().getName();
+		this.photoName=entity.getMember().getPhotoName();
 		this.home = entity.getHome();
 		this.createdDate = entity.getCreatedDate();
 		this.updateDate = entity.getUpdatedDate();
