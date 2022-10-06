@@ -7,3 +7,5 @@ Spring Boot JPA / MYBATIS Web project
 
 ## 기술 스택
 <img src="https://user-images.githubusercontent.com/88491427/194234526-82e248df-2f2d-4096-9f42-4063df4336d0.png"/>
+<img src="https://github.com/yooooonjin/YJCOM/files/9722009/YJCOM_project.pdf"/>
+[YJCOM_project.pdf](https://github.com/yooooonjin/YJCOM/files/9722009/YJCOM_project.pdf)
